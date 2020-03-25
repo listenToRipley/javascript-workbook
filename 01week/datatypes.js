@@ -24,4 +24,68 @@ let num2 = 876
 
 console.log(num1 + num2)
 
+//number 4a
 
+//boolean
+const blueBean = true
+
+console.log('blueBean is a type of' + typeof blueBean)
+
+//null
+let zero = null
+
+console.log('Zero is a type of' + typeof zero)
+// I still don't really understand this. Is there another way we are supposed to be declaring this?
+
+//undefined
+let empty
+
+console.log('Empty is a type of' + typeof empty)
+
+//number
+let num = 12
+
+console.log('Num is a type of' + typeof num)
+
+//NaN
+let nothing = (5 + 'hello')
+ 
+console.log('Nothing is a  type of' + typeof nothing)
+
+//how do  I get it to appear as NaN?
+
+//string
+let string = 'is a string, right?'
+// why is this coming up as undefined?
+
+console.log('Stringer is a ' + typeof stringer)
+
+//number 5-8, more like two truth and two lies
+
+let truthy = (a, b) => {
+
+  if(a === true && b === true) {
+    console.log('Both are TRUE')
+  } else if (a === true && b !== true) {
+    console.log('One of these is TRUE') 
+
+  // this one isn't right, need to fix  
+  } else if (a === false && b === false)
+   {
+    console.log('Neither is TRUE')
+  }
+}
+
+  let laTrue = true
+  let trueToo = true 
+  let notTrue = false 
+  let iLied = false 
+
+
+console.log(truthy(laTrue, trueToo))
+
+
+console.log(truthy(laTrue, notTrue))
+
+
+console.log(truthy(notTrue, iLied))
