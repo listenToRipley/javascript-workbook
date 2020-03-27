@@ -2,19 +2,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../../../DevFolder/ACA_web101_Natalie_Kendrick/reset.css">
+  <link href="https://fonts.googleapis.com/css?family=Lora|Nunito&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./index.css">
   <title>We just want to rule to the world</title>
 </head>
 <body>
-  <h1>Hello World</h1>
-  <h1>The current time</h1>
-    <span id="theTime">blah</span>
 
-    <h1>The sum of 14 + 345</h1>
-    <span id="total">?</span>
-  <h1>This number is a type of </h1>
-    <span id="stringNum"></span>
+    <!-- time and greeting -->
+<main>
+  <div id="div1">
+    <h1>Hello World</h1>
+    <h1>The current time</h1>
+      <span id="theTime">blah</span>
+  </div>
 
-  <h1>This a data types</h1>
+  <!--number to string -->
+  <div id="div2">
+    <h2>Number 5 is currently a type of </h2>
+     <span id="currentNumber"></span>
+
+   <h2>Now, 5 is a type of</h2>
+     <span id="stringTheory"></span>
+  
+
+<!-- string to number -->
+
+  <h2>We will now take the string number 11 and turn it back into a type of </h2>
+    <span id="nowYouSeeMe"></span>
+  </div>
+
+  <!-- boolean -->
+  <!-- <h1>This number is a type of </h1>
+    <span id="stringNum"></span> -->
+  <div id="div3">
+    <h1>This a data types</h1>
+    <h2>The variable blueBean is a type of</h2>
+        <span id="datatype1">...</span>
+
+      <!-- null -->
+    <h2>The variable zero is a type of</h2>
+      <span id="datatype2">...</span>
+        <br>
+          <p class="explain">This should be null, but it gets read as a object since this value is empty, but still defined, unlike undefined.</p>
+
+    <!-- undefined -->
+    <h2>The variable empty is a type of</h2>
+      <span id="datatype3">...</span>
+
+    <!-- number -->
+    <h2>The variable num is a type of</h2>
+      <span id="datatype4">...</span>
+
+    <!-- NaN -->
+    <h2>The variable nothing is a type of</h2>
+      <span id="datatype5">...</span>
+        <br>
+          <p class="explain">this should be a NaN, but NaN is still technically a number, so that is how type of reads it.</p>
+
+      <!-- string -->
+    <h2>The variable stringer is a type of</h2>
+      <span id="datatype6">...</span>
+  </div>
+
+      <!-- only when 2 things are true -->
+<div id="div4">
+  <h2>Since both laTrue and trueToo both share the value of true, then</h2>
+    <span id="ifTrue">...</span>
+
+  <!-- when 1 of 2 things are true -->
+  <h2>Since laTrue has the value of true and notTrue has the value of false, </h2>
+    <span id="ifOneTrue">...</span>
+
+  <!-- both things are not true -->
+  <h2>And since notTrue and iLied share the value of false, </h2>
+    <span id="ifFalse">...</span>
+
+  </div>
+  <!-- add some numbers -->
+
+  <div id="div5">
+   <h1>The sum of 14 + 345</h1>
+      <span id="total">?</span>
+  </div>
+</main>
 </body>
-<script src="./main.js"></script>
+<script src="main.js"></script>
 </html>

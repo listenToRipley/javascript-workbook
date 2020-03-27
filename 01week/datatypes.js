@@ -29,28 +29,33 @@ console.log(num1 + num2)
 //boolean
 const blueBean = true
 
-console.log('blueBean is a type of' + typeof blueBean)
+console.log('blueBean is a type of ' + typeof blueBean)
 
 //null
-let zero = null
+let nullFun = () => {
+  if (true) {
+    return null
+  }
+}
+let zero = nullFun
 
-console.log('Zero is a type of' + typeof zero)
+console.log('Zero is a type of ' + typeof zero)
 // I still don't really understand this. Is there another way we are supposed to be declaring this?
 
 //undefined
 let empty
 
-console.log('Empty is a type of' + typeof empty)
+console.log('Empty is a type of ' + typeof empty)
 
 //number
 let num = 12
 
-console.log('Num is a type of' + typeof num)
+console.log('Num is a type of ' + typeof num)
 
 //NaN
 let nothing = (5 + 'hello')
  
-console.log('Nothing is a  type of' + typeof nothing)
+console.log('Nothing is a  type of ' + typeof nothing)
 
 //how do  I get it to appear as NaN?
 
