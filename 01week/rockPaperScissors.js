@@ -14,7 +14,6 @@ const rl = readline.createInterface({
 
 // the function that will be called by the unit test below
 const rockPaperScissors = (hand1, hand2) => {
-  return `just checking`
 // Write code here
 // Use the unit test to see what is expected
 
@@ -35,44 +34,42 @@ const rockPaperScissors = (hand1, hand2) => {
 //   console.log(`This is "Rock, Paper, Scissors" not "Ninjas, Wizards, Vikings", try again.`)
 // }
 
-// const hand1Wins = (( hand1 === 'rock' && hand2 === 'scissors') || (hand1 === 'paper' && hand2 === 'rock') || (hand1 === 'scissors' && hand2 === 'paper'))
-// const hand2Wins = ((hand1 === 'paper' && hand2 === 'scissors') || (hand1 === 'rock' && hand2 === 'paper') || (hand1 === 'scissors' &&hand2 === 'rock')) 
-// const itsATie = ((hand1 === 'rock' && hand2 === 'rock') || (hand1 === 'scissors' && hand2 === 'scissors') || (hand1 === 'paper' && hand2 === 'paper'))
+const hand1Wins = (( hand1 === 'rock' && hand2 === 'scissors') || (hand1 === 'paper' && hand2 === 'rock') || (hand1 === 'scissors' && hand2 === 'paper'))
+const hand2Wins = ((hand1 === 'paper' && hand2 === 'scissors') || (hand1 === 'rock' && hand2 === 'paper') || (hand1 === 'scissors' &&hand2 === 'rock')) 
+const itsATie = ((hand1 === 'rock' && hand2 === 'rock') || (hand1 === 'scissors' && hand2 === 'scissors') || (hand1 === 'paper' && hand2 === 'paper'))
 
-// let winner1 = 'Hand one wins!'
-// let winner2 = 'Hand two wins!'
-// let drawOrTie = `It's a draw! You played the same thing!`
-
-// switch(rockPaperScissors) {
+switch(rockPaperScissors) {
 
  
 
-//     // win conditions for player1
-//     case hand1Wins:
-//       return winner1
-//     break
+    // win conditions for player1
+    case hand1Wins:
+      return "Hand one wins!"
+    break
 
-//     //win conditions for play2
+    //win conditions for play2
 
-//     case hand2Wins:
-//       return winner2
-//     break
+    case hand2Wins:
+      return "Hand two wins!"
+    break
 
-//     // tie / draw conditions 
-//     // if each is equal to itself 
-//     case itsATie:
-//       return drawOrTie
-//     break
+    // tie / draw conditions 
+    // if each is equal to itself 
+    case itsATie:
+      return "It's a tie!"
+    break
 
     // if you didn't use the values defined it should default to here 
     // default: 
     //   console.log(`This is "Rock, Paper, Scissors" not "Ninjas, Wizards, Vikings", try again.`)
   // }
 }
+}
 
 // the first function called in the program to get an input from the user
-// to run the function use the command: npm test 01week/rockPaperScissors.js
-// to close it ctrl + C
+// to run the function use the command: node 01week/rockPaperScissors.js
+// to run a test: npm test 01week/rockPaperScissors.js
+
 // to close it ctrl + C
 
 function getPrompt() {
