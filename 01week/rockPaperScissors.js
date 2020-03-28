@@ -1,3 +1,4 @@
+  
 // uses strict mode so strings are not coerced, variables are not hoisted, etc... 
 'use strict';
 
@@ -12,64 +13,68 @@ const rl = readline.createInterface({
 });
 
 // the function that will be called by the unit test below
-// there are only the options below to return
-
-
 const rockPaperScissors = (hand1, hand2) => {
-
+  return `just checking`
 // Write code here
 // Use the unit test to see what is expected
 
 
 // this would be always evaluating the hand1 first then hand2
-let hand1 = {
-  R : 'rock',
-  P : 'paper',
-  S : 'scissors'
-}
 
-let hand2 = {
-  R : 'rock',
-  P : 'paper',
-  S : 'scissors'
-}
-switch(hand1 | hand2) {
+// if (( hand1 === 'rock' && hand2 === 'scissors') || (hand1 === 'paper' && hand2 === 'rock') || (hand1 === 'scissors' && hand2 === 'paper')) {
+//   console.log('Hand one wins!')
 
 
-    // win conditions for player1
-    case ((hand1.R & hand2.S) | (hand1.P & hand2.R) | (hand1.S & hand2.P)):
+// } else if ((hand1 === 'paper' && hand2 === 'scissors') || (hand1 === 'rock' && hand2 === 'paper' ) || (hand1 === 'scissors' &&hand2 === 'rock')) {
+//   console.log('Hand two wins!')
 
-    //       rock and scissors                         or              paper and rock               or               scissors and paper
-    // case (((hand1 === 'rock')&&(hand2 === 'scissors')) || ((hand1 === 'paper')&&(hand2 === 'rock')) || ((hand1 === 'scissors')&&(hand2 === 'paper'))) :
-      console.log('Hand one wins!')
-    break
+// } else if ((hand1 === 'rock' && hand2 === 'rock') || (hand1 === 'scissors' && hand2 === 'scissors') || (hand1 === 'paper' && hand2 === 'paper')) {
+//   console.log(`It's a draw! Your both win!`)
 
-    //win conditions for play2
-    case ((hand1.P & hand2.S) | (hand1.R & hand2.P) | (hand1.S & hand2.R)):
+// } else {
+//   console.log(`This is "Rock, Paper, Scissors" not "Ninjas, Wizards, Vikings", try again.`)
+// }
 
-    //            paper and scissors                    or          rock and paper                     or        scissors and rock
-    // case (((hand1 === 'paper')&&(hand2 === 'scissors')) || ((hand1 === 'rock')&&(hand2 === 'paper')) || ((hand1 === 'scissors')&&(hand2 === 'rock'))):
-      console.log('Hand two wins!')
-    break
+// const hand1Wins = (( hand1 === 'rock' && hand2 === 'scissors') || (hand1 === 'paper' && hand2 === 'rock') || (hand1 === 'scissors' && hand2 === 'paper'))
+// const hand2Wins = ((hand1 === 'paper' && hand2 === 'scissors') || (hand1 === 'rock' && hand2 === 'paper') || (hand1 === 'scissors' &&hand2 === 'rock')) 
+// const itsATie = ((hand1 === 'rock' && hand2 === 'rock') || (hand1 === 'scissors' && hand2 === 'scissors') || (hand1 === 'paper' && hand2 === 'paper'))
 
-    // tie / draw conditions 
-    // if each is equal to itself 
-    case ((hand1.R & hand2.R) | (hand1.S & hand2.S) | (hand1.P & hand2.P)):
-    // case (((hand1 === 'rock')&& (hand2 === 'rock')) || ((hand1 === 'scissors')&&(hand2 === 'scissors')) || ((hand1 === 'paper')&&(hand2 === 'paper'))):
-      console.log(`It's a draw! You played the same thing!`)
-    break
+// let winner1 = 'Hand one wins!'
+// let winner2 = 'Hand two wins!'
+// let drawOrTie = `It's a draw! You played the same thing!`
+
+// switch(rockPaperScissors) {
+
+ 
+
+//     // win conditions for player1
+//     case hand1Wins:
+//       return winner1
+//     break
+
+//     //win conditions for play2
+
+//     case hand2Wins:
+//       return winner2
+//     break
+
+//     // tie / draw conditions 
+//     // if each is equal to itself 
+//     case itsATie:
+//       return drawOrTie
+//     break
 
     // if you didn't use the values defined it should default to here 
     // default: 
     //   console.log(`This is "Rock, Paper, Scissors" not "Ninjas, Wizards, Vikings", try again.`)
-  }
-
+  // }
 }
-
 
 // the first function called in the program to get an input from the user
 // to run the function use the command: npm test 01week/rockPaperScissors.js
 // to close it ctrl + C
+// to close it ctrl + C
+
 function getPrompt() {
   rl.question('hand1: ', (answer1) => {
     rl.question('hand2: ', (answer2) => {
@@ -80,7 +85,7 @@ function getPrompt() {
 }
 
 // Unit Tests
-// You use them run the command: npm test 01week/rockPaperScissors.js
+// You use them run the command: npm test main.js
 // to close them ctrl + C
 if (typeof describe === 'function') {
 
@@ -96,8 +101,8 @@ if (typeof describe === 'function') {
       assert.equal(rockPaperScissors('paper', 'scissors'), "Hand two wins!");
       assert.equal(rockPaperScissors('rock', 'scissors'), "Hand one wins!");
     });
-    it("should scrub input to ensure lowercase with `trim`ed whitepace", () => {
-      assert.equal(rockPaperScissors('rocK', ' paper '), "Hand two wins!");
+    it('should scrub input to ensure lowercase with "trim"ed whitepace', () => {
+      assert.equal(rockPaperScissors('rOcK', ' paper '), "Hand two wins!");
       assert.equal(rockPaperScissors('Paper', 'SCISSORS'), "Hand two wins!");
       assert.equal(rockPaperScissors('rock ', 'sCiSsOrs'), "Hand one wins!");
     });
