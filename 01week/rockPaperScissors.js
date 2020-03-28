@@ -17,53 +17,34 @@ const rockPaperScissors = (hand1, hand2) => {
 // Write code here
 // Use the unit test to see what is expected
 
+const rh1 = (hand1 === 'rock')
+const ph1 = (hand1 === 'paper')
+const sh1 = (hand1 === 'scissors')
 
-// this would be always evaluating the hand1 first then hand2
+const rh2 = (hand2 === 'rock')
+const ph2 = (hand2 === 'paper')
+const sh2 = (hand2 === 'scissors')
 
-// if (( hand1 === 'rock' && hand2 === 'scissors') || (hand1 === 'paper' && hand2 === 'rock') || (hand1 === 'scissors' && hand2 === 'paper')) {
-//   console.log('Hand one wins!')
+const tie = (rh1 && rh2) || (sh1 && sh2) || (ph1 && ph2)
+const winner1 = (rh1 && sh2) || (ph1 && rh2) || (sh1 && ph2)
+const winner2 = (ph1 && sh2) || (rh1 && ph2) || (sh1 && rh2)
 
+// let wrong = (!(winner1) && !(winner2))
 
-// } else if ((hand1 === 'paper' && hand2 === 'scissors') || (hand1 === 'rock' && hand2 === 'paper' ) || (hand1 === 'scissors' &&hand2 === 'rock')) {
-//   console.log('Hand two wins!')
+if (tie) {
+  return "It's a tie!"
+}
+else if (winner1) {
+  return "Hand one wins!"
 
-// } else if ((hand1 === 'rock' && hand2 === 'rock') || (hand1 === 'scissors' && hand2 === 'scissors') || (hand1 === 'paper' && hand2 === 'paper')) {
-//   console.log(`It's a draw! Your both win!`)
+} else if (winner2) {
+  return "Hand two wins!"
 
-// } else {
-//   console.log(`This is "Rock, Paper, Scissors" not "Ninjas, Wizards, Vikings", try again.`)
+} 
+// else if (wrong) {
+//   return `This is "Rock, Paper, Scissors" not "Ninjas, Wizards, Vikings", try again.` 
 // }
 
-const hand1Wins = (( hand1 === 'rock' && hand2 === 'scissors') || (hand1 === 'paper' && hand2 === 'rock') || (hand1 === 'scissors' && hand2 === 'paper'))
-const hand2Wins = ((hand1 === 'paper' && hand2 === 'scissors') || (hand1 === 'rock' && hand2 === 'paper') || (hand1 === 'scissors' &&hand2 === 'rock')) 
-const itsATie = ((hand1 === 'rock' && hand2 === 'rock') || (hand1 === 'scissors' && hand2 === 'scissors') || (hand1 === 'paper' && hand2 === 'paper'))
-
-switch(rockPaperScissors) {
-
- 
-
-    // win conditions for player1
-    case hand1Wins:
-      return "Hand one wins!"
-    break
-
-    //win conditions for play2
-
-    case hand2Wins:
-      return "Hand two wins!"
-    break
-
-    // tie / draw conditions 
-    // if each is equal to itself 
-    case itsATie:
-      return "It's a tie!"
-    break
-
-    // if you didn't use the values defined it should default to here 
-    // default: 
-    //   console.log(`This is "Rock, Paper, Scissors" not "Ninjas, Wizards, Vikings", try again.`)
-  // }
-}
 }
 
 // the first function called in the program to get an input from the user
@@ -82,7 +63,7 @@ function getPrompt() {
 }
 
 // Unit Tests
-// You use them run the command: npm test main.js
+// You use them run the command: npm test 01week/rockPaperScissors.js  
 // to close them ctrl + C
 if (typeof describe === 'function') {
 
