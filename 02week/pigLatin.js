@@ -10,55 +10,38 @@ const rl = readline.createInterface({
 
 const pigLatin = (word)  => {
 
-  let properWord = word.trim().toLowerCase()
+  let properFormat = word.trim().toLowerCase()
 
-  let firstVowel = (properWord) => {
-    //a
-    if (properWord.includes('a')) {
-       console.log(properWord.indexOf('a'))
+  //if your first vowel
 
-    //e
-    } else if (properWord.includes('e')){
-      console.log(properWord.indexOf('e'))
 
-    //i
-    } else if (properWord.includes('i')) {
-      console.log(properWord.indexOf('i'))
-    } 
+  let firstVowel = (properFormat) => {
+    const vowels = 'aeiou'
 
-    //o
-    else if (properWord.includes('o')) {
-      console.log(properWord.indexOf('o'))
+    for (let i = 0; i > properFormat.length; i++) {
+
+    if(properFormat[i].includes(vowels)) {
+      console.log(properFormat.indexOf(properFormat[i]))
+    } else if (properFormat.includes(!vowels)){
+      console.properFormat.indexOf([i],0)
     }
-
-    //u
-    else if (properWord.includes('u')) {
-      console.log(properWord.indexOf('u'))
     }
-
-    //other 
-    else {
-      console.log(properWord.substring(0,2))
-    }
-  }
 
   //locate the first vowel
-  let p1 = (properWord) => {
-    properWord.substring(firstVowel)
+  let p1 = (properFormat) => {
+    properFormat.substring(firstVowel)
     console.log(p1)
-
   } 
     
   //the removed first part 
-  let p2 = (properWord) => {
-    properWord.substring(0,firstVowel-1)
+  let p2 = (properFormat) => {
+    properFormat.substring(0,(firstVowel-1))
     console.log(p2)
   } 
     console.log(p1 + p2 + "yay")
-  }
   
 
-
+}
 
 const getPrompt = () => {
   rl.question('word ', (answer) => {
@@ -66,7 +49,7 @@ const getPrompt = () => {
     getPrompt();
   });
 }
-
+}
 // Tests
 
 if (typeof describe === 'function') {
