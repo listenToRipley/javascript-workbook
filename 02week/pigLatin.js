@@ -10,9 +10,54 @@ const rl = readline.createInterface({
 
 const pigLatin = (word)  => {
 
-  // Your code here
+  let properWord = word.trim().toLowerCase()
 
-}
+  let firstVowel = (properWord) => {
+    //a
+    if (properWord.includes('a')) {
+       console.log(properWord.indexOf('a'))
+
+    //e
+    } else if (properWord.includes('e')){
+      console.log(properWord.indexOf('e'))
+
+    //i
+    } else if (properWord.includes('i')) {
+      console.log(properWord.indexOf('i'))
+    } 
+
+    //o
+    else if (properWord.includes('o')) {
+      console.log(properWord.indexOf('o'))
+    }
+
+    //u
+    else if (properWord.includes('u')) {
+      console.log(properWord.indexOf('u'))
+    }
+
+    //other 
+    else {
+      console.log(properWord.substring(0,2))
+    }
+  }
+
+  //locate the first vowel
+  let p1 = (properWord) => {
+    properWord.substring(firstVowel)
+    console.log(p1)
+
+  } 
+    
+  //the removed first part 
+  let p2 = (properWord) => {
+    properWord.substring(0,firstVowel-1)
+    console.log(p2)
+  } 
+    console.log(p1 + p2 + "yay")
+  }
+  
+
 
 
 const getPrompt = () => {
