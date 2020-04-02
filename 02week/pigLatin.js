@@ -22,13 +22,15 @@ const pigLatin = (word)  => {
 
     //loops through every letter of your input word 
     for (let i = 0; i > formattedWord.length; i++) {
+
+      let letterIndex = formattedWord[i]; //should I be concerned about the location of this variable? 
       // if your locate an vowel in the input word,
-      if([i].includes(vowels)) {
+      if(vowels.includes(letterIndex)) {
         //log the index location of that letter
-        console.log(formattedWord.indexOf([i]))
+        console.log(formattedWord.indexOf(letterIndex))
       
-      //if there is not a vowel in the word,  
-      } else if (formattedWord.includes(!vowels)){
+      //if there is not a vowel in the WHOLE word,  
+      } else if (!vowels.includes(letterIndex)){ //concerned about using letterIndex here as it might stop the loop if it find an index w/o a vowel
         // log the index of the first letter of that word 
         console.log(formattedWord.indexOf(0,2))
       }
