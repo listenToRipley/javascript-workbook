@@ -14,8 +14,13 @@ const rl = readline.createInterface({
 
 // the function that will be called by the unit test below
 const rockPaperScissors = (hand1, hand2) => {
+
+
 // Write code here
 // Use the unit test to see what is expected
+
+// where those this belong? .trim().toLowerCase() go they have to be applied separately? 
+
 
 const rh1 = (hand1 === 'rock')
 const ph1 = (hand1 === 'paper')
@@ -29,11 +34,10 @@ const tie = (rh1 && rh2) || (sh1 && sh2) || (ph1 && ph2)
 const winner1 = (rh1 && sh2) || (ph1 && rh2) || (sh1 && ph2)
 const winner2 = (ph1 && sh2) || (rh1 && ph2) || (sh1 && rh2)
 
-// let wrong = (!(winner1) && !(winner2))
-
 if (tie) {
   return "It's a tie!"
 }
+
 else if (winner1) {
   return "Hand one wins!"
 
@@ -41,9 +45,29 @@ else if (winner1) {
   return "Hand two wins!"
 
 } 
-// else if (wrong) {
-//   return `This is "Rock, Paper, Scissors" not "Ninjas, Wizards, Vikings", try again.` 
+
+else if (!tie && !winner1 && !winner2) {
+  return `This is "Rock, Paper, Scissors" not "Ninjas, Wizards, Vikings", try again.` 
+}
+
+
+
+// let wrong = (!(winner1) && !(winner2))
+
+// switch(hand1, hand2) {
+//   case tie: 
+//     return "It's a tie!"
+//   break;
+//   case winner1: 
+//     return "Hand one wins!"
+//   break;
+//   case winner2: 
+//     return "Hand two wins!"
+//   break;
+//   default: 
+//     return `This is "Rock, Paper, Scissors" not "Ninjas, Wizards, Vikings", try again.` 
 // }
+
 
 }
 
@@ -54,9 +78,13 @@ else if (winner1) {
 // to close it ctrl + C
 
 function getPrompt() {
+  answer1.trim()
+  answer2.trim()
+  answer1.toLowerCase()
+  answer2.toLowerCase()
   rl.question('hand1: ', (answer1) => {
     rl.question('hand2: ', (answer2) => {
-      console.log( rockPaperScissors(answer1, answer2) );
+      console.log(rockPaperScissors(answer1, answer2));
       getPrompt();
     });
   });
