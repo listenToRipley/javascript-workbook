@@ -46,7 +46,7 @@ let results = document.getElementById('output')
 results.innerHTML = getPrompt()
 
 // Tests
-
+gas
 if (typeof describe === 'function') {
 
   describe('#pigLatin()', () => {
