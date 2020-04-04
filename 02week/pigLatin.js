@@ -14,6 +14,7 @@ const pigLatin = (word)  => {
 let formatWord = word.trim().toLowerCase() 
 
 //checks if your word has an vowel is in it
+            //regex was a lot simpler than trying to get a for loop to got through each letter. 
 let vowel = formatWord.match(/[aeiou]/)
 
 //finds the index of that first vowel
@@ -40,6 +41,9 @@ const getPrompt = () => {
     getPrompt();
   });
 }
+
+let results = document.getElementById('output')
+results.innerHTML = getPrompt()
 
 // Tests
 
@@ -68,3 +72,8 @@ if (typeof describe === 'function') {
   getPrompt();
 
 }
+
+
+
+
+
