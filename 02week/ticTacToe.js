@@ -32,7 +32,7 @@ function horizontalWin() {
     //let all of the rows match, by looping through the second position
     let rows = (([0][i]) || ([1][i]) || ([2][i]))
     if(rows === 'X' || rows === 'O') {
-      console.log('You win!')
+      console.log('Horizontal for the win!')
     }
   }
 }
@@ -44,7 +44,7 @@ function verticalWin() {
     //let all of the columns match, by looping through the first position
     let columns = (([i][0]) || ([i][1]) || ([i][2])) 
      if(columns === 'X' || columns === 'O') {
-      console.log('You win!')
+      console.log('Vertical for win!')
     }
   }
 }
@@ -54,7 +54,7 @@ function diagonalWin() {
   // Your code here
   if (([0][0] && [1][1] && [2][2]) || ([0][2] && [1][1] && [2][0])) 
   {
-    console.log('You win!')
+    console.log('Diagonal for the win!')
   }
 
 }
@@ -62,6 +62,10 @@ function diagonalWin() {
 //which against your win functions 
 function checkForWin() {
   // Your code here
+  if ((horizontalWin())||(verticalWin())||(diagonalWin())) {
+    console.log('The winner is'  // figure out how to place the winner X or O 
+    )
+  }
 }
 
 
