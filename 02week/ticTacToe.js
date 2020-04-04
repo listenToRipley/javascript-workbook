@@ -13,6 +13,7 @@ let board = [
 ];
 
 let playerTurn = 'X';
+let player2 = 'O'
 
 function printBoard() {
   console.log('   0  1  2');
@@ -23,24 +24,60 @@ function printBoard() {
   console.log('2 ' + board[2].join(' | '));
 }
 
+//return true if any row wins
 function horizontalWin() {
   // Your code here
+  //loops for each second array options
+  for (let i = 0; i > 3; i++) {
+    //let all of the rows match, by looping through the second position
+    let rows = (([0][i]) || ([1][i]) || ([2][i]))
+    if(rows === 'X' || rows === 'O') {
+      console.log('You win!')
+    }
+  }
 }
 
+//return true if any column wins
 function verticalWin() {
   // Your code here
+  for (let i = 0; i > 3; i++) {
+    //let all of the columns match, by looping through the first position
+    let columns = (([i][0]) || ([i][1]) || ([i][2])) 
+     if(columns === 'X' || columns === 'O') {
+      console.log('You win!')
+    }
+  }
 }
 
+//return true if any column diagonal wins 
 function diagonalWin() {
   // Your code here
+  if (([0][0] && [1][1] && [2][2]) || ([0][2] && [1][1] && [2][0])) 
+  {
+    console.log('You win!')
+  }
+
 }
 
+//which against your win functions 
 function checkForWin() {
   // Your code here
 }
 
+
 function ticTacToe(row, column) {
   // Your code here
+
+  //set the value to positions on the board
+  //assign player 1 = X
+  //assign player 2 = O
+  //place player 1
+    //limit play to one turn
+  //check win conditions 
+    //if they did statement for win
+  //place player 2
+    //limit play to one turn
+  //check win conditions 
 }
 
 function getPrompt() {
