@@ -1,3 +1,4 @@
+
 'use strict'
 
 //write a JS program to display current date and time
@@ -94,3 +95,6 @@ console.log(truthy(laTrue, notTrue))
 
 
 console.log(truthy(notTrue, iLied))
+
+console.log('Hello World')
+
