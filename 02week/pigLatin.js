@@ -11,26 +11,27 @@ const rl = readline.createInterface({
 const pigLatin = (word)  => {
 
   //formats the input word, use this term from this point on
-  let formattedWord = word.trim().toLowerCase()
+  let formatWord = word.trim().toLowerCase()
 
   //if your first vowel
-  //input, the correctly formatted word and evaluates it 
-  let firstVowel = (formattedWord) => {
+                    //input, the correctly formatted word and evaluates it 
+  let firstVowel = (formatWord) => {
 
     //against list of vowels to check your string against 
-    const vowels = 'aeiou'
+    let vowels = ('a'||'e'||'i' ||'o' ||'u')
+    
 
     //loops through every letter of your input word 
-    for (let i = 0; i > formattedWord.length; i++) {
-
-      let letterIndex = formattedWord[i]; //should I be concerned about the location of this variable? 
+    for (let i = 0; i > formatWord.length; i++) {
       // if your locate an vowel in the input word,
-      if(vowels.includes(letterIndex)) {
+                        // instead of includes 
+      if((formatWord[i]).includes(vowels)) {
         //log the index location of that letter
-        console.log(formattedWord.indexOf(letterIndex))
+        let startVowel = formatWord[i].search(vowels)
+        console.log(formatWord.indexOf(startVowel)
       
       //if there is not a vowel in the WHOLE word,  
-      } else if (!vowels.includes(letterIndex)){ //concerned about using letterIndex here as it might stop the loop if it find an index w/o a vowel
+      } else { //concerned about using letterIndex here as it might stop the loop if it find an index w/o a vowel
         // log the index of the first letter of that word 
         console.log(formattedWord.indexOf(0,2))
       }
@@ -40,18 +41,16 @@ const pigLatin = (word)  => {
   //take the output from the index of the first vowel, (or index of the first letter if there is no vowel)
   let p1 =
     //which gives you the input of index required to create a new substring, starting at the vowel and ending at the end of the word 
-    formattedWord.substring(firstVowel)
+    formatWord.substring(firstVowel)
   
-    
   //take the whole word
   let p2 = 
     //start at the beginning of the word, using the output to the first vowel index, -1 so it excludes the vowel
-    formattedWord.substring(0,(firstVowel-1))
+    formatWord.substring(0,(firstVowel-1))
     
     //should combined the two new substrings and add "yay' to the end.
     console.log(p1 + p2 + "yay")
   
-
 }
 
 const getPrompt = () => {
