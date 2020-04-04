@@ -10,45 +10,27 @@ const rl = readline.createInterface({
 
 const pigLatin = (word)  => {
 
-  //formats the input word, use this term from this point on
-  let formatWord = word.trim().toLowerCase()
+//formats your word
+let formatWord = word.trim().toLowerCase() 
 
-  //if your first vowel
-                    //input, the correctly formatted word and evaluates it 
-  let firstVowel = (formatWord) => {
+//checks if your word has an vowel is in it
+let vowel = formatWord.match(/[aeiou]/)
 
-    //against list of vowels to check your string against 
-    let vowels = ('a'||'e'||'i' ||'o' ||'u')
+//finds the index of that first vowel
+let position1 = formatWord.indexOf(vowel)
 
-    //loops through every letter of your input word 
-    for (let i = 0; i > formatWord.length; i++) {
-      // if your locate an vowel in the input word,
-                        // instead of includes 
-      if((formatWord[i]).includes(vowels)) {
-        //log the index location of that letter
-        
-        console.log(formatWord.indexOf([i]))
-      
-      //if there is not a vowel in the WHOLE word,  
-      } else { //concerned about using letterIndex here as it might stop the loop if it find an index w/o a vowel
-        // log the index of the first letter of that word 
-        console.log(formatWord.indexOf(2))
-      }
-    }
-    }
+//the index of the first vowel is the first position
+if(position1 === 0) {
+  return formatWord + 'yay'
 
-  //take the output from the index of the first vowel, (or index of the first letter if there is no vowel)
-  let p1 =
-    //which gives you the input of index required to create a new substring, starting at the vowel and ending at the end of the word 
-    formatWord.substring(firstVowel)
-  
-  //take the whole word
-  let p2 = 
-    //start at the beginning of the word, using the output to the first vowel index, -1 so it excludes the vowel
-    formatWord.substring(0,(firstVowel-1))
-    
-    //should combined the two new substrings and add "yay' to the end.
-    console.log(p1 + p2 + "yay")
+//the position of the first vowel should be greater than index 0
+} else if (position1 >= 1) {
+  return formatWord.slice(position1) + formatWord.slice(0, position1) + 'ay'
+}
+//in case it's doesn't have a vowel in it. 
+else if (!vowel){
+  return formatWord.substr(1) + formatWord.substr(0,1) + 'ay'
+}
   
 }
 
