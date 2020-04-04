@@ -19,7 +19,6 @@ const pigLatin = (word)  => {
 
     //against list of vowels to check your string against 
     let vowels = ('a'||'e'||'i' ||'o' ||'u')
-    
 
     //loops through every letter of your input word 
     for (let i = 0; i > formatWord.length; i++) {
@@ -27,13 +26,13 @@ const pigLatin = (word)  => {
                         // instead of includes 
       if((formatWord[i]).includes(vowels)) {
         //log the index location of that letter
-        let startVowel = formatWord[i].search(vowels)
-        console.log(formatWord.indexOf(startVowel)
+        
+        console.log(formatWord.indexOf([i]))
       
       //if there is not a vowel in the WHOLE word,  
       } else { //concerned about using letterIndex here as it might stop the loop if it find an index w/o a vowel
         // log the index of the first letter of that word 
-        console.log(formattedWord.indexOf(0,2))
+        console.log(formatWord.indexOf(2))
       }
     }
     }
