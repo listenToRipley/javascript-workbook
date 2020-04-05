@@ -9,17 +9,22 @@
 <body>
   <main>
     <h1>Welcome to Tic Tac Toe!</h1>
-    <div id="board">
-      <span class="squares" id="sq1"></span>
-      <span class="squares" id="sq2"></span>
-      <span class="squares" id="sq3"></span>
-      <span class="squares" id="sq4"></span>
-      <span class="squares" id="sq5"></span>
-      <span class="squares" id="sq6"></span>
-      <span class="squares" id="sq7"></span>
-      <span class="squares" id="sq8"></span>
-      <span class="squares" id="sq9"></span>
+        <!-- this assocate this function to this section correct? -->
+    <div onload="board()" id="board">
+        <!-- row 1 -->
+      <span onclick="" class="squares left top" id="sq1">&#8203</span>
+      <span onclick="" class="squares top" id="sq2">&#8203</span>
+      <span onclick="" class="squares top right" id="sq3">&#8203</span>
+      <!--  row 2 -->
+      <span onclick="" class="squares left" id="sq4">&#8203</span>
+      <span onclick="" class="squares" id="sq5">&#8203</span>
+      <span onclick="" class="squares right" id="sq6">&#8203</span>
+      <!--  row 3 -->
+      <span onclick="" class="squares left bottom" id="sq7">&#8203</span>
+      <span onclick="" class="squares bottom" id="sq8">&#8203</span>
+      <span onclick="" class="squares bottom right" id="sq9">&#8203</span>
     </div>
+    <button id="reset">Reset?</button>
   </main>
 </body>
 </html>
