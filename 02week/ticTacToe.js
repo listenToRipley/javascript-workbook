@@ -14,6 +14,7 @@ let board = [
 
 let playerTurn = 'X';
 
+
 function printBoard() {
   console.log('   0  1  2');
   console.log('0 ' + board[0].join(' | '));
@@ -24,6 +25,8 @@ function printBoard() {
 }
 
 //do we need to associate the board with this section? 
+
+//this is a helper function for checkForWin()
 //return true if any row wins
 function horizontalWin() {
   // Your code here
@@ -40,6 +43,7 @@ function horizontalWin() {
   }
 }
 
+//this is a helper function for checkForWin()
 //return true if any column wins
 function verticalWin() {
   // Your code here
@@ -55,6 +59,7 @@ function verticalWin() {
   }
 }
 
+//this is a helper function for checkForWin()
 //return true if any column diagonal wins 
 function diagonalWin() {
   // Your code here
@@ -73,6 +78,8 @@ function checkForWin() {
   if ((horizontalWin())||(verticalWin())||(diagonalWin())) {
     console.log('The winner is '  // figure out how to place the winner X or O 
     )
+  } else {
+    //continue play?
   }
 }
 
@@ -86,16 +93,18 @@ function ticTacToe(row, column) {
 
       // how do I create a shorter list? 
       const column1 = board([0][0],[1][0],[2][0])
-      const column2 = board([0][1],[1][1],[2][1])
+      const column2 = board([0][1],[1][1],[2][1])  
       const column3 = board([0][2],[1][2],[2][2])
   column = (column1, column2, column3) //index 0, 1, 2 of the second array
   
-  printBoard(row, columns)
+  //is this right? we want to pass in the values of the array back into the board? They're already established 
+  printBoard(row, column)
   //assign player 1 = X
   //assign player 2 = O
       // should they be able to choose? 
   //place player 1
     //limit play to one turn
+    //assess if the square is already populated 
   //check win conditions 
     // don't need to check win conditions if there has been less than 3 placements 
     //if they did statement for win
