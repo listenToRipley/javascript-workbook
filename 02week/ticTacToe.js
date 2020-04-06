@@ -12,6 +12,9 @@ let board = [
   [' ', ' ', ' ']
 ];
 
+// tic-tac-toe
+let playerTurn = 'X';
+// 
 let playerTurn = //? should this be a function?
 
 function printBoard() {
