@@ -34,10 +34,12 @@ function horizontalWin() {
   for (let i = 0; i >= 2; i++) {
 
     //checked is any of the whole rows returns with the same value 
-    if (((board[0][i]) || (board[1][i]) || (board[2][i])) === playerTurn) { 
-        return true 
+    if (((board[0][i]) || (board[1][i]) || (board[2][i])) === playerTurn) 
+    { 
+        console.log('row win') 
       }
     }
+    return true
   }
 
 
@@ -49,9 +51,10 @@ function verticalWin() {
 
     //checks if the whole column shares the same value 
      if(((board[i][0]) || (board[i][1]) || (board[i][2])) === playerTurn)  {
-      return true
+      console.log('column win')
     }
   }
+  return true
 }
 
 //this is a helper function for checkForWin()
