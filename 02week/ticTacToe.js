@@ -69,11 +69,13 @@ function diagonalWin() {
 
 }
 
-//which against your win functions 
+//which against your win functions, this function must come before the player change 
 function checkForWin() {
   // Your code here
   if ((horizontalWin())||(verticalWin())||(diagonalWin())) {
     return true 
+  } else {
+    return false 
   }
 }
 
@@ -82,23 +84,27 @@ function ticTacToe(row, column) {
   // Your code here
   board[row][column] = playerTurn
 
+  //this function must be called before you switch players or you would only be assessing based on one player 
   checkForWin(playerTurn)
+
+  //if statement here for ties! if checkForWin returns false and all squares are populated 
     
   //alternates between X and O
   playerTurn = (playerTurn === 'X') ? 'O' : 'X'
 
-  //assign player 1 = X
-  //assign player 2 = O
-      // should they be able to choose? 
+
+  //gui issues 
+    //based on playerTurn 
+      //should this be a button? 
+      //assign player 1 = X
+        // if innerHTML = run playerTurn ternary operator 
+      //assign player 2 = O
+
   //place player 1
     //limit play to one turn
     //assess if the square is already populated 
-  //check win conditions 
-    // don't need to check win conditions if there has been less than 3 placements 
-    //if they did statement for win
-  //place player 2
-    //limit play to one turn
-  //check win conditions 
+
+  //alert for win conditions or tie
 }
 
 function getPrompt() {
