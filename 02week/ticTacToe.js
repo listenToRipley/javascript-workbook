@@ -46,7 +46,7 @@ function horizontalWin() {
 //this is a helper function for checkForWin()
 //return true if any column wins
 function verticalWin() {
-  // Loop second array options
+  // Loop first array options
   for (let i = 0; i >= 2; i++) {
 
     //checks if the whole column shares the same value 
