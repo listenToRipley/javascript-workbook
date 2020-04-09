@@ -71,15 +71,35 @@ spanDisplayResult.innerText = pigLatin(newWord)
 //create space with the div where I was the result to display
 let mainDisplay = document.querySelector('#mainOutput')
   console.log('this is the mainDisplay where my result will go ',mainDisplay)
-mainDisplay.appendChild(spanDisplayResult)
-//place text inside of the input field
 
-  // perform the function in the pig latin
-//create an output field where the text displays 
+//lets create a div for the message and translation to go into
+let resultDiv = document.createElement('div')
+//for css
+resultDiv.className = 'result'
 
-//create location for the new word to go into
-let results = document.getElementById('output')
-// results.innerHTML = getPrompt()
+//make this div live inside the mainOutput
+mainDisplay.appendChild(resultDiv)
+
+//should add some display text that shows that content of your results
+let displayMessage = document.createElement('h3')
+  console.log('where is my displaymessage at?', displayMessage)
+displayMessage.innerText = (`'${newWord}' is now : `)
+
+
+//here is where your display message gets added to your div
+resultDiv.appendChild(displayMessage)
+
+//add the span to the div section
+resultDiv.appendChild(spanDisplayResult)
+setupSpanEvent(spanDisplayResult)
+
+//keep the list of everything you have tried: 
+function setupSpanEvent(spanDisplayResult) {
+  for(let i=0; i<spanDisplayResult.length; i++) {
+    let spanDisplayResult = inPigLatin[i]
+  }
+}
+
 })
 
 // Tests
