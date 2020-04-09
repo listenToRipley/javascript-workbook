@@ -65,6 +65,38 @@ function diagonalWin() {
   if ((board[0][0] && board[1][1] && board[2][2]) || (board[0][2] && board[1][1] && board[2][0]) === playerTurn) 
   {
     return true
+=======
+//return true if any row wins
+function horizontalWin() {
+  // Your code here
+  //loops for each second array options
+  for (let i = 0; i > 3; i++) {
+    //let all of the rows match, by looping through the second position
+    let rows = (([0][i]) || ([1][i]) || ([2][i]))
+    if(rows === 'X' || rows === 'O') {
+      console.log('Horizontal for the win!')
+    }
+  }
+}
+
+//return true if any column wins
+function verticalWin() {
+  // Your code here
+  for (let i = 0; i > 3; i++) {
+    //let all of the columns match, by looping through the first position
+    let columns = (([i][0]) || ([i][1]) || ([i][2])) 
+     if(columns === 'X' || columns === 'O') {
+      console.log('Vertical for win!')
+    }
+  }
+}
+
+//return true if any column diagonal wins 
+function diagonalWin() {
+  // Your code here
+  if (([0][0] && [1][1] && [2][2]) || ([0][2] && [1][1] && [2][0])) 
+  {
+    console.log('Diagonal for the win!')
   }
 
 }
@@ -82,6 +114,7 @@ function checkForWin() {
 
 function ticTacToe(row, column) {
   // Your code here
+
   board[row][column] = playerTurn
 
   //this function must be called before you switch players or you would only be assessing based on one player 
@@ -109,7 +142,6 @@ function ticTacToe(row, column) {
 
 function getPrompt() {
   printBoard();
-  horizontalWin(); 
   console.log("It's Player " + playerTurn + "'s turn.");
   rl.question('row: ', (row) => {
     rl.question('column: ', (column) => {
