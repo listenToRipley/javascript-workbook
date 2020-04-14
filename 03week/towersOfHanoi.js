@@ -20,16 +20,15 @@ function printStacks() {
   console.log("c: " + stacks.c);
 }
 
-//make sure you're using shift and unshift since you always want it to be the last one 
-
 //this will always be your starting state 
-let stackA = stacks.a
-let stackB = stacks.b
-let stackC = stacks.c
+  //if this is placed here, then all functions should be able to use these variables 
+  let stackA = stacks.a
+  let stackB = stacks.b
+  let stackC = stacks.c
 
 function movePiece() {
   // Your code here
-  //take the last item off of stack and move it
+
 
 //establish the index of your array in each object
   //should this be created as it's own object? 
@@ -37,14 +36,25 @@ let lastStackA = stackA[stackA.length-1]
 let lastStackB = stackB[stackB.length-1]
 let lastStackC = stackC[stackC.length-1]
 
-//all the move from s 
+  //take the last item off of stack and move it
 let removeFromA = stackA.pop(lastStackA)
 let removeFromB = stackB.pop(lastStackB)
 let removeFromC = stackC.pop(lastStackC)
 
+//this should be placed here? Or in the last function? 
+//all start should pop the last item on the index last 
+let startStack = (removeFromA || removeFromB || removeFromC)
+
+//all ends should push the pop item on the next index,
+  //this is not current right, it would just continuously pop 
+let endStack = (removeFromA || removeFromB || removeFromC)
+
     //move combinations 
     //we only want to push if the item is called 
-
+//we want to first make sure this is a valid move 
+  //and win condition has not yet been met
+  //is this considered hoisting? should this be placed in the last function?
+if ((isLegal === true) && (checkForWin === false)) {
 //move from stack a to stack c
 if(((startStack === stackA) && (endStack === stackC))) {
   stackC.push(removeFromA)
@@ -73,17 +83,24 @@ else if (((startStack === stackC) && (endStack === stackA))) {
 else if (((startStack === stackC) && (endStack === stackB))) {
   stackC.push(removeFromB)
 } 
+} else {
+  return false 
+  console.log('try again! not valid move!')
+}
 
 }
 
 function isLegal() {
   // Your code here
-  // if the last number placed in the space is smaller then the number you are currently trying to place, then you cannot place that new number
-    //you cannot move to the same space you started at
-    //we need to make sure to compare the value of your current move to the last array value already there.
-  if((endStack < startStack)||(startStack === endStack)) {
+    // the item being pop is greater then the last item push to that location
+  if((endStack < startStack)
+    // of the starting position happens to be the same as the end position 
+      ||(startStack === endStack)) {
     return true
-  } 
+  } else {
+    return false 
+    console.log('try again!')
+  }
 
 }
 
@@ -94,30 +111,13 @@ function checkForWin() {
 if(stackC === [4, 3, 2, 1]) {
   return true 
 }
-
 }
 
 function towersOfHanoi(startStack, endStack) {
   // Your code here
-    //we want to startStack to equal where you are moving from 
-   //and the endStack  equal to where you are moving to. 
 
-  //first verify you move if legal
-  if (isLegal(startStack, endStack) === false) {
-    //then you can move a piece 
+  //all other functions have been built into the other functions 
     movePiece(startStack, endStack) 
-    //then you want to see if you win
-    if (checkForWin() === true) {
-      // if you win the game is over
-      console.log('You win!')
-    } else {
-      //else you are going to need to keep playing
-      movePiece(startStack, endStack)
-    }
-    //see of the move is illegal, then you won't continue!
-  } else {
-    console.log('try again')
-  }
 
 }
 
