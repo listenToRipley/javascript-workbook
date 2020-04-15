@@ -22,92 +22,80 @@ function printStacks() {
 
 //this will always be your starting state 
   //if this is placed here, then all functions should be able to use these variables
-    //only place this is called right now is in the win conditions 
-  let stackA = stacks.a
-  let stackB = stacks.b
-  let stackC = stacks.c
 
-function movePiece() {
+function movePiece(startPoint, endPoint) {
   // Your code here
 
 //establish the index of your array in each object
-// let lastStackA = stackA[stackA.length-1]
-// let lastStackB = stackB[stackB.length-1]
-// let lastStackC = stackC[stackC.length-1]
-  //or we could create another helper function to make this a lot shorter 
-                          //should this be starter stack maybe?
-                          //maybe this should be global since it is used in two places? 
-  let lastInStackIndex = (startStack) => {
-    return startStack.length-1
-  }
+  let lastInStackIndex = startPoint.length-1
+  
 
   //take the last item off of stack and move it
-// let removeFromA = stackA.pop(lastStackA)
-// let removeFromB = stackB.pop(lastStackB)
-// let removeFromC = stackC.pop(lastStackC)
-  // or we could create another function to go through each
-                    // should this still share the same variable name? 
-  let removeFrom = (startStack) => {
-    return startStack.pop(lastInStackIndex)
-  }
+  let removeFrom = startPoint.pop(lastInStackIndex)
 
 //all ends should push the pop item on the next index,
     //need to push the popped it here, which is what we were doing below
-  let moveTo = (endStack) => {
-    return endStack.push(removeFrom(startStack))
-  }
+  let moveTo = endPoint.push(removeFrom)
 
-  //LAST THREE FUNCTIONS SHOULD BE DAISY CHAINED
-  lastInStackIndex(startStack)
+  //LAST THREE SHOULD BE DAISY CHAINED
+    return moveTo
 
 }
 
-function isLegal() {
+function isLegal(startPoint, endPoint) {
 
   // Your code here
-    // the item being pop is greater then the last item push to that location
+  //since it is is Legal, not is Legal, any falsys should be trues 
+
       //need to asses the last item in the index of your current move  
-      let lastValueInStack = (stack) => {
-        return stack.length-1
-      }
-  if((endStack[lastValueInStack(endStack)] > startStack[lastValueInStack(startStack)])
+      let lastIndexStart = startPoint.length-1
+      let lastIndexEnd = endPoint.length-1
+
+      let stacking = (stacks.a || stacks.b || stacks.c)
+      
+  if(
+    //the array you are trying to move from is empty
+    //the array you a try move to has a value which is greater already in it 
+    (startPoint[lastIndexStart] < endPoint[lastIndexEnd])
     // of the starting position happens to be the same as the end position 
-      ||(startStack !== endStack)) {
+      && (startPoint !== endPoint) 
+      //we don't want them to be able to enter invalid stack letters
+      && (startPoint === stacking) && (endPoint === stacking)) {
     return true
+  } else {
+    return false
   }
 
 }
 
-function checkForWin() {
+function checkForWin(endPoint) {
   // Your code here
   //you move all your values from stack a to stack c and the order is the same as the beginning 
-    //should I just a for in loop here to verify it? 
-      //does it have to be stack c? Or any stack other than the starting stack A? 
-if(stackC === [4, 3, 2, 1]) {
+if((stacks.c === [4, 3, 2, 1]) || (stacks.b === [4, 3, 2, 1])) {
   return true 
+} else {
+  return false 
 }
 }
 
 function towersOfHanoi(startStack, endStack) {
   // Your code here
 
-  //this isn't quite
-    //want to check for your win conditionals at the top, maybe a while loop would be better? 
-    // if (checkForWin() === true) {
-    //     //if you win, stop
-    //   return 'you win'
-    //   //otherwise, make sure your move is legal
-    // } else if (ifLegal() === true) {
-    //   // if it is legal, then you can finally call this function
-    //   movePiece()
-    // } else {
-    //   return 'no a valid move, try again'
-    // }
+  //does seem to be case sensitive 
+  let starter = startStack.toLowerCase().trim()
+  let ender = endStack.toLowerCase().trim()
+
+  //access the stack 
+  let startPoint = stacks[startStack]
+  let endPoint = stacks[endStack]
+
+  console.log('here is ' + startStack, 'here is '+ endStack)
+  console.log('here is start: '+ startPoint, 'here is end : ' + endPoint)
+
     do {
-      movePiece()
+      movePiece(startPoint, endPoint)
     }
-    //does this call the functions correctly? 
-    while ((checkForWin !== true) && (ifLegal === true)) 
+    while ((checkForWin() === false) && (isLegal(startPoint, endPoint) === true))
 }
 
 function getPrompt() {
