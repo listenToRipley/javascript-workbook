@@ -29,7 +29,6 @@ function printStacks() {
 
 function movePiece() {
   // Your code here
-  //this shouldn't call those functions though right? 
 
 //establish the index of your array in each object
 // let lastStackA = stackA[stackA.length-1]
@@ -59,6 +58,7 @@ function movePiece() {
   }
 
   //LAST THREE FUNCTIONS SHOULD BE DAISY CHAINED
+  lastInStackIndex(startStack)
 
 }
 
@@ -93,16 +93,21 @@ function towersOfHanoi(startStack, endStack) {
 
   //this isn't quite
     //want to check for your win conditionals at the top, maybe a while loop would be better? 
-    if (checkForWin() === true) {
-        //if you win, stop
-      return 'you win'
-      //otherwise, make sure your move is legal
-    } else if (ifLegal() === true) {
-      // if it is legal, then you can finally call this function
+    // if (checkForWin() === true) {
+    //     //if you win, stop
+    //   return 'you win'
+    //   //otherwise, make sure your move is legal
+    // } else if (ifLegal() === true) {
+    //   // if it is legal, then you can finally call this function
+    //   movePiece()
+    // } else {
+    //   return 'no a valid move, try again'
+    // }
+    do {
       movePiece()
-    } else {
-      return 'no a valid move, try again'
     }
+    //does this call the functions correctly? 
+    while ((checkForWin !== true) && (ifLegal === true)) 
 }
 
 function getPrompt() {
