@@ -21,14 +21,15 @@ function printStacks() {
 }
 
 //this will always be your starting state 
-  //if this is placed here, then all functions should be able to use these variables 
+  //if this is placed here, then all functions should be able to use these variables
+    //only place this is called right now is in the win conditions 
   let stackA = stacks.a
   let stackB = stacks.b
   let stackC = stacks.c
 
 function movePiece() {
   // Your code here
-
+  //this shouldn't call those functions though right? 
 
 //establish the index of your array in each object
 // let lastStackA = stackA[stackA.length-1]
@@ -36,6 +37,7 @@ function movePiece() {
 // let lastStackC = stackC[stackC.length-1]
   //or we could create another helper function to make this a lot shorter 
                           //should this be starter stack maybe?
+                          //maybe this should be global since it is used in two places? 
   let lastInStackIndex = (startStack) => {
     return startStack.length-1
   }
@@ -68,10 +70,10 @@ function isLegal() {
       let lastValueInStack = (stack) => {
         return stack.length-1
       }
-  if((endStack[lastValueInStack(endStack)] < startStack[lastValueInStack(startStack)])
+  if((endStack[lastValueInStack(endStack)] > startStack[lastValueInStack(startStack)])
     // of the starting position happens to be the same as the end position 
-      ||(startStack === endStack)) {
-    return false
+      ||(startStack !== endStack)) {
+    return true
   }
 
 }
@@ -80,6 +82,7 @@ function checkForWin() {
   // Your code here
   //you move all your values from stack a to stack c and the order is the same as the beginning 
     //should I just a for in loop here to verify it? 
+      //does it have to be stack c? Or any stack other than the starting stack A? 
 if(stackC === [4, 3, 2, 1]) {
   return true 
 }
@@ -88,12 +91,17 @@ if(stackC === [4, 3, 2, 1]) {
 function towersOfHanoi(startStack, endStack) {
   // Your code here
 
-  //this isn't quite right, we do call these into the move piece, but not right
-    if (checkForWin === true) {
+  //this isn't quite
+    //want to check for your win conditionals at the top, maybe a while loop would be better? 
+    if (checkForWin() === true) {
+        //if you win, stop
       return 'you win'
+      //otherwise, make sure your move is legal
+    } else if (ifLegal() === true) {
+      // if it is legal, then you can finally call this function
+      movePiece()
     } else {
-    movePiece(startStack, endStack) 
-      if (move)
+      return 'no a valid move, try again'
     }
 }
 
