@@ -29,7 +29,6 @@ function movePiece(startPoint, endPoint) {
 //establish the index of your array in each object
   let lastInStackIndex = startPoint.length-1
   
-
   //take the last item off of stack and move it
   let removeFrom = startPoint.pop(lastInStackIndex)
 
@@ -39,7 +38,6 @@ function movePiece(startPoint, endPoint) {
 
   //LAST THREE SHOULD BE DAISY CHAINED
     return moveTo
-
 }
 
 function isLegal(startPoint, endPoint) {
@@ -50,7 +48,7 @@ function isLegal(startPoint, endPoint) {
       //need to asses the last item in the index of your current move  
       let lastIndexStart = startPoint.length-1
       let lastIndexEnd = endPoint.length-1
-
+    //these are the only legal options of keys to enter 
       let stacking = (stacks.a || stacks.b || stacks.c)
       
   if(
@@ -68,10 +66,10 @@ function isLegal(startPoint, endPoint) {
 
 }
 
-function checkForWin(endPoint) {
+function checkForWin() {
   // Your code here
   //you move all your values from stack a to stack c and the order is the same as the beginning 
-if((stacks.c === [4, 3, 2, 1]) || (stacks.b === [4, 3, 2, 1])) {
+if(stacks.b === [4, 3, 2, 1] || stacks.c === [4, 3, 2, 1]) {
   return true 
 } else {
   return false 
@@ -89,13 +87,27 @@ function towersOfHanoi(startStack, endStack) {
   let startPoint = stacks[startStack]
   let endPoint = stacks[endStack]
 
-  console.log('here is ' + startStack, 'here is '+ endStack)
-  console.log('here is start: '+ startPoint, 'here is end : ' + endPoint)
+  // console.log('here is ' + startStack, 'here is '+ endStack)
+  // console.log('here is start: '+ startPoint, 'here is end : ' + endPoint)
 
-    do {
-      movePiece(startPoint, endPoint)
-    }
-    while ((checkForWin() === false) && (isLegal(startPoint, endPoint) === true))
+  //seems to like to have the move piece first, when I changed it to a while statement, the move function stopped working
+
+  do {
+    return movePiece(startPoint, endPoint)
+  }
+  while ((checkForWin() === false) && (isLegal(startPoint, endPoint) === true))
+
+  //doesn't seem to like the if statement 
+
+  // if (checkForWin() === false && isLegal(startPoint, endPoint) === true) {
+  //   return movePiece(startPoint, endPoint)
+  // } else if (checkForWin === true){ 
+  //     return 'game over'
+  // } else if (isLegal(startPoint, endPoint) === false) {
+  //   return 'invalid move'
+  // } 
+
+
 }
 
 function getPrompt() {
