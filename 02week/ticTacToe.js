@@ -12,8 +12,8 @@ let board = [
   [' ', ' ', ' ']
 ];
 
-let playerTurn = 'X';
-let player2 = 'O'
+// tic-tac-toe
+let playerTurn = 'X' 
 
 function printBoard() {
   console.log('   0  1  2');
@@ -24,6 +24,48 @@ function printBoard() {
   console.log('2 ' + board[2].join(' | '));
 }
 
+//do we need to associate the board with this section? 
+
+//this is a helper function for checkForWin()
+//return true if any row wins
+function horizontalWin() {
+  // Your code here
+  //loops through each option for the second array
+  for (let i = 0; i >= 2; i++) {
+
+    //checked is any of the whole rows returns with the same value 
+    if (((board[0][i]) || (board[1][i]) || (board[2][i])) === playerTurn) 
+    { 
+        console.log('row win') 
+      }
+    }
+    return true
+  }
+
+
+//this is a helper function for checkForWin()
+//return true if any column wins
+function verticalWin() {
+  // Loop first array options
+  for (let i = 0; i >= 2; i++) {
+
+    //checks if the whole column shares the same value 
+     if(((board[i][0]) || (board[i][1]) || (board[i][2])) === playerTurn)  {
+      console.log('column win')
+    }
+  }
+  return true
+}
+
+//this is a helper function for checkForWin()
+//return true if any column diagonal wins 
+function diagonalWin() {
+  
+  //looks at the whole of either left diagonal or right diagonal 
+  if ((board[0][0] && board[1][1] && board[2][2]) || (board[0][2] && board[1][1] && board[2][0]) === playerTurn) 
+  {
+    return true
+=======
 //return true if any row wins
 function horizontalWin() {
   // Your code here
@@ -59,12 +101,13 @@ function diagonalWin() {
 
 }
 
-//which against your win functions 
+//which against your win functions, this function must come before the player change 
 function checkForWin() {
   // Your code here
   if ((horizontalWin())||(verticalWin())||(diagonalWin())) {
-    console.log('The winner is'  // figure out how to place the winner X or O 
-    )
+    return true 
+  } else {
+    return false 
   }
 }
 
@@ -72,16 +115,29 @@ function checkForWin() {
 function ticTacToe(row, column) {
   // Your code here
 
-  //set the value to positions on the board
-  //assign player 1 = X
-  //assign player 2 = O
+  board[row][column] = playerTurn
+
+  //this function must be called before you switch players or you would only be assessing based on one player 
+  checkForWin(playerTurn)
+
+  //if statement here for ties! if checkForWin returns false and all squares are populated 
+    
+  //alternates between X and O
+  playerTurn = (playerTurn === 'X') ? 'O' : 'X'
+
+
+  //gui issues 
+    //based on playerTurn 
+      //should this be a button? 
+      //assign player 1 = X
+        // if innerHTML = run playerTurn ternary operator 
+      //assign player 2 = O
+
   //place player 1
     //limit play to one turn
-  //check win conditions 
-    //if they did statement for win
-  //place player 2
-    //limit play to one turn
-  //check win conditions 
+    //assess if the square is already populated 
+
+  //alert for win conditions or tie
 }
 
 function getPrompt() {
