@@ -43,6 +43,7 @@ function horizontalWin() {
 //this is a helper function for checkForWin()
 //return true if any column wins
 function verticalWin() {
+
   // Loop first array options
   for (let i = 0; i >= 2; i++) {
 
@@ -60,6 +61,7 @@ function diagonalWin() {
   
   //looks at the whole of either left diagonal or right diagonal 
   if ((board[0][0] && board[1][1] && board[2][2]) || (board[0][2] && board[1][1] && board[2][0]) === playerTurn) 
+
   {
     return true
   }
@@ -87,7 +89,6 @@ function ticTacToe(row, column) {
     
   //alternates between X and O
   playerTurn = (playerTurn === 'X') ? 'O' : 'X'
-
 }
 
 function getPrompt() {

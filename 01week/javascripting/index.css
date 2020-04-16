@@ -1,0 +1,55 @@
+/* I know we don't need to do this, but I need to keep up my practice on this  */
+
+body {
+  margin: 5%;
+  padding: 1em;
+  background-color: rgba(239, 240, 192, 0.904);
+}
+
+main > div{
+  padding: 15px 0 15px 10px;
+}
+
+h1 {
+  font-family: 'Lora', serif;
+  font-size: 24px;
+}
+
+h2 {
+  font-family: 'Lora', serif;
+  font-size: 20px;
+  padding: 6px;
+}
+
+span, p {
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+}
+
+div > span {
+  padding: 2em;
+}
+
+.explain {
+    padding-left: 4em;
+}
+
+#div1{
+  background-color: rgba(127, 255, 212, 0.788);
+}
+
+#div2{
+  background-color: rgba(46, 139, 86, 0.712);
+}
+
+#div3{
+  background-color: rgba(50, 92, 78, 0.616);
+}
+
+#div4{
+  background-color: rgba(50, 65, 60, 0.616);
+}
+
+#div5{
+  background-color: rgba(60, 86, 87, 0.801);
+}
