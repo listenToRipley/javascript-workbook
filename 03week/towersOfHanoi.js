@@ -40,25 +40,35 @@ function movePiece(startPoint, endPoint) {
     return moveTo
 }
 
-function isLegal(startPoint, endPoint) {
+function isLegal(starter, ender) {
+  
+    //access the stack 
+    let startPoint = stacks[starter]
+    let endPoint = stacks[ender]
 
   // Your code here
   //since it is is Legal, not is Legal, any falsys should be trues 
+    // console.log('inside is legal start point: ', startPoint)
+    // console.log('inside is legal end points: ', endPoint)
+
+        //the array you are trying to move from is empty
+      if (startPoint.length === 0) {
+        return false
+      } 
+    //the array you are trying move to is empty
+      if (endPoint.length === 0) {
+        return true 
+      }
 
       //need to asses the last item in the index of your current move  
       let lastIndexStart = startPoint.length-1
       let lastIndexEnd = endPoint.length-1
-    //these are the only legal options of keys to enter 
-      let stacking = (stacks.a || stacks.b || stacks.c)
       
-  if(
-    //the array you are trying to move from is empty
+   if(
     //the array you a try move to has a value which is greater already in it 
     (startPoint[lastIndexStart] < endPoint[lastIndexEnd])
     // of the starting position happens to be the same as the end position 
-      && (startPoint !== endPoint) 
-      //we don't want them to be able to enter invalid stack letters
-      && (startPoint === stacking) && (endPoint === stacking)) {
+      && (startPoint !== endPoint)) {
     return true
   } else {
     return false
@@ -69,7 +79,7 @@ function isLegal(startPoint, endPoint) {
 function checkForWin() {
   // Your code here
   //you move all your values from stack a to stack c and the order is the same as the beginning 
-if(stacks.b === [4, 3, 2, 1] || stacks.c === [4, 3, 2, 1]) {
+if(stacks.b.length === 4 || stacks.c.length === 4) {
   return true 
 } else {
   return false 
@@ -84,29 +94,18 @@ function towersOfHanoi(startStack, endStack) {
   let ender = endStack.toLowerCase().trim()
 
   //access the stack 
-  let startPoint = stacks[startStack]
-  let endPoint = stacks[endStack]
+  let startPoint = stacks[starter]
+  let endPoint = stacks[ender]
 
-  // console.log('here is ' + startStack, 'here is '+ endStack)
-  // console.log('here is start: '+ startPoint, 'here is end : ' + endPoint)
+  console.log('here is ' + startStack, 'here is '+ endStack)
+  console.log('here is start: '+ startPoint, 'here is end : ' + endPoint)
 
   //seems to like to have the move piece first, when I changed it to a while statement, the move function stopped working
-
-  do {
-    return movePiece(startPoint, endPoint)
-  }
-  while ((checkForWin() === false) && (isLegal(startPoint, endPoint) === true))
-
-  //doesn't seem to like the if statement 
-
-  // if (checkForWin() === false && isLegal(startPoint, endPoint) === true) {
-  //   return movePiece(startPoint, endPoint)
-  // } else if (checkForWin === true){ 
-  //     return 'game over'
-  // } else if (isLegal(startPoint, endPoint) === false) {
-  //   return 'invalid move'
-  // } 
-
+ if (isLegal(starter, ender) === true) {
+    movePiece(startPoint, endPoint)
+ } else {
+   console.log('is not legal')
+ }
 
 }
 
@@ -115,7 +114,12 @@ function getPrompt() {
   rl.question('start stack: ', (startStack) => {
     rl.question('end stack: ', (endStack) => {
       towersOfHanoi(startStack, endStack);
-      getPrompt();
+       if (checkForWin() === false) {
+         getPrompt(); 
+      } else {
+        printStacks()
+        console.log('You won!')
+      }
     });
   });
 }
