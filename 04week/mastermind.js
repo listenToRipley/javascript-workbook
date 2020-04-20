@@ -53,7 +53,7 @@ function generateHint(guess) {
   //loop through that solutionArray, w/ .indexOf() 
   //determine if guessArray appears at all in solutionArray 
   //save the index in the variable called 
-  
+
   console.log('this is the start loop for 100% accurate guesses ')
 
   for(let i = 0; i<solutionArray.length; i++) {
@@ -77,8 +77,14 @@ function generateHint(guess) {
 
   //console.log out correctLettersLocations in red and correctLetters in white, separated by a hyphen.
   
-  //add your hint to the board 
+  //we don't want to double count your letters. We care more about the 100% accurate than the correct letters.
+  // this number should never be greater than 4. 
+  //this isn't quite right. 
+return correctLetterLocations - correctLetters
+// if you are subtracting 4-4 = 0, 
 
+
+//add your hint to the board 
 
 }
 
