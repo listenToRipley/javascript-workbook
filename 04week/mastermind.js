@@ -8,7 +8,11 @@ const rl = readline.createInterface({
 });
 
 let board = [];
+
+//the 'solution' is the mastermind's input
 let solution = '';
+
+//since we're restricting the letters you can choose, should be short circuit this? 
 let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
 function printBoard() {
@@ -17,6 +21,7 @@ function printBoard() {
   }
 }
 
+//these are for testing 
 function generateSolution() {
   for (let i = 0; i < 4; i++) {
     const randomIndex = getRandomInt(0, letters.length);
@@ -24,24 +29,47 @@ function generateSolution() {
   }
 }
 
+//this is a helper function for the generateSolution 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+//this function should generate output that is the guess hints 
 function generateHint(guess) {
   // your code here
 
   let solutionArray = solution.split('')
-  let guessArray = ''
-  //check of the above variable will need to be .split('')
-  let correctLetterLocations = 0 
+  let guessArray = guess.split('')
+
+  //we want to loop through each letter in the array to check against it.
+
+  let correctLetterLocations = 0  
+    console.log('before the loop, my 100% accurate guesses are: ', correctLetterLocations)
   //this variable will need to count how many letters are in the correct location 
   //this variable should increase for every letter and index that matches 
   // if it returns no matches, return null 
   let correctLetters = 0
+    console.log('before the loop, the correct guesses letters are: ', correctLetters)
   //loop through that solutionArray, w/ .indexOf() 
   //determine if guessArray appears at all in solutionArray 
   //save the index in the variable called 
+  
+  console.log('this is the start loop for 100% accurate guesses ')
+
+  for(let i = 0; i<solutionArray.length; i++) {
+    if(solution[i] === guessArray[i]) {
+      console.log('this is the current letter in the solution', solutionArray[i])
+      console.log('this is the current letter in the guess', guessArray[i])
+      console.log(`make sure that ${solutionArray[i]} is equal to ${guessArray[i]}`)
+      return  correctLetterLocations ++ 
+      console.log('current 100% accurate guesses are: ' + correctLetterLocations)
+    } else {
+      return null 
+      console.log('there are no 100% matches in this guess')
+    }
+    return correctLetterLocations
+  }
+
   let targetIndex = 0
   //if targetIndex > -1 increase correctLetters 
 
@@ -58,26 +86,6 @@ function mastermind(guess) {
   solution = 'abcd'; // Comment this out to generate a random solution
   // your code here
 
-  //how to play: 
-  //1. mastermind chooses four, in this case, letter and keeps them secret, the secret code.
-  //2. the codebreaker provide a guess to see if they can figure out the secret code. 
-  //3. After the guess is made, the mastermind must provide hints to the codebreaker
-    // if the code breaker provided:
-       //a. if th guess matches the secret code
-          // the game is over 
-
-          //else 
-        //b. if the letter and location with the guess matches
-          //return 1 for each match 
-        //c. if the letter matches, but the location does not
-          //return 1 for each match 
-        //d. if no matches can be found, return nothing 
-    //4. as long as 3.a. - winning - has not occurred, continue 3.b. - 3.d. until 10 guess have been made.
-    //5. if there has been 10 guesses and a correct guess has not been made
-        // the mastermind wins
-        //the codebreaker loses 
-
-        
   //if they get the answer it should return 'You guessed it!'
 
 
@@ -128,3 +136,23 @@ if (typeof describe === 'function') {
   generateSolution();
   getPrompt();
 }
+
+
+  //how to play: 
+  //1. mastermind chooses four, in this case, letter and keeps them secret, the secret code.
+  //2. the codebreaker provide a guess to see if they can figure out the secret code. 
+  //3. After the guess is made, the mastermind must provide hints to the codebreaker
+    // if the code breaker provided:
+       //a. if th guess matches the secret code
+          // the game is over 
+
+          //else 
+        //b. if the letter and location with the guess matches
+          //return 1 for each match 
+        //c. if the letter matches, but the location does not
+          //return 1 for each match 
+        //d. if no matches can be found, return nothing 
+    //4. as long as 3.a. - winning - has not occurred, continue 3.b. - 3.d. until 10 guess have been made.
+    //5. if there has been 10 guesses and a correct guess has not been made
+        // the mastermind wins
+        //the codebreaker loses 
