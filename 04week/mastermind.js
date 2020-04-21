@@ -35,53 +35,98 @@ function getRandomInt(min, max) {
 }
 
 //this function should generate output that is the guess hints 
-function generateHint(guess) {
+function generateHint(guessFormatted) {
   // your code here
 
+  //converts my string to an array so I can loop through it 
   let solutionArray = solution.split('')
-  let guessArray = guess.split('')
+  let guessArray = guessFormatted.split('')
 
-  //we want to loop through each letter in the array to check against it.
+  console.log('this is what my solution looks like now ', solutionArray)
+  console.log('this what my guess looks like now ', guessArray)
 
+  console.log(`this is the length of my solution array :`,solutionArray.length)
+
+  //using the index of the solution array, we want to check against each item in the index and verify if they match 
+
+  //first we're check if the location and letter matches 
+
+   //this variable will need to count how many letters are in the correct location 
   let correctLetterLocations = 0  
     console.log('before the loop, my 100% accurate guesses are: ', correctLetterLocations)
-  //this variable will need to count how many letters are in the correct location 
-  //this variable should increase for every letter and index that matches 
-  // if it returns no matches, return null 
-  let correctLetters = 0
-    console.log('before the loop, the correct guesses letters are: ', correctLetters)
-  //loop through that solutionArray, w/ .indexOf() 
-  //determine if guessArray appears at all in solutionArray 
-  //save the index in the variable called 
 
-  console.log('this is the start loop for 100% accurate guesses ')
+
+  //this will count how many letters match the solution 
+  let correctLetters = 0
+  console.log('before the loop, the correct guesses letters are: ', correctLetters)
+
+  //this is for checking if ANY of the letters provide match the guess
+    //this converts my solution ins a regular express so I can check my guess array against it.
+  let regexFromSolution = new RegExp(`[${solution}]`);
+                                //this has to be a template literal or the formatting isn't right for the regex 
+  console.log('this should be a regex of the solution', regexFromSolution)
+
+  console.log('this is the start loop for 100% accurate guesses')
 
   for(let i = 0; i<solutionArray.length; i++) {
+      //this is only looping once and not increase the correctLetterLocations 
     if(solution[i] === guessArray[i]) {
-      console.log('this is the current letter in the solution', solutionArray[i])
-      console.log('this is the current letter in the guess', guessArray[i])
+      console.log('this is inside my 100% loop')
+      console.log('this is the current letter in the solution :'+ solutionArray[i] +' & the current letter in the guess :', guessArray[i])
       console.log(`make sure that ${solutionArray[i]} is equal to ${guessArray[i]}`)
+      
+      //this variable should increase for every letter and index that matches 
       return  correctLetterLocations ++ 
       console.log('current 100% accurate guesses are: ' + correctLetterLocations)
     } else {
-      return null 
+      return correctLetterLocations = 0 
       console.log('there are no 100% matches in this guess')
     }
     return correctLetterLocations
   }
 
-  let targetIndex = 0
-  //if targetIndex > -1 increase correctLetters 
+    //the guess should be checked against the solution 
+  for (let i = 0; i > guessArray.length; i++) {
+    if (guessArray[i].match(regexFromSolution)) {
+      console.log('this is inside my correctLetter function')
+      console.log('this is the current letter in the guess :', guessArray[i])
+      return correctLetters++
+    }
+    //if nothing matches, we don't want to ti do anything 
+    else {
+      return null 
+    }
+    return correctLetters 
+  }
 
-  //hints
+  console.log('this is after both functions for correct answers have run')
+  console.log('the number of 100% correct guesses are' + correctLetterLocations)
+  console.log('the number of correct letters is ' + correctLetters)
 
-  //console.log out correctLettersLocations in red and correctLetters in white, separated by a hyphen.
-  
+    //this is the count for me total correct guesses made, either 100% or just letter
+    let correctGuess = correctLetterLocations - correctLetters
+  console.log('now the correct guesses equals ' + correctGuess)
+
+  //the correct letter location should always take president over the correct letter. 
   //we don't want to double count your letters. We care more about the 100% accurate than the correct letters.
   // this number should never be greater than 4. 
   //this isn't quite right. 
-return correctLetterLocations - correctLetters
-// if you are subtracting 4-4 = 0, 
+  // if you are subtracting 4-4 = 0, 
+
+  if (correctGuess > -1) {
+    return correctGuess = 0 
+    console.log('nothing was right in that guess')
+  } else if (correctLetterLocations === 1 && correctLetters === 1) {
+    return correctGuess = 1
+    console.log('You have 1 100% accurate guess'.red)
+  }
+
+let targetIndex = 0
+//if targetIndex > -1 increase correctLetters 
+
+//hints
+
+//console.log out correctLettersLocations in red and correctLetters in white, separated by a hyphen.
 
 
 //add your hint to the board 
@@ -91,24 +136,41 @@ return correctLetterLocations - correctLetters
 function mastermind(guess) {
   solution = 'abcd'; // Comment this out to generate a random solution
   // your code here
+    let guessFormatted = guess.trimmed().toLowerCase()
 
-  //if they get the answer it should return 'You guessed it!'
 
+    if (guessFormatted.length > 4) {
+      return 'your guess it too long, try again'
+    }
 
-  // the end 
-  if (board.length = 10) {
-    return 'You ran out of turns! The solution was ' + solution
-  } else {
-    return 'Guess again.'
-    //need to run the hint function again 
-  }
+    //short circuited, 
+      //check if you got the guess correct right away
+          // we shouldn't need to include language in the get hint function for a correct guess, since the function should stop here before it gets anywhere else 
+    if (guessFormatted === solution) {
+      return 'You guessed it!'
+      //make sure you still have turns left
+    } else  if  (board.length = 10){
+      return 'You ran out of turns! The solution was ' + solution
+      //if you haven't guess it and you still have turn, then generate a hint. 
+    } else {
+      return 'Guess again'
+      generateHint()
+    }
+
 }
 
 
 function getPrompt() {
   rl.question('guess: ', (guess) => {
+    //get the input of the guess
     mastermind(guess);
     printBoard();
+    //shouldn't the solution come before the guess? 
+      //we only want the solution to be generated once, not continue to generate every turn
+    generateSolution();
+      // Kept this here to make sure calling it within the mastermind function was correct
+        //with all input completed, we should generate the guess
+    // generateHint();
     getPrompt();
   });
 }
