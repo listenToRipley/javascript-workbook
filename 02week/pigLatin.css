@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Solway', serif;
+}
+
+#intro {
+  padding: 30px 20px 70px;
+  background-image: url(https://2zwmzkbocl625qdrf2qqqfok-wpengine.netdna-ssl.com/wp-content/uploads/2019/12/19764126_web1_shutterstock_1079412209--1-.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+h1 {
+  font-size: 34px;
+  padding-bottom: 10px;
+  color: rgba(240, 248, 255, 0.589);
+}
+
+/* make sure all my content displays in a column  */
+#mainOutput{
+  display: flex;
+  flex-direction: column;
+  font-family: 'Montserrat Alternates', sans-serif;
+  background-image: url(https://images.unsplash.com/photo-1470165414781-59aed746a9bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1652&q=80);
+  background-position: center;
+  background-size: cover;
+  height: 80vh;
+  color: rgba(22, 30, 95, 0.781);
+  padding: 15px;
+  font-weight: bold;
+}
+
+
+.result {
+  display: flex;
+  flex-direction: row;
+}
