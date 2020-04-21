@@ -89,6 +89,9 @@ if(stacks.b.length === 4 || stacks.c.length === 4) {
 function towersOfHanoi(startStack, endStack) {
   // Your code here
 
+  // valid that the entry is something that can be done 
+  if (startStack === 'a' || startStack === 'b' || startStack === 'c' && endStack === 'a' || endStack === 'b' || endStack === 'c') {
+
   //does seem to be case sensitive 
   let starter = startStack.toLowerCase().trim()
   let ender = endStack.toLowerCase().trim()
@@ -106,6 +109,9 @@ function towersOfHanoi(startStack, endStack) {
  } else {
    console.log('is not legal')
  }
+} else {
+  console.log('this is not a valid move, please try again')
+}
 
 }
 
@@ -128,9 +134,25 @@ function getPrompt() {
 
 if (typeof describe === 'function') {
 
+  //my test
+  describe('block invalid output', () => {
+    it('should be able to move a block', () => {
+      towersOfHanoi('es', 'gee');
+      assert.deepEqual(stacks, { a: [4, 3, 2,1], b: [], c: [] });
+    });
+  });
+
   describe('#towersOfHanoi()', () => {
     it('should be able to move a block', () => {
       towersOfHanoi('a', 'b');
+      assert.deepEqual(stacks, { a: [4, 3, 2], b: [1], c: [] });
+    });
+  });
+
+  //my test
+  describe('#towersOfHanoi()', () => {
+    it('should trim and lower case the input', () => {
+      towersOfHanoi('A', '  B   ');
       assert.deepEqual(stacks, { a: [4, 3, 2], b: [1], c: [] });
     });
   });
@@ -144,6 +166,17 @@ if (typeof describe === 'function') {
       };
       assert.equal(isLegal('a', 'b'), false);
     });
+
+    //my test
+    it('should block moves to the same location that you started from', () => {
+      stacks = {
+        a: [4, 3, 2, 1],
+        b: [],
+        c: []
+      };
+      assert.equal(isLegal('a', 'a'), false);
+    });
+
     it('should allow a legal move', () => {
       stacks = {
         a: [4, 3, 2, 1],
