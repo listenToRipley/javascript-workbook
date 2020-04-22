@@ -11,6 +11,18 @@ let jobTypes = {
 
 // Your code here
 
+//build two classes, 
+
+//crew member
+  //constructor should take in as input: name, their job, their special skill 
+
+//ship 
+  //constructor should take in as input:name, type, ability
+    //can have crew members 
+    //contain a method: missionStatement()
+        //if there a crew member that can activate it  == loop through crew to make sure jobTypes matches ship ability, it should return ability
+          //else return 'can't perform a mission yet' 
+
 //tests
 if (typeof describe === 'function'){
   describe('CrewMember', function(){
