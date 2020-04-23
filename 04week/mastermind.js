@@ -47,10 +47,6 @@ function generateHint(guessFormatted) {
 
   console.log(`this is the length of my solution array :`,solutionArray.length)
 
-  //using the index of the solution array, we want to check against each item in the index and verify if they match 
-
-  //first we're check if the location and letter matches 
-
    //this variable will need to count how many letters are in the correct location 
   let correctLetterLocations = 0  
     console.log('before the loop, my 100% accurate guesses are: ', correctLetterLocations)
@@ -60,74 +56,56 @@ function generateHint(guessFormatted) {
   let correctLetters = 0
   console.log('before the loop, the correct guesses letters are: ', correctLetters)
 
-  //this is for checking if ANY of the letters provide match the guess
-    //this converts my solution ins a regular express so I can check my guess array against it.
-  let regexFromSolution = new RegExp(`[${solution}]`);
-                                //this has to be a template literal or the formatting isn't right for the regex 
-  console.log('this should be a regex of the solution', regexFromSolution)
+  //first we're check if the location and letter matches 
 
-  console.log('this is the start loop for 100% accurate guesses')
-
+  //using the index of the solution array, we want to check against each item in the index and verify if they match 
+  // console.log('this is the start loop for 100% accurate guesses')
   for(let i = 0; i<solutionArray.length; i++) {
-      //this is only looping once and not increase the correctLetterLocations 
     if(solution[i] === guessArray[i]) {
-      console.log('this is inside my 100% loop')
-      console.log('this is the current letter in the solution :'+ solutionArray[i] +' & the current letter in the guess :', guessArray[i])
-      console.log(`make sure that ${solutionArray[i]} is equal to ${guessArray[i]}`)
-      
-      //this variable should increase for every letter and index that matches 
-      return  correctLetterLocations ++ 
-      console.log('current 100% accurate guesses are: ' + correctLetterLocations)
-    } else {
-      return correctLetterLocations = 0 
-      console.log('there are no 100% matches in this guess')
+        correctLetterLocations ++ 
+      // console.log('current 100% accurate guesses are: ' + correctLetterLocations)
     }
-    return correctLetterLocations
+    correctLetterLocations
   }
 
-    //the guess should be checked against the solution 
-  for (let i = 0; i > guessArray.length; i++) {
-    if (guessArray[i].match(regexFromSolution)) {
-      console.log('this is inside my correctLetter function')
-      console.log('this is the current letter in the guess :', guessArray[i])
-      return correctLetters++
-    }
-    //if nothing matches, we don't want to ti do anything 
-    else {
-      return null 
-    }
-    return correctLetters 
-  }
+    //checks to see if any of the letters match 
+  solutionArray.forEach((solutionLetter) => {
+    guessArray.forEach((guessLetter) => {
+        //need to add something in here to stops it from counting the same letter
+      if (guessLetter === solutionLetter) {
+        correctLetters ++
+      }
+      correctLetters
+    })
+    correctLetters
+  }) 
 
-  console.log('this is after both functions for correct answers have run')
+  console.log('this is after both functions have run')
   console.log('the number of 100% correct guesses are' + correctLetterLocations)
   console.log('the number of correct letters is ' + correctLetters)
 
     //this is the count for me total correct guesses made, either 100% or just letter
-    let correctGuess = correctLetterLocations - correctLetters
-  console.log('now the correct guesses equals ' + correctGuess)
+  let locationOverLetter = (correctLetterLocations - correctLetters)
+  let letterOverLocation = (correctLetters - correctLetterLocations)
 
-  //the correct letter location should always take president over the correct letter. 
-  //we don't want to double count your letters. We care more about the 100% accurate than the correct letters.
-  // this number should never be greater than 4. 
-  //this isn't quite right. 
-  // if you are subtracting 4-4 = 0, 
-
-  if (correctGuess > -1) {
-    return correctGuess = 0 
-    console.log('nothing was right in that guess')
-  } else if (correctLetterLocations === 1 && correctLetters === 1) {
-    return correctGuess = 1
-    console.log('You have 1 100% accurate guess'.red)
+  //if they are equal, the the location of the letter is more important the letter
+ if (correctLetterLocations === correctLetters) {
+    console.log(correctLetterLocations)
+  //if the location number is larger than the correct letters, then the letter should be subtracted from the location, the location takes presents though
+  } else if (correctLetters > correctLetterLocations) {
+    console.log(correctLetterLocations = (locationOverLetter))
+  //of you have more letters than locations, you should subtract the location from the letters and print both 
+  } else if (correctLetterLocations > correctLetters)
+  { 
+      console.log(correctLetter = ((letterOverLocation)))
+      console.log(correctLetterLocations = locationOverLetter)
+    
+    //we shouldn't end up with negative numbers, but if we do, reset it to zero
+  }else if (correctLetterLocations> -1) {
+    console.log(correctLetterLocations = 0)
+  } else if (correctLetters > -1) {
+    console.log(correctLetters = 0)
   }
-
-let targetIndex = 0
-//if targetIndex > -1 increase correctLetters 
-
-//hints
-
-//console.log out correctLettersLocations in red and correctLetters in white, separated by a hyphen.
-
 
 //add your hint to the board 
 
@@ -136,25 +114,33 @@ let targetIndex = 0
 function mastermind(guess) {
   solution = 'abcd'; // Comment this out to generate a random solution
   // your code here
-    let guessFormatted = guess.trimmed().toLowerCase()
 
+    let guessFormatted = guess.trim().toLowerCase()
 
+    board.push(guessFormatted)
+
+    //the guess should not be longer than 4    
     if (guessFormatted.length > 4) {
-      return 'your guess it too long, try again'
+      console.log('your guess it too long, try again')
+      //we only want letters, not numbers
+    } else if (typeof guessFormatted !== 'string' || guessFormatted instanceof String){
+      console.log('we only accept letters')
     }
+    //would like to add something from stop the same letter being used twice in a string?
+
 
     //short circuited, 
       //check if you got the guess correct right away
           // we shouldn't need to include language in the get hint function for a correct guess, since the function should stop here before it gets anywhere else 
     if (guessFormatted === solution) {
-      return 'You guessed it!'
+      console.log('You guessed it!')
       //make sure you still have turns left
-    } else  if  (board.length = 10){
-      return 'You ran out of turns! The solution was ' + solution
+    } else  if (board.length === 10){
+      console.log('You ran out of turns! The solution was ' + solution)
       //if you haven't guess it and you still have turn, then generate a hint. 
     } else {
-      return 'Guess again'
-      generateHint()
+      console.log('Guess again')
+      generateHint(guessFormatted)
     }
 
 }
