@@ -83,6 +83,8 @@ function generateHint(guessArray) {
   console.log('the number of 100% correct guesses are' + correctLetterLocations)
   console.log('the number of correct letters is ' + correctLetters)
 
+  //this isn't right. I am having a really hard time with getting the logic on this right even though I've written it out several times on paper
+
     //this is the count for me total correct guesses made, either 100% or just letter
   let locationOverLetter = (correctLetters - correctLetterLocations)
   let letterOverLocation = (correctLetterLocations - correctLetters)
@@ -127,7 +129,8 @@ function mastermind(guess) {
     } else if (typeof guessArray !== 'string' || guessFormatted instanceof String){
       console.log('we only accept letters')
     }
-    //would like to add something from stop the same letter being used twice in a string?
+
+    //prevent duplicate letters
     else if (guessArray) {
       console.log('hey! you used the same letter twice')
     }
