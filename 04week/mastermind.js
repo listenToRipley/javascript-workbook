@@ -40,20 +40,22 @@ function generateHint(guessArray) {
 
   //converts my string to an array so I can loop through it 
   let solutionArray = solution.split('')
+  //this has stop working, wonderful 
 
-  console.log('this is what my solution looks like now ', solutionArray)
+
+  // console.log('this is what my solution looks like now ', solutionArray)
   console.log('this what my guess looks like now ', guessArray)
 
-  console.log(`this is the length of my solution array :`,solutionArray.length)
+  // console.log(`this is the length of my solution array :`,solutionArray.length)
 
    //this variable will need to count how many letters are in the correct location 
   let correctLetterLocations = 0  
-    console.log('before the loop, my 100% accurate guesses are: ', correctLetterLocations)
+    // console.log('before the loop, my 100% accurate guesses are: ', correctLetterLocations)
 
 
   //this will count how many letters match the solution 
   let correctLetters = 0
-  console.log('before the loop, the correct guesses letters are: ', correctLetters)
+  // console.log('before the loop, the correct guesses letters are: ', correctLetters)
 
   //first we're check if the location and letter matches 
 
@@ -79,37 +81,33 @@ function generateHint(guessArray) {
     correctLetters
   }) 
 
-  console.log('this is after both functions have run')
-  console.log('the number of 100% correct guesses are' + correctLetterLocations)
-  console.log('the number of correct letters is ' + correctLetters)
+  // console.log('this is after both functions have run')
+  // console.log('the number of 100% correct guesses are' + correctLetterLocations)
+  // console.log('the number of correct letters is ' + correctLetters)
 
   //this isn't right. I am having a really hard time with getting the logic on this right even though I've written it out several times on paper
 
     //this is the count for me total correct guesses made, either 100% or just letter
-  let locationOverLetter = (correctLetters - correctLetterLocations)
-  let letterOverLocation = (correctLetterLocations - correctLetters)
 
-  //if they are equal, the the location of the letter is more important the letter
- if (correctLetterLocations === correctLetters) {
-    console.log(correctLetterLocations)
-  //if the location number is larger than the correct letters, then the letter should be subtracted from the location, the location takes presents though
-  } else if (correctLetters > correctLetterLocations) {
-    console.log(correctLetterLocations = (locationOverLetter))
-  //of you have more letters than locations, you should subtract the location from the letters and print both 
-  } else if (correctLetterLocations > correctLetters)
-  { 
-      console.log(correctLetter = ((letterOverLocation)))
-      console.log(correctLetterLocations = locationOverLetter)
-    
-    //we shouldn't end up with negative numbers, but if we do, reset it to zero
-  }else if (correctLetterLocations> -1) {
-    console.log(correctLetterLocations = 0)
-  } else if (correctLetters > -1) {
-    console.log(correctLetters = 0)
-  }
+  //to prevent negative integers 
+let letterOverLocation = Math.abs(correctLetters - correctLetterLocations)
+  
+// you correctLetterLocations number will always remain the same, but your correctLetters will change 
+if (correctLetters < correctLetterLocations) {
+  console.log('you have more correct locations')
+  return (correctLetters = letterOverLocation)
+} else if (correctLetters > correctLetterLocations) {
+  console.log('you have more correct letters')
+  return(letterOverLocation)
+} else if (correctLetterLocations === correctLetters) {
+  // console.log('your correct letters and locations are equal')
+  return (correctLetters = 0)
+}
 
 //add your hint to the board 
+  let hint = board.push(correctLetterLocations.red, '-', correctLetters.white)
 
+  console.log(hint)
 }
 
 function mastermind(guess) {
@@ -118,23 +116,59 @@ function mastermind(guess) {
 
     let guessFormatted = guess.trim().toLowerCase()
 
+    //show your input, then show your errors
     board.push(guessFormatted)
+
+
+    let duplicateLetters = (letters) => {
+      console.log('it ran')
+      if (guessFormatted.indexOf(letter) >= 0) {
+        console.log('no duplicates')
+        return true
+      } else {
+        console.log('this guess contains duplicates')
+        return false;
+      }
+    }
 
     let guessArray = guessFormatted.split('')
 
-    //the guess should not be longer than 4    
-    if (guessArray.length > 4) {
-      console.log('your guess it too long, try again')
-      //we only want letters, not numbers
-    } else if (typeof guessArray !== 'string' || guessFormatted instanceof String){
+    //this is all wrong
+  
+    let notValue = guessArray.forEach((letter, index) => {
+      console.log('this one ran too')
+      if (guessArray.some(letters)) {
+        return true
+      } else {
+        return false
+      }
+    })
+
+    //the guess should not be longer than 4  
+      //I know it's not right, but I am trying.  
+    if(notValue === false) 
+    { 
+      console.log('these letters are not included in the the guess options')
+      return false
+    } 
+    else if (guessFormatted.length > 4 || guessFormatted.length < 4) {
+      console.log('your guess is not the right length, please try again')
+      return false
+       
+      //duplicate letter 
+    } else if (duplicateLetters === false) {
+      console.log('there is a double letter in this guess')
+      return false 
+    } 
+    //we only want letters, not numbers 
+      else if (typeof guessFormatted !== 'string'){
       console.log('we only accept letters')
+      return false 
     }
-
-    //prevent duplicate letters
-    else if (guessArray) {
-      console.log('hey! you used the same letter twice')
+      else {
+      console.log('this guess is acceptable')
+      return true 
     }
-
     //short circuited, 
       //check if you got the guess correct right away
           // we shouldn't need to include language in the get hint function for a correct guess, since the function should stop here before it gets anywhere else 
