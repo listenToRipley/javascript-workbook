@@ -103,6 +103,8 @@ function mastermind(guess) {
   if((guessFormat.length > 4 || guessFormat < 4) || (typeof guessFormat !== 'string')) {  
     console.log('this is not a valid guess, please try again')
     return false
+
+    //not sure how to write the code for repeats in the code. should that be in hints or should it prevent it?
   } else if(guessFormat === solution) {
     //need to stop the board from continuing to allow me to bring
     console.log('You guessed it!')
