@@ -2,14 +2,14 @@
 // Use a do...while loop to console.log the numbers from 1 to 1000.
 
 //this works, don't forget to uncomment 
-// let z = 0 
-// do {
-//   z++
-//   console.log(z)
-// }
-// while( z < 1000);
+let z = 0 
+do {
+  z++
+  console.log(z)
+}
+while( z < 1000);
 
-      // console.log(`at the end z is: `, z)
+      console.log(`at the end z is: `, z)
  // Create an object (an array with keys and values) called person with the following data:
 
 
@@ -27,22 +27,21 @@
  // Use a for...in loop and if statement to console.log the value associated with the key birthDate if the birth year is an odd number.
 
  //right now this is iterating over each variable within birthDate 
- 
-  //this is working, don't forget to uncomment 
-// let odd = (time) => {
-//    for (let time in person.birthDate) {
 
-//   // console.log(person.birthDate)
+let odd = (time) => {
+   for (let time in person.birthDate) {
 
-//    if(time.year % 2) {
-//      return 'this year is even'
-//    } else {
-//       return 'this year is odd'
-//    }
-//  }
-// }
+  // console.log(person.birthDate)
 
-// console.log(odd(person))
+   if(time.year % 2) {
+     return 'this year is even'
+   } else {
+      return 'this year is odd'
+   }
+ }
+}
+
+console.log(odd(person))
 
  // Create an arrayOfPersons that contains multiple objects. You can simply copy/paste the person object you made above multiple times. Feel free to change the values to reflect multiple people you might have in your database.
 
@@ -90,6 +89,7 @@ let janis = arrayOfPersons.map((array) => {
     console.log(array.lastName)
     console.log(array.birthDate)
     console.log(array.gender)
+    arrayOfPersons[2]
   })
 
 console.log(janis)
