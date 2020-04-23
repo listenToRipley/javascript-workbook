@@ -35,12 +35,11 @@ function getRandomInt(min, max) {
 }
 
 //this function should generate output that is the guess hints 
-function generateHint(guessFormatted) {
+function generateHint(guessArray) {
   // your code here
 
   //converts my string to an array so I can loop through it 
   let solutionArray = solution.split('')
-  let guessArray = guessFormatted.split('')
 
   console.log('this is what my solution looks like now ', solutionArray)
   console.log('this what my guess looks like now ', guessArray)
@@ -85,8 +84,8 @@ function generateHint(guessFormatted) {
   console.log('the number of correct letters is ' + correctLetters)
 
     //this is the count for me total correct guesses made, either 100% or just letter
-  let locationOverLetter = (correctLetterLocations - correctLetters)
-  let letterOverLocation = (correctLetters - correctLetterLocations)
+  let locationOverLetter = (correctLetters - correctLetterLocations)
+  let letterOverLocation = (correctLetterLocations - correctLetters)
 
   //if they are equal, the the location of the letter is more important the letter
  if (correctLetterLocations === correctLetters) {
@@ -119,15 +118,19 @@ function mastermind(guess) {
 
     board.push(guessFormatted)
 
+    let guessArray = guessFormatted.split('')
+
     //the guess should not be longer than 4    
-    if (guessFormatted.length > 4) {
+    if (guessArray.length > 4) {
       console.log('your guess it too long, try again')
       //we only want letters, not numbers
-    } else if (typeof guessFormatted !== 'string' || guessFormatted instanceof String){
+    } else if (typeof guessArray !== 'string' || guessFormatted instanceof String){
       console.log('we only accept letters')
     }
     //would like to add something from stop the same letter being used twice in a string?
-
+    else if (guessArray) {
+      console.log('hey! you used the same letter twice')
+    }
 
     //short circuited, 
       //check if you got the guess correct right away
@@ -156,7 +159,7 @@ function getPrompt() {
     generateSolution();
       // Kept this here to make sure calling it within the mastermind function was correct
         //with all input completed, we should generate the guess
-    // generateHint();
+    generateHint();
     getPrompt();
   });
 }
