@@ -38,8 +38,7 @@ function getRandomInt(min, max) {
 function generateHint(guessArray) {
   // your code here
 
-  // my guess array variable is not coming through 
-  console.log('is my guess array coming through!', guessArray)
+  // console.log('is my guess array coming through!', guessArray)
   //converts my string to an array so I can loop through it 
   let solutionArray = solution.split('')
   // console.log('this is what my solution looks like now ', solutionArray)
@@ -79,38 +78,35 @@ function generateHint(guessArray) {
     correctLetters
   }
 
-  // console.log('this is after both functions have run')
+  console.log('this is after both functions have run')
   console.log('the number of 100% correct guesses are' + correctLetterLocations)
   console.log('the number of correct letters is ' + correctLetters)
 
-  //this isn't right. I am having a really hard time with getting the logic on this right even though I've written it out several times on paper
+  //this isn't coming through 
 
     //this is the count for me total correct guesses made, either 100% or just letter
-
-  //to prevent negative integers 
-let locationsOverLetters = Math.abs(correctLetterLocations - correctLetters)
-  
+  console.log('start of if statement')
 // you correctLetterLocations number will always remain the same, but your correctLetters will change 
-let hints = (correctLetters, correctLetterLocations) => {
-if ((correctLetters < correctLetterLocations)|| (correctLetters > correctLetterLocations)) {
+if ((correctLetters < correctLetterLocations)||(correctLetters > correctLetterLocations)) {
   // console.log('you have more correct locations')
-  return (correctLetters = locationsOverLetters)
-  return correctLetterLocations
+  return ((correctLetters = Math.abs(correctLetterLocations - correctLetters)), correctLetterLocations)
 } else if (correctLetterLocations === correctLetters) {
   // console.log('your correct letters and locations are equal')
-  return (correctLetters = 0)
-  return correctLetterLocations
+  return ((correctLetters = 0), correctLetterLocations)
 } else if (correctLetters === 0 && correctLetterLocations === 0) {
-  return (correctLetterLocations = 0)
-  return (correctLetters = 0)
-}
-correctLetterLocations
-correctLetters
+  return ((correctLetterLocations = 0), (correctLetters = 0))
 }
 
-return hints(correctLetters, correctLetterLocations)
+//
+console.log('after my if statement')
+
+console.log('after if statement you have 100% correct guesses are' + correctLetterLocations)
+console.log('after if statement you have correct letters is ' + correctLetters)
+
+
+console.log(correctLetters, correctLetterLocations)
 //add your hint to the board 
-  let showHint = board.push(correctLetterLocations.red, '-', correctLetters.white)
+  let showHint = board.push(correctLetterLocations.red + '-' + correctLetters.white)
 
   return showHint
 }
@@ -186,7 +182,7 @@ function mastermind(guess) {
       console.log('You ran out of turns! The solution was ' + solution)
       //if you haven't guess it and you still have turn, then generate a hint. 
     } else {
-      console.log('guess should be here', guessArray)
+      // console.log('guess should be here', guessArray)
        //show your input, then show your errors
       board.push(guessFormatted)
       generateHint(guessArray)
