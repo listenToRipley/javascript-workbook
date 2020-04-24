@@ -86,77 +86,52 @@ function generateHint(guessArray) {
     correctLetters
   }
 
-//   console.log('this is after both functions have run')
 //   console.log('the number of 100% correct guesses are' + correctLetterLocations)
 //   console.log('the number of correct letters is ' + correctLetters)
 
-console.log('you have 100% correct guesses are' + correctLetterLocations)
-console.log('you have correct letters is ' + correctLetters)
+// console.log('you have 100% correct guesses are :' + correctLetterLocations)
+// console.log('you have correct letters is :' + correctLetters)
 
-
-console.log(correctLetters, correctLetterLocations)
 //add your hint to the board 
-return  board.push(correctLetterLocations.red + '-' + correctLetters.white)
+return correctLetterLocations + '-' + correctLetters
 
 }
 
 function mastermind(guess) {
   solution = 'abcd'; // Comment this out to generate a random solution
   // your code here
-
+    //format your array
     let guessFormatted = guess.trim().toLowerCase()
 
+    //make your guess into an array
     let guessArray = guessFormatted.split('')
     // console.log('guess array looks like now',guessArray)
 
-    //duplicate letters in guess
-      //need to loop through the array 
-      //check if all letter is unique in this array
-      //don't need this after all, but it was really helpful, thank you!
-    // let haveSeen = []
-    // let dups = []
-
-    // guessArray.forEach(element => {
-    //   if (haveSeen.includes(element)) {
-    //     dups.push(element)
-    //   } else {
-    //     haveSeen.push(element)
-    //   }
-    // }) 
-
-    // if (dups.length > 0) {
-    //   return false
-    // }
-
-    //the guess has more than or less than 4 characters in it 
-      //~~not working yes
-    if (guessFormatted.length > 4 || guessFormatted.length < 4) {
-      return false
+    //these must return true if you want to execute 
+    //your guess must be 4 long 
+    if ((guessArray.length > 4) || (guessArray < 4)) {
+      console.log('your guess must be 4 characters long. Try again')
+    }
+      //the guess doesn't contain the characters available in the letters set 
+        //~~not working
+    else if (guessArray.includes(letters) === true) {
+      console.log('only characters available in a guess are :', letters)
     }
 
-      //the guess doesn't contain the characters available in the letters set 
-      //~~ not working yet
-     if (guessArray.includes(letters) === true) {
-        return true
-    } 
-    //short circuited, 
-//check if you got the guess correct right away
-    // we shouldn't need to include language in the get hint function for a correct guess, since the function should stop here before it gets anywhere else 
-    else if (guessFormatted === solution) {
-      console.log('You guessed it!')
-      return true
+    //short circuited
+      //check if you got the guess correct right away
+     if (guessFormatted === solution) {
+      return 'You guessed it!'
       //make sure you still have turns left
     } else  if (board.length === 10){
-      console.log('You ran out of turns! The solution was ' + solution)
-      return true 
+      return 'You ran out of turns! The solution was ' + solution
       //if you haven't guess it and you still have turn, then generate a hint. 
     } else {
       // console.log('guess should be here', guessArray)
        //show your input, then show your errors
       board.push(guessFormatted)
-      console.log(generateHint(guessArray))
+      return generateHint(guessArray)
     }
-
 }
 
 
@@ -165,9 +140,6 @@ function getPrompt() {
     //get the input of the guess
     mastermind(guess);
     printBoard();
-      // Kept this here to make sure calling it within the mastermind function was correct
-        //with all input completed, we should generate the guess
-    // generateHint();
     getPrompt();
   });
 }
