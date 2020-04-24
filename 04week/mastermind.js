@@ -38,13 +38,11 @@ function getRandomInt(min, max) {
 function generateHint(guessArray) {
   // your code here
 
+  // my guess array variable is not coming through 
+  console.log('is my guess array coming through!', guessArray)
   //converts my string to an array so I can loop through it 
   let solutionArray = solution.split('')
-  //this has stop working, wonderful 
-
-
   // console.log('this is what my solution looks like now ', solutionArray)
-  console.log('this what my guess looks like now ', guessArray)
 
   // console.log(`this is the length of my solution array :`,solutionArray.length)
 
@@ -62,7 +60,7 @@ function generateHint(guessArray) {
   //using the index of the solution array, we want to check against each item in the index and verify if they match 
   // console.log('this is the start loop for 100% accurate guesses')
   for(let i = 0; i<solutionArray.length; i++) {
-    if(solution[i] === guessArray[i]) {
+    if(solutionArray[i] === guessArray[i]) {
         correctLetterLocations ++ 
       // console.log('current 100% accurate guesses are: ' + correctLetterLocations)
     }
@@ -70,44 +68,51 @@ function generateHint(guessArray) {
   }
 
     //checks to see if any of the letters match 
-  solutionArray.forEach((solutionLetter) => {
-    guessArray.forEach((guessLetter) => {
-        //need to add something in here to stops it from counting the same letter
-      if (guessLetter === solutionLetter) {
+
+  for (let i = 0; i<solutionArray.length; i++) {
+    for (let j = 0; j<guessArray.length; j++) {
+      if (guessArray[j] === solutionArray[i]) {
         correctLetters ++
-      }
+      } 
       correctLetters
-    })
+    }
     correctLetters
-  }) 
+  }
 
   // console.log('this is after both functions have run')
-  // console.log('the number of 100% correct guesses are' + correctLetterLocations)
-  // console.log('the number of correct letters is ' + correctLetters)
+  console.log('the number of 100% correct guesses are' + correctLetterLocations)
+  console.log('the number of correct letters is ' + correctLetters)
 
   //this isn't right. I am having a really hard time with getting the logic on this right even though I've written it out several times on paper
 
     //this is the count for me total correct guesses made, either 100% or just letter
 
   //to prevent negative integers 
-let letterOverLocation = Math.abs(correctLetters - correctLetterLocations)
+let locationsOverLetters = Math.abs(correctLetterLocations - correctLetters)
   
 // you correctLetterLocations number will always remain the same, but your correctLetters will change 
-if (correctLetters < correctLetterLocations) {
-  console.log('you have more correct locations')
-  return (correctLetters = letterOverLocation)
-} else if (correctLetters > correctLetterLocations) {
-  console.log('you have more correct letters')
-  return(letterOverLocation)
+let hints = (correctLetters, correctLetterLocations) => {
+if ((correctLetters < correctLetterLocations)|| (correctLetters > correctLetterLocations)) {
+  // console.log('you have more correct locations')
+  return (correctLetters = locationsOverLetters)
+  return correctLetterLocations
 } else if (correctLetterLocations === correctLetters) {
   // console.log('your correct letters and locations are equal')
   return (correctLetters = 0)
+  return correctLetterLocations
+} else if (correctLetters === 0 && correctLetterLocations === 0) {
+  return (correctLetterLocations = 0)
+  return (correctLetters = 0)
+}
+correctLetterLocations
+correctLetters
 }
 
+return hints(correctLetters, correctLetterLocations)
 //add your hint to the board 
-  let hint = board.push(correctLetterLocations.red, '-', correctLetters.white)
+  let showHint = board.push(correctLetterLocations.red, '-', correctLetters.white)
 
-  console.log(hint)
+  return showHint
 }
 
 function mastermind(guess) {
@@ -116,9 +121,11 @@ function mastermind(guess) {
 
     let guessFormatted = guess.trim().toLowerCase()
 
-    //show your input, then show your errors
-    board.push(guessFormatted)
+    let guessArray = guessFormatted.split('')
+    console.log('guess array looks like now',guessArray)
 
+    //if I contain this to its own function, maybe it will run?
+    let valueInput = (guessFormatted, guessArray) => {
 
     let duplicateLetters = (letters) => {
       console.log('it ran')
@@ -131,13 +138,11 @@ function mastermind(guess) {
       }
     }
 
-    let guessArray = guessFormatted.split('')
-
     //this is all wrong
   
     let notValue = guessArray.forEach((letter, index) => {
       console.log('this one ran too')
-      if (guessArray.some(letters)) {
+      if (guessArray.includes(letters) === true) {
         return true
       } else {
         return false
@@ -166,12 +171,14 @@ function mastermind(guess) {
       return false 
     }
       else {
-      console.log('this guess is acceptable')
+      // console.log('this guess is acceptable')
       return true 
     }
+  }
+
     //short circuited, 
-      //check if you got the guess correct right away
-          // we shouldn't need to include language in the get hint function for a correct guess, since the function should stop here before it gets anywhere else 
+//check if you got the guess correct right away
+    // we shouldn't need to include language in the get hint function for a correct guess, since the function should stop here before it gets anywhere else 
     if (guessFormatted === solution) {
       console.log('You guessed it!')
       //make sure you still have turns left
@@ -179,8 +186,10 @@ function mastermind(guess) {
       console.log('You ran out of turns! The solution was ' + solution)
       //if you haven't guess it and you still have turn, then generate a hint. 
     } else {
-      console.log('Guess again')
-      generateHint(guessFormatted)
+      console.log('guess should be here', guessArray)
+       //show your input, then show your errors
+      board.push(guessFormatted)
+      generateHint(guessArray)
     }
 
 }
@@ -196,7 +205,7 @@ function getPrompt() {
     generateSolution();
       // Kept this here to make sure calling it within the mastermind function was correct
         //with all input completed, we should generate the guess
-    generateHint();
+    // generateHint();
     getPrompt();
   });
 }
