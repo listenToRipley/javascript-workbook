@@ -56,21 +56,29 @@ function generateHint(guessArray) {
 
   //first we're check if the location and letter matches 
 
+  let temporarySolution = []  
+  let leftOvers = []
+
   //using the index of the solution array, we want to check against each item in the index and verify if they match 
   // console.log('this is the start loop for 100% accurate guesses')
   for(let i = 0; i<solutionArray.length; i++) {
     if(solutionArray[i] === guessArray[i]) {
+        //remove the correct answers for the array 
+        temporarySolution.push(solution[i])
         correctLetterLocations ++ 
       // console.log('current 100% accurate guesses are: ' + correctLetterLocations)
+    } else {
+      //move the unaccounted for items to their own array
+      leftOvers.push(solution[i])
     }
     correctLetterLocations
   }
 
     //checks to see if any of the letters match 
 
-  for (let i = 0; i<solutionArray.length; i++) {
-    for (let j = 0; j<guessArray.length; j++) {
-      if (guessArray[j] === solutionArray[i]) {
+  for (let i = 0; i<guessArray.length; i++) {
+    for (let j = 0; j<leftOvers.length; j++) {
+      if (guessArray[j] === leftOvers[i]) {
         correctLetters ++
       } 
       correctLetters
@@ -78,37 +86,18 @@ function generateHint(guessArray) {
     correctLetters
   }
 
-  console.log('this is after both functions have run')
-  console.log('the number of 100% correct guesses are' + correctLetterLocations)
-  console.log('the number of correct letters is ' + correctLetters)
+//   console.log('this is after both functions have run')
+//   console.log('the number of 100% correct guesses are' + correctLetterLocations)
+//   console.log('the number of correct letters is ' + correctLetters)
 
-  //this isn't coming through 
-
-    //this is the count for me total correct guesses made, either 100% or just letter
-  console.log('start of if statement')
-// you correctLetterLocations number will always remain the same, but your correctLetters will change 
-if ((correctLetters < correctLetterLocations)||(correctLetters > correctLetterLocations)) {
-  // console.log('you have more correct locations')
-  return ((correctLetters = Math.abs(correctLetterLocations - correctLetters)), correctLetterLocations)
-} else if (correctLetterLocations === correctLetters) {
-  // console.log('your correct letters and locations are equal')
-  return ((correctLetters = 0), correctLetterLocations)
-} else if (correctLetters === 0 && correctLetterLocations === 0) {
-  return ((correctLetterLocations = 0), (correctLetters = 0))
-}
-
-//
-console.log('after my if statement')
-
-console.log('after if statement you have 100% correct guesses are' + correctLetterLocations)
-console.log('after if statement you have correct letters is ' + correctLetters)
+console.log('you have 100% correct guesses are' + correctLetterLocations)
+console.log('you have correct letters is ' + correctLetters)
 
 
 console.log(correctLetters, correctLetterLocations)
 //add your hint to the board 
-  let showHint = board.push(correctLetterLocations.red + '-' + correctLetters.white)
+return  board.push(correctLetterLocations.red + '-' + correctLetters.white)
 
-  return showHint
 }
 
 function mastermind(guess) {
@@ -118,74 +107,54 @@ function mastermind(guess) {
     let guessFormatted = guess.trim().toLowerCase()
 
     let guessArray = guessFormatted.split('')
-    console.log('guess array looks like now',guessArray)
+    // console.log('guess array looks like now',guessArray)
 
-    //if I contain this to its own function, maybe it will run?
-    let valueInput = (guessFormatted, guessArray) => {
+    //duplicate letters in guess
+      //need to loop through the array 
+      //check if all letter is unique in this array
+      //don't need this after all, but it was really helpful, thank you!
+    // let haveSeen = []
+    // let dups = []
 
-    let duplicateLetters = (letters) => {
-      console.log('it ran')
-      if (guessFormatted.indexOf(letter) >= 0) {
-        console.log('no duplicates')
-        return true
-      } else {
-        console.log('this guess contains duplicates')
-        return false;
-      }
-    }
+    // guessArray.forEach(element => {
+    //   if (haveSeen.includes(element)) {
+    //     dups.push(element)
+    //   } else {
+    //     haveSeen.push(element)
+    //   }
+    // }) 
 
-    //this is all wrong
-  
-    let notValue = guessArray.forEach((letter, index) => {
-      console.log('this one ran too')
-      if (guessArray.includes(letters) === true) {
-        return true
-      } else {
-        return false
-      }
-    })
+    // if (dups.length > 0) {
+    //   return false
+    // }
 
-    //the guess should not be longer than 4  
-      //I know it's not right, but I am trying.  
-    if(notValue === false) 
-    { 
-      console.log('these letters are not included in the the guess options')
+    //the guess has more than or less than 4 characters in it 
+      //~~not working yes
+    if (guessFormatted.length > 4 || guessFormatted.length < 4) {
       return false
-    } 
-    else if (guessFormatted.length > 4 || guessFormatted.length < 4) {
-      console.log('your guess is not the right length, please try again')
-      return false
-       
-      //duplicate letter 
-    } else if (duplicateLetters === false) {
-      console.log('there is a double letter in this guess')
-      return false 
-    } 
-    //we only want letters, not numbers 
-      else if (typeof guessFormatted !== 'string'){
-      console.log('we only accept letters')
-      return false 
     }
-      else {
-      // console.log('this guess is acceptable')
-      return true 
-    }
-  }
 
+      //the guess doesn't contain the characters available in the letters set 
+      //~~ not working yet
+     if (guessArray.includes(letters) === true) {
+        return true
+    } 
     //short circuited, 
 //check if you got the guess correct right away
     // we shouldn't need to include language in the get hint function for a correct guess, since the function should stop here before it gets anywhere else 
-    if (guessFormatted === solution) {
+    else if (guessFormatted === solution) {
       console.log('You guessed it!')
+      return true
       //make sure you still have turns left
     } else  if (board.length === 10){
       console.log('You ran out of turns! The solution was ' + solution)
+      return true 
       //if you haven't guess it and you still have turn, then generate a hint. 
     } else {
       // console.log('guess should be here', guessArray)
        //show your input, then show your errors
       board.push(guessFormatted)
-      generateHint(guessArray)
+      console.log(generateHint(guessArray))
     }
 
 }
@@ -196,9 +165,6 @@ function getPrompt() {
     //get the input of the guess
     mastermind(guess);
     printBoard();
-    //shouldn't the solution come before the guess? 
-      //we only want the solution to be generated once, not continue to generate every turn
-    generateSolution();
       // Kept this here to make sure calling it within the mastermind function was correct
         //with all input completed, we should generate the guess
     // generateHint();
