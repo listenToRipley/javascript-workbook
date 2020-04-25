@@ -10,9 +10,7 @@ let jobTypes = {
 };
 
 // Your code here
-
 //build two classes, 
-
 //crew member
   //constructor should take in as input: name, their job, their special skill 
 
@@ -38,7 +36,6 @@ class CrewMember {
 
   }
 
-
 //ship 
   //constructor should take in as input:name, type, ability
     //can have crew members 
@@ -56,6 +53,7 @@ class Ship {
     //need to have an empty array for crew members
     this.crew = [
         //we need to push the whole class on the member in here. 
+        //once push, we can access the whole object of that crew member here. 
     ]
 
     //update the crew members in the ship 
@@ -65,27 +63,45 @@ class Ship {
     //this method should return the ship's ability if there is a crew member who job matches that require abilities aka "ship type"
     //we have to compare the job to key of jobTypes and if it matches then you can access to value of that key. 
       //once the key is provided you can compare it to the ships ability. 
-  missionStatement() {
-      //  we need to compare the jobTypes to the type of ship
-      // if crew member can activate it, it should activate it 
-      //   return 
-      //       two possible outcomes 
-      //     1.  "Can't perform a mission yet."
-      //     2.  the ability is executed 
+  missionStatement(crewMemberJob, shipMission) {
+      let doThis = ''
+      //is there any one on the ship?
+      if(crewOnShip.length == 0) {
+        return "Can't perform a mission yet."
+      } 
+      //Look at the crew member's jobs 
+      else if (
+         //if you have more than one crew member, look at each of their jobs
+        ((crewOnShip.job.forEach((membersJob) => 
+      //compare their job title to the job options listed in jobTypes
+      { if (membersJob.includes(jobTypes.keys())) {
+          //
+        return doThis = jobTypes[membersJob]
+      } else {
+        console.log('that nice, but is not good for space travel')
+        //return false 
+      }
+    }))
+    ) //we want the doThis === this.type 
+    //if it is a programmer, it can be assigned to any ship and still do the same thing 
+     ) {
+        //if all of or any of that is true, then you can perform the ship's ability 
+        return this.ability
+      } else {
+        return "Can't perform a mission yet."
+      }
     }
-  // }
   //using template literals 
-  // description () {
+  description (crew) {
+    return `${this.name}, is a ${this.type} of ship and it's goal is to ${this.ability}`
     //there are no crew member, the ship is staying put 
-    //if(this.crew.length === 0) {
-      
-    // }
-  //   //provide object literals for the details on what should be getting passed in  
-    //the name of the ship
-      //how many crew members their currently are
-        //if empty list that
-        //if the mission statement can be completed 
-  // }
+    if(this.crew.length === 0) {
+      return ` and there isn't currently anyone on this ship`
+  } else if (this.crew.length > 0) {
+    return ` and there are currently ${this.crew.length}, on the ship.`
+  }
+  //should be also include if it can complete it's mission? 
+}
 }
 
 //tests
