@@ -20,22 +20,24 @@ class CrewMember {
   constructor(name, job, skill) {
     this.name = name;
     this.job = job;
-    this.skill = skill;
+    this.specialSkill = specialSkill;
 
     //we need to assign this information back the crew member 
     this.postedToShip = null;
       //unlike ship, we're only going to have one ship assign to one individual 
-
-    //this method should add THIS crew member to the ship being passed in.
-    //NOTE: an entire ship instance is passed in, not just a name
-    //NOTE: the entire crew number should be added to the ship's array of crew 
-    // enterShip(someShip){
-        //pass the ship name to the individual 
-      //}
-    // }
+    } 
+//create a method should add THIS crew member to the ship being passed i
+      //shipName is the instance of the template you are using. Since you are assigning this information by the variable name, it should pass the whole instance into this. 
+      enterShip(shipName){
+        // pass the ship name to the individual 
+           //NOTE: an entire ship instance is passed in, not just a name
+          this.postedToShip = shipName
+          //NOTE: the entire crew number should be added to the ship's array of crew 
+          shipName.crew.push(this)
+        }
 
   }
-}
+
 
 //ship 
   //constructor should take in as input:name, type, ability
@@ -45,10 +47,10 @@ class CrewMember {
           //else return 'can't perform a mission yet' 
 
 class Ship {
-  constructor(shipName, type, ability) {
+  constructor(name, type, ability) {
 
-    this.shipName = shipName;
-    this.shipType = shipType;
+    this.name = name;
+    this.type = type;
     this.ability = ability
 
     //need to have an empty array for crew members
@@ -56,21 +58,34 @@ class Ship {
         //we need to push the whole class on the member in here. 
     ]
 
-    //we need to assign a crew member to a ship
     //update the crew members in the ship 
+    let crewOnShip = (this.crew = crew)
 
-    this.crew.postedToShip = shipName
-    this.shipName.crew = crew
-    //this method should return the ship's ability if there is a crew member who job matches that require abilities aka "ship type"
-    // missionStatement() {
-        // we need to compare the jobTypes to the type of ship
-    //   }
-    // }
-
-    // description () {
-    //   //provide object literals for the details on what should be getting passed in  
-    // }
   }
+    //this method should return the ship's ability if there is a crew member who job matches that require abilities aka "ship type"
+    //we have to compare the job to key of jobTypes and if it matches then you can access to value of that key. 
+      //once the key is provided you can compare it to the ships ability. 
+  missionStatement() {
+      //  we need to compare the jobTypes to the type of ship
+      // if crew member can activate it, it should activate it 
+      //   return 
+      //       two possible outcomes 
+      //     1.  "Can't perform a mission yet."
+      //     2.  the ability is executed 
+    }
+  // }
+  //using template literals 
+  // description () {
+    //there are no crew member, the ship is staying put 
+    //if(this.crew.length === 0) {
+      
+    // }
+  //   //provide object literals for the details on what should be getting passed in  
+    //the name of the ship
+      //how many crew members their currently are
+        //if empty list that
+        //if the mission statement can be completed 
+  // }
 }
 
 //tests
