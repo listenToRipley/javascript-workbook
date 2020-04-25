@@ -61,39 +61,65 @@ function generateHint(guessArray) {
 
   //using the index of the solution array, we want to check against each item in the index and verify if they match 
   // console.log('this is the start loop for 100% accurate guesses')
-  for(let i = 0; i<solutionArray.length; i++) {
-    if(solutionArray[i] === guessArray[i]) {
+  solutionArray.forEach((letter, index) => {
+    if(solutionArray.index === guessArray.index) {
         //remove the correct answers for the array 
-        temporarySolution.push(solution[i])
+        temporarySolution.push(letter)
         correctLetterLocations ++ 
       // console.log('current 100% accurate guesses are: ' + correctLetterLocations)
     } else {
       //move the unaccounted for items to their own array
-      leftOvers.push(solution[i])
+      leftOvers.push(letter)
     }
     correctLetterLocations
-  }
+  })
 
     //checks to see if any of the letters match 
 
-  for (let i = 0; i<guessArray.length; i++) {
-    for (let j = 0; j<leftOvers.length; j++) {
-      if (guessArray[j] === leftOvers[i]) {
+          //tally for duplicates
+    let once = []
+    let moreThan = []
+
+  guessArray.forEach(gLetter => {
+    console.log(`what are my gLetters? ${gLetter}`)
+
+    //check if any of the letters within the items left were correct
+    leftOvers.forEach((loLetter) => {
+      console.log(`what are my loLetters? ${loLetter}`)
+      if (gLetter=== loLetter) {
         correctLetters ++
-      } 
+      }
+      //what are my current 
       correctLetters
+    })
+    correctLetters
+    //this isn't right because it will also be true since the letter will always be included. we would have have to count 
+    if(once.includes(gLetter)) {     
+      moreThan.push(gLetter)  
+    }
+    else {
+      once.push(gLetter)
+    }
+
+    console.log(`what does my once array look like? ${once}`)
+    console.log(`and my moreThan? ${moreThan}`)
+
+    if (moreThan.length > 0) {
+      correctLetters - moreThan.length
     }
     correctLetters
-  }
+    console.log('this is the end of the letter match section')
 
-//   console.log('the number of 100% correct guesses are' + correctLetterLocations)
-//   console.log('the number of correct letters is ' + correctLetters)
+  })
+
+  console.log('the number of 100% correct guesses are' + correctLetterLocations)
+  console.log('the number of correct letters is ' + correctLetters)
 
 // console.log('you have 100% correct guesses are :' + correctLetterLocations)
 // console.log('you have correct letters is :' + correctLetters)
 
 //add your hint to the board 
-return correctLetterLocations + '-' + correctLetters
+return correctLetterLocations + '-'+ correctLetters
 
 }
 
@@ -114,9 +140,10 @@ function mastermind(guess) {
     }
       //the guess doesn't contain the characters available in the letters set 
         //~~not working
-    else if (guessArray.includes(letters) === true) {
-      console.log('only characters available in a guess are :', letters)
-    }
+    // else if (guessArray.includes(letters) === false) {
+    //   console.log('only characters available in a guess are :', letters)
+    // } 
+    //your previous guess should not match your current guess 
 
     //short circuited
       //check if you got the guess correct right away
