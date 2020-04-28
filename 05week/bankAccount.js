@@ -21,7 +21,8 @@ class BankAccount {
     this.transaction.push(amount)
   }
 
-  charge(payee, amount) {
+  charge(amount) {
+    //why do we want to keep the payee information? 
   //shows are charges to the account 
     //prevent a transaction being posted to the card if
       //the balance is zero or the amount is greater than balance 
@@ -40,6 +41,7 @@ class Transaction extends BankAccount {
     this.date = date;
     this.amount = amount; 
     this.payee = payee;
+    this.type = type
   } 
     //we want to store all transactions associated with the card
     history(aTransaction) {
