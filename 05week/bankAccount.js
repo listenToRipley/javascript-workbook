@@ -4,15 +4,17 @@ class BankAccount {
   constructor(accountNumber, owner) {
     this.accountNumber = accountNumber;
     this.owner = owner;
-    this.transaction = [0];
-    this.history = []
+      //this is supposed to be the transaction history 
+    this.transactions = [];
     
   }
+
+  //change all of these since we need to access 
 
   balance() {
     //shows the total of the transaction array
       //can never reach less than 0
-    return this.transaction.reduce(acc, value => acc + value)
+    return this.transaction.amount.reduce(acc, value => acc + value)
   }
 
   deposits(amount) {
@@ -41,12 +43,11 @@ class Transaction extends BankAccount {
     this.date = date;
     this.amount = amount; 
     this.payee = payee;
-    this.type = type
   } 
     //we want to store all transactions associated with the card
     history(aTransaction) {
       //shows the complete details of the transaction 
       //this will be a complete history of all transactions 
-    this.history.push(aTransaction)
+    this.transactions.push(aTransaction)
 }
 }
