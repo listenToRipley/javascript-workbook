@@ -6,48 +6,71 @@ class BankAccount {
     this.owner = owner;
       //this is supposed to be the transaction history 
     this.transactions = [];
-    
   }
 
   //change all of these since we need to access 
 
   balance() {
-    //shows the total of the transaction array
-      //can never reach less than 0
-    return this.transaction.amount.reduce(acc, value => acc + value)
-  }
+    let balance = 0
+    //reduce down all amounts 
+    this.transactions.reduce((acc, value) => 
+      {
+       console.log(acc, value)  
+       return balance = acc + value.amount
+      })
 
+  balance
+
+  //if the balance is at zero
+  if (balance = 0) {
+    return 'this is a new account, a deposit has not yet been made'
+  } else {
+    return balance
+  }
+ }
+
+ //~~something not working here 
   deposits(amount) {
-    //shows are refunds or deposits by account holder to the account
-      // will always be a positive number 
-    this.transaction.push(amount)
+    //should always be the account number doing the deposit 
+    let payee = this.owner
+      //if we are just pushing in the account, would there be a way to default the payee information to just say deposit? 
+    this.transactions.push(new Transaction(amount, payee))
+
   }
 
-  charge(amount) {
-    //why do we want to keep the payee information? 
-  //shows are charges to the account 
+  charge(aTransaction) {
+
     //prevent a transaction being posted to the card if
       //the balance is zero or the amount is greater than balance 
     if (this.balance() <= 0 || this.balance() < amount) {
-      console.log('insufficient funds')
+      return 'insufficient funds'
     } else {
-    //will always be a negative number
-      this.transaction.push(-Math.abs(amount))
-    }
+    return this.transactions.push(aTransaction)
   }
+
+}
 }
 
+//need to add language so that only values can be put in the amount field? 
+
 //this is where a transaction is created
-class Transaction extends BankAccount {
-  super(date, amount, payee) {
-    this.date = date;
-    this.amount = amount; 
+class Transaction {
+  constructor(amount, payee) {
+    this.date = new Date()
+    this.amount = new Intl.NumberFormat('en-IN', {maximumSignificantDigits: 3}).format(amount); 
     this.payee = payee;
   } 
-    //we want to store all transactions associated with the card
-    history(aTransaction) {
-      //shows the complete details of the transaction 
-      //this will be a complete history of all transactions 
-    this.transactions.push(aTransaction)
 }
-}
+
+let myAccount = new BankAccount(123244, 'Natalie Kendrick')
+console.log(myAccount)
+let yourAccount = new BankAccount(234236, 'Willie Nelson')
+console.log(yourAccount)
+
+let silverSea = new Transaction(313, 'Silver Sea')
+console.log(silverSea)
+
+console.log(`deposit :`,myAccount.deposits(1233))
+console.log(`balance :`,myAccount.balance())
+console.log(myAccount)
+console.log(`charge: `,myAccount.charge(silverSea))
