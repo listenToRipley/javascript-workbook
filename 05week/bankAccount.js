@@ -12,14 +12,14 @@ class BankAccount {
 
   balance() {
     let balance = 0
+    console.log(`before`,balance)
     //reduce down all amounts 
     this.transactions.reduce((acc, value) => 
       {
-       console.log(acc, value)  
+      //  console.log(acc, value)  
        return balance = acc + value.amount
       })
-
-  balance
+      console.log(`after`,balance)
 
   //if the balance is at zero
   if (balance = 0) {
@@ -29,8 +29,10 @@ class BankAccount {
   }
  }
 
+
  //~~something not working here 
   deposits(amount) {
+    // console.log('can we see inside the deposit?')
     //should always be the account number doing the deposit 
     let payee = this.owner
       //if we are just pushing in the account, would there be a way to default the payee information to just say deposit? 
@@ -42,7 +44,7 @@ class BankAccount {
 
     //prevent a transaction being posted to the card if
       //the balance is zero or the amount is greater than balance 
-    if (this.balance() <= 0 || this.balance() < amount) {
+    if (this.balance() <= 0 || this.balance() < amount || this.balance() === 'this is a new account, a deposit has not yet been made') {
       return 'insufficient funds'
     } else {
     return this.transactions.push(aTransaction)
@@ -57,7 +59,7 @@ class BankAccount {
 class Transaction {
   constructor(amount, payee) {
     this.date = new Date()
-    this.amount = new Intl.NumberFormat('en-IN', {maximumSignificantDigits: 3}).format(amount); 
+    this.amount = amount; 
     this.payee = payee;
   } 
 }
@@ -69,8 +71,7 @@ console.log(yourAccount)
 
 let silverSea = new Transaction(313, 'Silver Sea')
 console.log(silverSea)
-
-console.log(`deposit :`,myAccount.deposits(1233))
-console.log(`balance :`,myAccount.balance())
+myAccount.deposits(1231)
+myAccount.balance()
 console.log(myAccount)
 console.log(`charge: `,myAccount.charge(silverSea))
