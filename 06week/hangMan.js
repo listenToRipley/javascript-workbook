@@ -37,7 +37,7 @@ console.log(hide(secret))
 //the someone tries to guess the secret phrase 
 let currentGuess = ' '
   //rules: 
-
+let yourGuess = (currentGuess) => {
   //they give a single letter at a time 
   if(currentGuess.length < 1) {
     return 'I am sorry, you can only guess one letter at a time'
@@ -45,6 +45,7 @@ let currentGuess = ' '
   } else if (guesses.includes(currentGuess) === true|| hiddenArray.includes(currentGuess) === true) {
     return `you've already used that letter, try again one`
       //if letter isn't included in the secret phrase, then place in the incorrect guesses 
+      //~~doesn't like this for some reason
   } else if (secretString.includes(currentGuess) === false) {
     guesses.push(currentGuess)
     return guesses
@@ -52,13 +53,20 @@ let currentGuess = ' '
   } else if (secretString.includes(currentGuess) === true) {
       let indexLocation = []
     //loop through secretString and return the index for each letter that matches the currentGuess 
-    secretString.forEach(element, index => {
-      if (element === currentGuess) {
+    secretString.forEach(letter, index => {
+      if (letter === currentGuess) {
         indexLocation.push(index)
       }
+      return indexLocation
     })
     //push the currentGuess to that index on the hiddenSecret 
+    indexLocation.forEach(indexNum => {
+      hiddenArray.splice(indexNum, 1, currentGuess)
+    })
+    return hiddenArray
     //display the new hiddenSecret with the correctGuesses 
   }
+}
 
+console.log(yourGuess('h'))
     //do we want to add something that allows them to "solve the puzzle?"
