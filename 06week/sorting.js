@@ -18,19 +18,18 @@ const sumEvens = nowNumbs.reduce((acc, nextNum) => {
 // console.log(sumEvens);
 
 // Find the index of the first value, when added to it's index = 512 (#ATX!!)
-const atxIdx = (nowNumbs.reduce((acc, value, index) => {
-  //add the nowNumbs one a time, until we each 512,
-  acc += value
-  if(acc === 512) {
-    return index
-  }
-  return index
-}))
 
   //then return the index of the last number added, which made it equal 512 
+      //add the nowNumbs one a time, until we each 512, once your each that number, return the index of that last 
+const atxIdx = (nowNumbs.forEach((value, index) => {
+  
 
-// console.log(atxIdx)
-// console.log(`index: ${atxIdx}, value: ${nowNumbs[atxIdx]}`);
+}))
+
+
+
+console.log(atxIdx)
+console.log(`index: ${atxIdx}, value: ${nowNumbs[atxIdx]}`);
 
 const weather = [
   { id: 5743823523151872,
