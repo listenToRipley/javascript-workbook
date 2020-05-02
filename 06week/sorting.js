@@ -3,7 +3,7 @@ const strNumbs = ["1","4","1","5","9","2","6","5","3","5","8","9","7","9","3","2
 
 // Given 1000 digits of PI as strings, return an array of the digits as numbers
 const toNumbs = strNumbs.map(num  => {
-  return num
+  return parseInt(num, 10)
 })
 
 // console.log(toNumbs)
@@ -17,21 +17,22 @@ const sumEvens = toNumbs.forEach((num) => {
   total
 })
 
-// console.log(sumEvens);
+console.log(sumEvens);
 
 // Find the index of the first value, when added to it's index = 512 (#ATX!!)
 // With the same numbers, find the sum of the even values
-const atxIdx = (toNumbs.reduce((acc, value, index) => {
   //add the nowNumbs one a time, until we each 512,
-  console.log('acc :', acc, 'value :', value, "index ;", index  )
-  acc + value
-  if(acc === 512) {
-    return index
-  }
+const atxIdx = toNumbs.reduce((acc, value, index) => {
+  console.log('acc :', acc, 'value :', value, "index ;", index)
+    do {
+      //~~its not increasing
+      acc + value
+    } while (acc !== 512)
+  
   return index
-}, 0))
+}, 0)
 
-console.log(`index: ${atxIdx}, value: ${toNumbs[atxIdx]}`);
+// console.log(`index: ${atxIdx}, value: ${toNumbs[atxIdx]}`);
 
 const weather = [
   { id: 5743823523151872,
