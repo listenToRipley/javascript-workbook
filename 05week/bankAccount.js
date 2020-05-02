@@ -13,19 +13,20 @@ class BankAccount {
     //create an array for each amount 
     //add them all together to show your current balance 
   balance() {
-    let total = 0 
     
     let tally = this.transactions.map((event) => {
-      console.log('event',event)
+      // console.log('event',event)
       return event.amount
     })
       // ~~ is logging 12 transactions when there should be three? 
-    console.log('tally',tally)
+    // console.log('tally',tally)
 
-    tally.reduce(((curr, sum) => {
-    total = curr.amount += sum.amount}))
+    tally.reduce((curr, sum) => {
+      console.log('cur :', curr, 'sum :', sum)
+     return curr + sum}, 0);
 
-    return total
+     return tally
+
    }
 
   deposits(amount) {
@@ -72,6 +73,6 @@ myAccount.deposits(1231)
 myAccount.charge(silverSea)
 myAccount.charge(pTerrys)
 // console.log(myAccount)
-myAccount.balance()
+console.log(myAccount.balance())
 // console.log(yourAccount)
 
