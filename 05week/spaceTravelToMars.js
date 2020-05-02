@@ -74,8 +74,26 @@ class Ship {
         //if not, then we're not going anywhere
         return "Can't perform a mission yet."
       } 
-      //Look at the crew member's jobs 
+  
       else {
+        //was told by tutor I did not need to include this, but then in other conversations thought I did. Doesn't pass the test, but doesn't seem like the test was designed for this. 
+      //good through each individual in the ship
+        //if their job matches the ship type listed in jobType and the current type of ship they are one,
+          //reform the ability 
+      // if (this.crew.forEach((person) => {
+      //   let shipJob = ' '
+      //   //check if their job matches the jobType keys
+      //   if(person.job.includes(position => jobTypes.position) === true) {
+      //     //if it does, tell use the content on the jobType
+      //     shipJob = jobTypes
+      //   } 
+      //   //if 
+      //   if (shipJob === this.type) {
+      //     return true 
+      //   } else if (shipJob === 'Any Ship') {
+      //     return true
+      //   }
+      // })){
         return this.ability
       }
     }
