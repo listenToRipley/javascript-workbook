@@ -18,10 +18,16 @@ const sumEvens = nowNumbs.reduce((acc, nextNum) => {
 // console.log(sumEvens);
 
 // Find the index of the first value, when added to it's index = 512 (#ATX!!)
-// const atxIdx = 
-//add the nowNumbs one a time, until we each 512,
+const atxIdx = (nowNumbs.reduce((acc, value, index) => {
+  //add the nowNumbs one a time, until we each 512,
+  acc += value
+  if(acc === 512) {
+    return index
+  }
+  return index
+}))
+
   //then return the index of the last number added, which made it equal 512 
-//or take all the number up to index 512 and add them together? 
 
 // console.log(atxIdx)
 // console.log(`index: ${atxIdx}, value: ${nowNumbs[atxIdx]}`);
