@@ -9,25 +9,24 @@ class BankAccount {
   }
 
   //~~isn't returning the correct values 
+  //locate the amounts within the transactions array
+    //create an array for each amount 
+    //add them all together to show your current balance 
   balance() {
-    let balance = 0
-    console.log('inside the balane?')
-    this.transactions.reduce((acc, cost) => {
-      console.log('see my acc :', acc.amount, '& amounts', cost.amount)
-     balance = (acc.amount += cost.amount)
-      return balance
+    let total = 0 
+    
+    let tally = this.transactions.map((event) => {
+      console.log('event',event)
+      return event.amount
     })
-    //if there are not transactions to add, then stop
-    if (this.transactions.length === 0) {
-      return 'this is a new account, no deposits have been made yet.'
-      //otherwise
-      //go through the whole transaction array  
-      //locate each amount
-      //add each of those amounts together
-        //tell us what the total is after everything has been added together. 
+      // ~~ is logging 12 transactions when there should be three? 
+    console.log('tally',tally)
 
-    }
-}
+    tally.reduce(((curr, sum) => {
+    total = curr.amount += sum.amount}))
+
+    return total
+   }
 
   deposits(amount) {
     // console.log('can we see inside the deposit?')
@@ -68,10 +67,11 @@ let silverSea = new Transaction(-313, 'Silver Sea')
 let pTerrys = new Transaction(-24.53, 'P.Terry\'s')
 // console.log(silverSea)
 myAccount.deposits(1231)
-myAccount.balance()
+// myAccount.balance()
 // console.log(myAccount)
 myAccount.charge(silverSea)
 myAccount.charge(pTerrys)
-console.log(myAccount)
-// myAccount.balance()
+// console.log(myAccount)
+myAccount.balance()
+// console.log(yourAccount)
 
