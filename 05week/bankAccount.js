@@ -7,22 +7,25 @@ class BankAccount {
       //this is supposed to be the transaction history 
     this.transactions = [];
   }
-  
-  //return the sum of all amount, subtracting and adding as needed 
 
   //~~isn't returning the correct values 
   balance() {
     let balance = 0
-    // console.log(`before`,balance)
-    //reduce down all amounts 
-    if (this.transactions.length === 0) {
-      return 'this is a new account, no deposits have been mase '
-    } else {
-    this.transactions.reduce((acc, value) => 
-     {
-      //  console.log(acc, value)  
-     return balance = acc + value.amount
+    console.log('inside the balane?')
+    this.transactions.reduce((acc, cost) => {
+      console.log('see my acc :', acc.amount, '& amounts', cost.amount)
+     balance = (acc.amount += cost.amount)
+      return balance
     })
+    //if there are not transactions to add, then stop
+    if (this.transactions.length === 0) {
+      return 'this is a new account, no deposits have been made yet.'
+      //otherwise
+      //go through the whole transaction array  
+      //locate each amount
+      //add each of those amounts together
+        //tell us what the total is after everything has been added together. 
+
     }
 }
 
@@ -70,5 +73,5 @@ myAccount.balance()
 myAccount.charge(silverSea)
 myAccount.charge(pTerrys)
 console.log(myAccount)
-myAccount.balance()
+// myAccount.balance()
 
