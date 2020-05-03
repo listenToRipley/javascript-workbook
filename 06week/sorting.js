@@ -9,30 +9,54 @@ const toNumbs = strNumbs.map(num  => {
 // console.log(toNumbs)
 
 // With the same numbers, find the sum of the even values
-const sumEvens = toNumbs.forEach((num) => {
-  total = 0
-  if (num % 2) {
-    num+=total
+const sumEvens = toNumbs.reduce((acc, nextNum) => {
+  if (nextNum % 2 === 0) {
+    // console.log('num }',nextNum)
+    acc += nextNum
   }
-  total
+  return acc
 })
 
-console.log(sumEvens);
+// console.log(sumEvens);
 
 // Find the index of the first value, when added to it's index = 512 (#ATX!!)
 // With the same numbers, find the sum of the even values
   //add the nowNumbs one a time, until we each 512,
-const atxIdx = toNumbs.reduce((acc, value, index) => {
+const atxIdx = 
+
+// toNumbs.forEach((num) => {
+//   let findAustin = 0 
+//   let texasArray = [] 
+//   findAustin += num
+// console.log('num }', num, 'currently added }', findAustin, 'texasArray }', texasArray )
+//   if (findAustin < 512) {
+//    return texasArray.push(num)
+//   } else if (findAustin === 512)
+//     return texasArray.length-1
+
+// })
+
+
+toNumbs.reduce((acc, value, index) => {
+  //I think thee is an issue with this. When we add it all together, see index 475 and 476, it goes from 511 t0 514
   console.log('acc :', acc, 'value :', value, "index ;", index)
-    do {
-      //~~its not increasing
-      acc + value
-    } while (acc !== 512)
-  
+  if (acc < 512) {
+   return acc + value
+  } else if (acc === 512) {
+    return index
+  }
   return index
+  
+  
+  //   do {
+  //     //~~its not increasing
+  //     acc + value
+  //   } while (acc !== 512)
+  
+  // return index
 }, 0)
 
-// console.log(`index: ${atxIdx}, value: ${toNumbs[atxIdx]}`);
+console.log(`index: ${atxIdx}, value: ${toNumbs[atxIdx]}`);
 
 const weather = [
   { id: 5743823523151872,
@@ -106,7 +130,7 @@ const weatherStates = new Set(weather.map((objects) => {
   return objects.weather_state_name
 }))
 
-console.log(weatherStates)
+// console.log(weatherStates)
 
 //find the id of the object in weather that has a min_temp of 15.915
 //got through the weather object,
@@ -115,4 +139,4 @@ console.log(weatherStates)
       //return the whole object of that object
 
 const idealTemp = weather.filter(entry => { return entry.min_temp === 15.915})
-console.log(idealTemp)
+// console.log(idealTemp)
