@@ -21,11 +21,11 @@ class BankAccount {
       // ~~ is logging 12 transactions when there should be three? 
     // console.log('tally',tally)
 
-    tally.reduce((curr, sum) => {
-      console.log('cur :', curr, 'sum :', sum)
+    let balance = tally.reduce((curr, sum) => {
+      // console.log('cur :', curr, 'sum :', sum)
      return curr + sum}, 0);
 
-     return tally
+     return balance
 
    }
 
