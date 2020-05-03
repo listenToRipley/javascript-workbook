@@ -6,7 +6,7 @@ const toNumbs = strNumbs.map(num  => {
   return parseInt(num, 10)
 })
 
-// console.log(toNumbs)
+console.log(toNumbs)
 
 // With the same numbers, find the sum of the even values
 const sumEvens = toNumbs.reduce((acc, nextNum) => {
@@ -17,7 +17,7 @@ const sumEvens = toNumbs.reduce((acc, nextNum) => {
   return acc
 })
 
-// console.log(sumEvens);
+console.log(sumEvens);
 
 // Find the index of the first value, when added to it's index = 512 (#ATX!!)
 // With the same numbers, find the sum of the even values
@@ -126,7 +126,7 @@ const weatherStates = new Set(weather.map((objects) => {
   return objects.weather_state_name
 }))
 
-// console.log(weatherStates)
+console.log(weatherStates)
 
 //find the id of the object in weather that has a min_temp of 15.915
 //got through the weather object,
@@ -135,4 +135,4 @@ const weatherStates = new Set(weather.map((objects) => {
       //return the whole object of that object
 
 const idealTemp = weather.filter(entry => { return entry.min_temp === 15.915})
-// console.log(idealTemp)
+console.log(idealTemp)
