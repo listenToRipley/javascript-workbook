@@ -1,13 +1,31 @@
-Create a list of individuals 
+Life scenario - just the logistics of signing up, not the rules of the game 
+You sign up to play dodge ball
+  they ask you: 
+    do you know how to play?
+      if so:
+        how many years experience do you have? 
+      if so can you: 
+        throw?
+        dodge? 
+    have to paid you fee? 
+    are you in good healthy?
+someone decides what team you're going to be one given their own set of criteria 
+you then become a member of that team. 
+  you know the color of your team and the mascot 
+now you are ready to play
+
+These are the rules we're deals with
+People sign up to play dodge ball.  
+Apply the player details to each of those individuals 
 Display that list 
 Sort those individuals into 1 of 2 teams 
-  Once added, remove that individual from the main list and move them onto a list for that team. 
-    Once someone has been added to team, they should no longer appear on the main list. 
+  Once added:
+   Remove that individual from the main list 
+   Move them onto a list for that team. 
+    Apply to team information to that individual 
     
   Players can move from one team to another, but they should only appear on one list at a time. 
-
-A team will have a color and mascot associated with it. 
-
+    If a play is moved from one team to another, the team information should be replaced with the team they moved to. 
 
 
 Instructions Provided 

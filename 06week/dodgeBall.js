@@ -1,5 +1,6 @@
 'use strict';
 
+//this is my starting list. 
 const arrOfPeople = [
   {
     id: 2,
@@ -52,18 +53,56 @@ const arrOfPeople = [
   },
 ]
 
-const listOfPlayers = []
-const blueTeam = []
-const redTeam = []
+//how many of these functions should actually be methods within the classes? 
+//what triggers these events? 
+//create a function by which we can merge (Object.assign(target, source)), the individual with the player class 
 
+//create a function that allows individuals to be move from the list of player to the blue or red team
+
+//create a function that allows people to be move from one team to another.
+
+//create a function that allows the team attributes to be added to an individual once they have been added to that team.
+
+
+//take the array of people and put it in this list w/ the player components added. 
+const listOfPlayers = []
+  //add people from your listOfPlayers to either the blueTeam or the RedTeam
+
+const blueTeam = []
+  //if they have been moved to the blueTeam, remove them from the listOfPlayers 
+      //add the team attributes to this player 
+const redTeam = []
+  //of they have been moved to the redTeam, remove them from the listOfPlayers 
+
+ 
 class player {
-  constructor(){}
+  //these characteristic will have to be added to the individuals before they get added to the list of players
+  //possibly use Object.assign(target, source)
+  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience){
+    //these would be the default answers on all individuals 
+    this.canThrowBall = False;
+    this.canDodgeBall = False; 
+    this.hasPaid = False;
+    this.isHealthy = False;
+    this.yearsExperience = 0;
+  }
+  //add a method to update the player information 
 }
+
+//when people are added to their associated them, this class should be added to those individuals. 
+ //should these be an extended class?
 class blueTeammate {
-  constructor(){}
+  //these be supers? 
+  constructor(mascot, teamColor){
+    this.mascot = mascot,
+    this.teamColor = teamColor
+  }
 }
 class redTeammate {
-  constructor(){}
+  constructor(mascot, teamColor){
+    this.mascot = mascot,
+    this.teamColor = teamColor
+  }
 }
 
 const listPeopleChoices = () => {
