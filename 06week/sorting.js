@@ -22,40 +22,36 @@ const sumEvens = toNumbs.reduce((acc, nextNum) => {
 // Find the index of the first value, when added to it's index = 512 (#ATX!!)
 // With the same numbers, find the sum of the even values
   //add the nowNumbs one a time, until we each 512,
-const atxIdx = 
 
-// toNumbs.forEach((num) => {
-//   let findAustin = 0 
-//   let texasArray = [] 
-//   findAustin += num
-// console.log('num }', num, 'currently added }', findAustin, 'texasArray }', texasArray )
-//   if (findAustin < 512) {
-//    return texasArray.push(num)
-//   } else if (findAustin === 512)
-//     return texasArray.length-1
+  //create an array of all the values accumulations and return that array  
+  let accArray = []
+let total = toNumbs.reduce((acc, value) => { 
+  // console.log('acc',acc,'value', value)
+  accArray.push(acc)
+ return acc + value
+})
+// console.log(accArray)
+// console.log(total)
 
-// })
-
-
-toNumbs.reduce((acc, value, index) => {
-  //I think thee is an issue with this. When we add it all together, see index 475 and 476, it goes from 511 t0 514
-  console.log('acc :', acc, 'value :', value, "index ;", index)
-  if (acc < 512) {
-   return acc + value
-  } else if (acc === 512) {
-    return index
+//go through the array  of accumulations and find the location 
+  //use the binary search to limit the large array and make it faster 
+let findAustin = (array, austin) => {
+  let l = 0;
+  let r = array.length -1 
+  while (l <= r) {
+    let m = Math.floor((l+r)/2)
+    if(array[m] < austin) {
+      l = m + 1
+    } else if (array[m] > austin) {
+      r = m - 1
+    } else {
+      return array.indexOf(austin) 
+    }
   }
-  return index
+  return 'Austin not found'
+}
   
-  
-  //   do {
-  //     //~~its not increasing
-  //     acc + value
-  //   } while (acc !== 512)
-  
-  // return index
-}, 0)
-
+const atxIdx = findAustin(accArray, 512)
 console.log(`index: ${atxIdx}, value: ${toNumbs[atxIdx]}`);
 
 const weather = [
