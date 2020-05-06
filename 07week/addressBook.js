@@ -6,14 +6,17 @@ window.onload = function() {
 }
 
 let addressBook = function() {
+  //we find the content we are looking for 
   let book = fetch('https://randomuser.me/api/')
   book.then(function(response) {
     console.log('here is the fetch response = ', response)
+    //we get the json file
     return response.json()
   })
-  .then(function(data) {
-    console.log('I want to look at each entry = ', data)
-    data.forEach(updatePage)
+  //
+  .then(function(person) {
+    console.log('I want to look at each entry = ', person)
+    person.forEach(updatePage)
   })
 }
 
