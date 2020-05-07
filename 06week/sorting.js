@@ -133,6 +133,7 @@ console.log(weatherStates)
   //look at each min_temp
     //if the value is 15.915 
       //return the whole object of that object
+      //didn't get it to filter on the id, still returning the whole object
 
-const idealTemp = weather.filter(entry => { return entry.min_temp === 15.915})
+const idealTemp = weather.filter(entry => {  return entry.min_temp === 15.915})
 console.log(idealTemp)
