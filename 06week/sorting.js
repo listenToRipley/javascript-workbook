@@ -136,10 +136,10 @@ console.log(weatherStates)
       //didn't get it to filter on the id, still returning the whole object
 
 const idealTemp = weather.filter(entry => {  return entry.min_temp === 15.915})
-console.log(idealTemp)
+// console.log(idealTemp)
 
 let idealID = idealTemp.map(obj => {
   return obj.id
 })
 
-console.log('id:',idealID)
+console.log('id:',idealID.toString())
