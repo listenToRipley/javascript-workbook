@@ -64,13 +64,6 @@ let findPeople = function(person) {
   single.appendChild(buttonInfo)
 
 
-  //need the extra info to live inside my button into and only generate/seen when the button is clicked
-  let xInfoEvent = (buttonInfo) => {
-    buttonInfo.addEventListener('click', function() {
-      console.log('see this info button get clicked?', buttonInfo)
-    })
-  } 
-
   //adds a class so it can be altered in css
   buttonInfo.classList.add('xinfo')
 
@@ -90,8 +83,13 @@ let findPeople = function(person) {
   extraInfo.appendChild(phone)
   extraInfo.appendChild(email)
 
-
-
+  //need the extra info to live inside my button into and only generate/seen when the button is clicked
+  buttonInfo.addEventListener('click', function() {
+    console.log('see this info button get clicked?', buttonInfo)
+    single.appendChild(extraInfo)
+    console.log(single)
+    console.log(extraInfo)
+  })
 
   //dob - change formatting for display? 
   //location
