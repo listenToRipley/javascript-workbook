@@ -17,14 +17,16 @@ let getPost = function() {
 const getPosts = () => {
   console.log('Inside the posts methods, about this fetch request')
   let fetchPromise = fetch('http://jsonplaceholder.typicode.com/posts')
-    let dataPromise = fetchPromise.then(function(response) {
+   .then(function(response) {
       console.log('Fetch is done! Response =', response)
-      return response.json()
+      return response.jsson()
   
     })
-    dataPromise.then(function(data) {
+    .then(function(data) {
       console.log('Got my data! data.length = ', data.length)
       data.forEach(updateHtml)
+    }).catch(function(error){
+      alert('something went wrong!')
     })
 
   console.log('Request is sent off ...')
@@ -40,17 +42,9 @@ let updateHtml = function(post){
     postLi.innerText = post.title
     postUl.appendChild(postLi)
 
-
-    let userId = post.userId
     let userSpan = document.createElement('span')
-    userSpan.innerText = '   - by' +userId
+    userSpan.innerText = '   - by' +post.userId
     postLi.append(userSpan)
-    
-    fetch('http://jsonplaceholder.typicode.com/posts'+userId)
-    .then(function(response){
-      
-    })
-
 
 }
 // // this function logs the results in your browsers console
