@@ -5,7 +5,6 @@
 window.onload = () => {
   getHeroes()
 }
-
 //fetch my api
 
 let getHeroes = () => {
@@ -17,14 +16,19 @@ let getHeroes = () => {
   })
   .then(function(json){
     let result = json.data.results
-    console.log('json result : ', result) 
+    console.log('json result : ', result)
+    document.getElementById('fetch').innerText = results.length 
   })
+  .then(function(result) {
+    //should return each item in the array as individual to loop through 
+    result.forEach(needAHero)
+})
 }
 
-let needAHero = (getHeroes) => {
+let needAHero = (characters) => {
   //create a list of all the comic stories 
   let stories = []
-//go through each character and pull out through 
+//go through each character and pull out the items listed in the stories key and add them to their own list
   getHeroes.forEach(character => {
     stories.push(character.stories.items.name)
   });
@@ -33,7 +37,3 @@ let needAHero = (getHeroes) => {
 
   //display the names of each character that appears in that comic. 
 }
-
-console.log(needAHero(getHeroes))
-
-console.log()
