@@ -18,7 +18,6 @@ let apiPeople = function() {
   })
   //we want to return the content on the json file 
   .then(function(people) {
-      //getting back that the length is undefined, why? 
     // console.log('I want to look a people = ', people.results)
     people.results.forEach(findPeople)
   })
@@ -26,46 +25,82 @@ let apiPeople = function() {
 
 //should print ten lines of people
 let findPeople = function(person) {
-  console.log('find the people = ', person)
-  //create your elements that you will be working with 
-    //this is my parent elements, my targets where my created content will be placed 
-  let book = document.getElementById('people')
-  let single = document.getElementById('person')
-  let extraInfo = document.getElementById('extraInfo')
-  //make sure my parent elements know how they are nested 
-  book.appendChild(single)
-  single.appendChild(extraInfo)
+  // console.log('find the people = ', person)
 
-    //these are my created elements
+  //create my HTML set up 
+  let body = document.getElementsByTagName('body')
+  console.log(body)
+  //create your elements that you will be working with 
+  //CREATION OF ELEMENTS
+    //main body of my content, this is the master element 
+  let mainBody = document.createElement('main')
+  // console.log('create the main',mainBody)
+  //create the div within the main body 
+  let div = document.createElement('div')
+  // console.log('create the div where my uls will live', div)
+  //container for each individual called from the API 
+  let mainUl = document.createElement('ul')
+  // console.log('my main ul where the name and picture will first appear', mainUl )
+  //create a separate UL for all the extra information 
+  let hiddenUL = document.createElement('ul')
+  // console.log('my second ul, where the additional information on each person will live', hiddenUL)
+
+    //class names in order 
+    div.setAttribute('id', 'people') //book
+    mainUl.setAttribute('id','person')
+    hiddenUL.setAttribute('id','extraInfo')
+    
+
+  //make sure my parent elements know how they are nested 
+  mainBody.appendChild(div)
+  div.appendChild(mainUl)
+  mainUl.appendChild(hiddenUL)
+  // console.log('everything coming through?',div) yes
+
+  //query selectors 
+  let book = document.getElementById('people')
+    // console.log('this is all the information',book)
+  let individual = document.getElementById('person')
+    // console.log('this is each person coming in from the api',individual)
+  let hidInfo = document.getElementById('extraInfo')
+  // console.log('this is the additional information on each person', hidInfo)
+  
+  // console.log('this is my button', btn)
+
+  //these are my created elements within the mainUL
   let profilePic = document.createElement('img')
   let firstNames = document.createElement('li')
   let lastNames = document.createElement('li')
-  let buttonInfo = document.createElement('button')
+  //button element needs to be created here so it will generate per individual 
+  let infoButton = document.createElement('button')
+  console.log('my button', infoButton)
+  infoButton.innerText = 'More Info'
+
+ //add this content to its parent element 
+  individual.appendChild(profilePic)
+  individual.appendChild(firstNames)
+  individual.appendChild(lastNames)
+  individual.appendChild(infoButton)
+
+  //add the profile picture the profile picture element
+  profilePic.src = person.picture.large
+  //add to parent element
+  individual.appendChild(profilePic)
+
+  //add name to the name element
+  firstNames.innerText = person.name.first
+  lastNames.innerText = person.name.last
+  //add to the parent element
+  individual.appendChild(firstNames)
+  individual.appendChild(lastNames)
+
+  //this should be the content on your hidInfo UL list 
   let dob = document.createElement('li')
   let city = document.createElement('li')
   let state = document.createElement('li')
   let country = document.createElement('li')
   let phone = document.createElement('li')
   let email = document.createElement('li')
-  
-  //add the profile picture the profile picture element
-  profilePic.src = person.picture.large
-  //add to parent element
-  single.appendChild(profilePic)
-
-  //add name to the name element
-  firstNames.innerText = person.name.first
-  lastNames.innerText = person.name.last
-  //add to the parent element
-  single.appendChild(firstNames)
-  single.appendChild(lastNames)
-  // Add a button to each user that when clicked displays the rest of their information like DOB, address and so forth.
-  buttonInfo.innerText = 'More Info'
-  single.appendChild(buttonInfo)
-
-
-  //adds a class so it can be altered in css
-  buttonInfo.classList.add('xinfo')
 
   //add the information that will be contained in the extraInfo section
   dob.innerText = person.dob.date
@@ -75,25 +110,23 @@ let findPeople = function(person) {
   phone.innerText = person.phone
   email.innerText = person.email
 
-  //add those elements to the extraInfo section
-  extraInfo.appendChild(dob)
-  extraInfo.appendChild(city)
-  extraInfo.appendChild(state)
-  extraInfo.appendChild(country)
-  extraInfo.appendChild(phone)
-  extraInfo.appendChild(email)
+  console.log('now this should have all the info per person',hidInfo)
 
-  //need the extra info to live inside my button into and only generate/seen when the button is clicked
-  buttonInfo.addEventListener('click', function() {
-    console.log('see this info button get clicked?', buttonInfo)
-    single.appendChild(extraInfo)
-    console.log(single)
-    console.log(extraInfo)
+  infoButton.setAttribute('id','infoBtn')
+  //the information should not display until the button is clicked. 
+    //when it is clicked, it should display directly under the individual 
+  infoButton.addEventListener('click', function() {
+    console.log('see this info button get clicked?', infoButton)
+      //add those elements to the extraInfo section
+    hidInfo.appendChild(dob)
+    hidInfo.appendChild(city)
+    hidInfo.appendChild(state)
+    hidInfo.appendChild(country)
+    hidInfo.appendChild(phone)
+    hidInfo.appendChild(email)
+    individual.appendChild(hidInfo)
+    // console.log(one)
+    console.log(hidInfo)
   })
-
-  //dob - change formatting for display? 
-  //location
-  //phone
-  //email
 }
 
