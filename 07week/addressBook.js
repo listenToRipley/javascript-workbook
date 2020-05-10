@@ -34,11 +34,11 @@ let mainBody = document.getElementById('main')
   //if not, create UL 
   if (indexUsed.includes(index) === false) {
   let div = document.createElement('div')
-  console.log('access the div where my uls will live', div)
+  // console.log('access the div where my uls will live', div)
     //container for each person called from the API '
   let mainUl = document.createElement('ul')
   mainUl.classList.add('person')
-  console.log('my main ul where the name and picture will first appear', mainUl )
+  // console.log('my main ul where the name and picture will first appear', mainUl )
   div.appendChild(mainUl)
   // console.log('see the div?',div) 
 
@@ -54,6 +54,8 @@ let mainBody = document.getElementById('main')
   // //button element needs to be created here so it will generate per individual 
   // console.log('my button', infoButton)
   infoButton.innerText = 'More Info'
+  infoButton.setAttribute('class', 'infoBtn')
+  infoButton.setAttribute('aria-controls','forToggle')
 
  //add this content to its parent element 
   mainUl.appendChild(profilePic)
@@ -72,67 +74,66 @@ let mainBody = document.getElementById('main')
 //the button must be appended after the name has been added, or else it comes before it 
   mainUl.appendChild(infoButton)
 
-  infoButton.classList.add('infoBtn')
-
   //this will create the hidden information
-    let createInfo = () => {
-    //don't want this information created until after the button
-    let hiddenUL = document.createElement('ul')
-    // console.log('my second ul, where the additional information on each person will live hiddenUL)
-    hiddenUL.classList.add('extraInfo')
-    let hidInfo = document.getElementsByClassName('extraInfo')
-    // console.log('this is the additional information on each person', hidInfo)
-    mainUl.appendChild(hiddenUL)
+  let hiddenUL = document.createElement('ul')
+  // console.log('my second ul, where the additional information on each person will live hiddenUL)
+  hiddenUL.setAttribute('class','extraInfo')
+  hiddenUL.setAttribute('class', 'forToggle')
+  hiddenUL.setAttribute('aria-hidden', 'true')
+  //create a loop for each attribute you want to set on hiddenUl
+  let hidInfo = document.getElementsByClassName('extraInfo')
+  // console.log('this is the additional information on each person', hidInfo)
+  mainUl.appendChild(hiddenUL)
 
-    //this should be the content on your hidInfo UL list 
-    let dob = document.createElement('li')
-    let city = document.createElement('li')
-    let state = document.createElement('li')
-    let country = document.createElement('li')
-    let cell = document.createElement('li')
-    let email = document.createElement('li')
+  //this should be the content on your hidInfo UL list 
+  let dob = document.createElement('li')
+  let city = document.createElement('li')
+  let state = document.createElement('li')
+  let country = document.createElement('li')
+  let cell = document.createElement('li')
+  let email = document.createElement('li')
 
-    //add the information that will be contained in the extraInfo section
-    let bDay = people.dob.date 
-    // console.log(bDay)
-    let formatBday = new Date(bDay).toDateString()
+  //add the information that will be contained in the extraInfo section
+  let bDay = people.dob.date 
+  // console.log(bDay)
 
-    dob.innerText = `Birthday : ${formatBday}`
-    city.innerText = `City : ${people.location.city}`
-    state.innerText = `State : ${people.location.state}`
-    country.innerText =`Country : ${ people.location.country}`
-    cell.innerText = `Cell : ${people.cell}`
-    email.innerText = `Email : ${people.email}`
-
-    // console.log('now this should have all the info per person',hidInfo)
-    
-      //add those elements information 
-    hiddenUL.appendChild(dob)
-    hiddenUL.appendChild(city)
-    hiddenUL.appendChild(state)
-    hiddenUL.appendChild(country)
-    hiddenUL.appendChild(cell)
-    hiddenUL.appendChild(email)
-      console.log(hidInfo)
-    mainUl.appendChild(hiddenUL)
-    
-  }
-
-  let count = 0
-  let clickCount = () =>  { return count++ }
- 
-  console.log(mainUl)
+  let formatBday = new Date(bDay).toDateString()
+  dob.innerText = `Birthday : ${formatBday}`
+  city.innerText = `City : ${people.location.city}`
+  state.innerText = `State : ${people.location.state}`
+  country.innerText =`Country : ${ people.location.country}`
+  cell.innerText = `Cell : ${people.cell}`
+  email.innerText = `Email : ${people.email}`
+  // console.log('now this should have all the info per person',hidInfo)
+  
+    //add those elements information 
+  hiddenUL.appendChild(dob)
+  hiddenUL.appendChild(city)
+  hiddenUL.appendChild(state)
+  hiddenUL.appendChild(country)
+  hiddenUL.appendChild(cell)
+  hiddenUL.appendChild(email)
+    // console.log(hidInfo)
+  mainUl.appendChild(hiddenUL)
+  hiddenUL.style.visibility = 'hidden' 
+  // console.log(mainUl)
 
   infoButton.addEventListener('click', function() {
-  // console.log('start count', count)
-    clickCount()
-    createInfo()
+    // console.log('been clicked?')
+    let aria = hiddenUL.getAttribute('aria-hidden')
+    
     //created information should only be created once then store, not created over and over again 
-    //update inner text 'less info
-  infoButton.innerText = 'Less Info'
+    hiddenUL.setAttribute('aria-hidden', aria === 'true' ? 'false' : 'true')
+    
+    if (aria === 'true') {
+      hiddenUL.style.visibility = 'visible' 
+      infoButton.innerText = 'Less Info'
+    } else {
+      hiddenUL.style.visibility = 'hidden' 
+      infoButton.innerText = 'More Info'
+    }
   })
 
-  console.log(count)
   mainBody.appendChild(mainUl)
   
   //add this index to your indexUsed array so you don't make it again
