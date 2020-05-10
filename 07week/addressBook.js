@@ -5,7 +5,6 @@ window.onload = function() {
   console.log('my page has loaded')
 }
 
-
 let apiPeople = function() {
   //we find the content we are looking for
                       //10 people 
@@ -18,91 +17,73 @@ let apiPeople = function() {
   })
   //we want to return the content on the json file 
   .then(function(people) {
-    // console.log('I want to look a people = ', people.results)
+    // console.log('There = ', people.results.length, "people in this object")
     people.results.forEach(findPeople)
   })
 }
 
-//should print ten lines of people
-let findPeople = function(person, index) {
-  console.log('find the people = ', person)
-  console.log('index', index)
-  //create my HTML set up 
-  //CREATION OF ELEMENTS
-    //main body of my content, this is the master element 
-  let mainBody = document.createElement('main')
-  // console.log('create the main',mainBody)
-  //create the div within the main body 
-  let div = document.createElement('div')
-  // console.log('create the div where my uls will live', div)
-  //container for each individual called from the API 
-  let mainUl = document.createElement('ul')
-  // console.log('my main ul where the name and picture will first appear', mainUl )
-  //create a separate UL for all the extra information 
-
-  //class names in order 
-  div.setAttribute('id', 'people') //book
-  mainUl.setAttribute('id','person')
-    
-  //make sure my parent elements know how they are nested 
-  mainBody.appendChild(div)
-  div.appendChild(mainUl)
-  // console.log('everything coming through?',div) yes
-
-  //query selectors 
-  let book = document.getElementById('people')
-    console.log('this is all the information',book)
-
-
 let indexUsed = []
+//should print ten lines of people
+let findPeople = function(people, index) {
+  // console.log('find the people = ', people)
+  // console.log('index', index)
+
   //we want the UL to be created per person
   //using the index, determine if you have already created a UL for the person
   //every time you do create a new UL, add the index number to your indexUsedArray
   //if not, create UL 
   if (indexUsed.includes(index) === false) {
-  let individual = document.getElementById('person')
-    // console.log('this is each person coming in from the api',individual)
+  let div = document.createElement('div')
+  console.log('access the div where my uls will live', div)
+    //container for each person called from the API '
+  let mainUl = document.createElement('ul')
+  mainUl.classList.add('person')
+  console.log('my main ul where the name and picture will first appear', mainUl )
+  div.appendChild(mainUl)
+  // console.log('see the div?',div) 
+
+  //create a separate UL for all the extra information 
+  let person = document.getElementsByClassName('person')
+    // console.log('this is each person coming in from the api',person)
 
   //these are my created elements within the mainUL
   let profilePic = document.createElement('img')
   let firstNames = document.createElement('li')
   let lastNames = document.createElement('li')
-  //button element needs to be created here so it will generate per individual 
   let infoButton = document.createElement('button')
-  console.log('my button', infoButton)
+  // //button element needs to be created here so it will generate per individual 
+  // console.log('my button', infoButton)
   infoButton.innerText = 'More Info'
 
  //add this content to its parent element 
-  individual.appendChild(profilePic)
-  individual.appendChild(firstNames)
-  individual.appendChild(lastNames)
-  individual.appendChild(infoButton)
+  mainUl.appendChild(profilePic)
+  mainUl.appendChild(firstNames)
+  mainUl.appendChild(lastNames)
 
   //add the profile picture the profile picture element
-  profilePic.src = person.picture.large
-  //add to parent element
-  individual.appendChild(profilePic)
+  profilePic.src = people.picture.large
 
   //add name to the name element
-  firstNames.innerText = person.name.first
-  lastNames.innerText = person.name.last
+  firstNames.innerText = people.name.first
+  lastNames.innerText = people.name.last
   //add to the parent element
-  individual.appendChild(firstNames)
-  individual.appendChild(lastNames)
+  mainUl.appendChild(firstNames)
+  mainUl.appendChild(lastNames)
+//the button must be appended after the name has been added, or else it comes before it 
+  mainUl.appendChild(infoButton)
 
-
-  infoButton.setAttribute('id','infoBtn')
+  infoButton.classList.add('infoBtn')
   //the information should not display until the button is clicked. 
-    //when it is clicked, it should display directly under the individual 
+    //when it is clicked, it should display directly under the person 
   infoButton.addEventListener('click', function() {
     console.log('see this info button get clicked?', infoButton)
     //don't want this information created until after the button
     let hiddenUL = document.createElement('ul')
-    // console.log('my second ul, where the additional information on each person will live'hiddenUL)
-    hiddenUL.setAttribute('id','extraInfo')
-    let hidInfo = document.getElementById('extraInfo')
+    // console.log('my second ul, where the additional information on each person will live hiddenUL)
+    hiddenUL.classList.add('extraInfo')
+    let hidInfo = document.getElementsByClassName('extraInfo')
     // console.log('this is the additional information on each person', hidInfo)
-    individual.appendChild(hiddenUL)
+    person.appendChild(hiddenUL)
 
     //this should be the content on your hidInfo UL list 
     let dob = document.createElement('li')
@@ -113,12 +94,12 @@ let indexUsed = []
     let email = document.createElement('li')
 
     //add the information that will be contained in the extraInfo section
-    dob.innerText = person.dob.date
-    city.innerText = person.location.city
-    state.innerText = person.location.state
-    country.innerText = person.location.country
-    phone.innerText = person.phone
-    email.innerText = person.email
+    dob.innerText = people.dob.date
+    city.innerText = people.location.city
+    state.innerText = people.location.state
+    country.innerText = people.location.country
+    phone.innerText = people.phone
+    email.innerText = people.email
 
     // console.log('now this should have all the info per person',hidInfo)
     
@@ -133,9 +114,11 @@ let indexUsed = []
 
     mainUl.appendChild(hiddenUL)
   })
-
+  // mainBody.appendChild(mainUl)
+  
   //add this index to your indexUsed array so you don't make it again
-  indexUsed.push(index)
+  indexUsed.push('index',index)
 } 
+
 }
 
