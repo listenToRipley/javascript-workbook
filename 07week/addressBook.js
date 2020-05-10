@@ -27,7 +27,7 @@ let indexUsed = []
 let findPeople = function(people, index) {
   // console.log('find the people = ', people)
   // console.log('index', index)
-
+let mainBody = document.getElementById('main')
   //we want the UL to be created per person
   //using the index, determine if you have already created a UL for the person
   //every time you do create a new UL, add the index number to your indexUsedArray
@@ -73,52 +73,71 @@ let findPeople = function(people, index) {
   mainUl.appendChild(infoButton)
 
   infoButton.classList.add('infoBtn')
-  //the information should not display until the button is clicked. 
-    //when it is clicked, it should display directly under the person 
-  infoButton.addEventListener('click', function() {
-    console.log('see this info button get clicked?', infoButton)
+
+  //this will create the hidden information
+    let createInfo = () => {
     //don't want this information created until after the button
     let hiddenUL = document.createElement('ul')
     // console.log('my second ul, where the additional information on each person will live hiddenUL)
     hiddenUL.classList.add('extraInfo')
     let hidInfo = document.getElementsByClassName('extraInfo')
     // console.log('this is the additional information on each person', hidInfo)
-    person.appendChild(hiddenUL)
+    mainUl.appendChild(hiddenUL)
 
     //this should be the content on your hidInfo UL list 
     let dob = document.createElement('li')
     let city = document.createElement('li')
     let state = document.createElement('li')
     let country = document.createElement('li')
-    let phone = document.createElement('li')
+    let cell = document.createElement('li')
     let email = document.createElement('li')
 
     //add the information that will be contained in the extraInfo section
-    dob.innerText = people.dob.date
-    city.innerText = people.location.city
-    state.innerText = people.location.state
-    country.innerText = people.location.country
-    phone.innerText = people.phone
-    email.innerText = people.email
+    let bDay = people.dob.date 
+    // console.log(bDay)
+    let formatBday = new Date(bDay).toDateString()
+
+    dob.innerText = `Birthday : ${formatBday}`
+    city.innerText = `City : ${people.location.city}`
+    state.innerText = `State : ${people.location.state}`
+    country.innerText =`Country : ${ people.location.country}`
+    cell.innerText = `Cell : ${people.cell}`
+    email.innerText = `Email : ${people.email}`
 
     // console.log('now this should have all the info per person',hidInfo)
     
       //add those elements information 
-    hidInfo.appendChild(dob)
-    hidInfo.appendChild(city)
-    hidInfo.appendChild(state)
-    hidInfo.appendChild(country)
-    hidInfo.appendChild(phone)
-    hidInfo.appendChild(email)
+    hiddenUL.appendChild(dob)
+    hiddenUL.appendChild(city)
+    hiddenUL.appendChild(state)
+    hiddenUL.appendChild(country)
+    hiddenUL.appendChild(cell)
+    hiddenUL.appendChild(email)
       console.log(hidInfo)
-
     mainUl.appendChild(hiddenUL)
+    
+  }
+
+  let count = 0
+  let clickCount = () =>  { return count++ }
+ 
+  console.log(mainUl)
+
+  infoButton.addEventListener('click', function() {
+  // console.log('start count', count)
+    clickCount()
+    createInfo()
+    //created information should only be created once then store, not created over and over again 
+    //update inner text 'less info
+  infoButton.innerText = 'Less Info'
   })
-  // mainBody.appendChild(mainUl)
+
+  console.log(count)
+  mainBody.appendChild(mainUl)
   
   //add this index to your indexUsed array so you don't make it again
   indexUsed.push('index',index)
 } 
-
+  
 }
 
