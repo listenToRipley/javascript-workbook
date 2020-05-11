@@ -203,7 +203,11 @@ listOfPlayers.map(person => {
   let team = new teammates('Purple Cobras', 'blue')
   let teamSpirit = Object.assign(person, team)
   blueTeam.push(teamSpirit)
+  bMember = cLi
+    cClass(bMember, 'bMember')
+    bMember.innerText = person.name + person.canDodgeBall
   }})
+  appending(bTeam,bMember)
 }
 
 
@@ -217,6 +221,11 @@ const red = (id) => {
   let team = new teammates('Average Joes', 'red')
   let teamSpirit = Object.assign(person, team)
   redTeam.push(teamSpirit)
+  rMember = cLi
+    cClass(rMember, 'rMember')
+    rMember.innerText = person.name + person.canDodgeBall
   }})
+  //~~issue here
+  appending(rTeam, rMember)
 }
  
