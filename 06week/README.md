@@ -63,8 +63,9 @@ listPeopleChoices()
   Lives in - 'player'
     get the id of player
     using the ID, create a copy of that person in   listOfPlayers[] 
-    remove that li from the the list of people
     add the class of Player to that person 
+    remove that li from the the list of people HTML
+      the ul items only include name and skill
     add a buttons of blue() & red()
       this function should be triggered inside of this element 
     update html content
