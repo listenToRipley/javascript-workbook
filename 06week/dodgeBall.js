@@ -106,12 +106,15 @@ const listPeopleChoices = () => {
 const listOfPlayers = []
 
 const makePlayer = (id) => {
+    //need a parent UL 
+    const dbPlayers = document.getElementById('players')
   // console.log(`li ${id} was clicked!`)
+  //this creates a copy of the individual with a matching id to the list of players array. 
   arrOfPeople.map(person => {
     //pull in the whole object, but only add those individual to the listOfPlays, if their id was provided 
     // console.log('look at the whole object,', person)
     if(person.id === id) {
-      console.log('first if, inside makePlayer?')
+      // console.log('first if, inside makePlayer?')
       //at this point, we want to create a new object which includes the player constructor and the person object from the arrayOfPeople
           //we are assuming all of these when they sign up. 
       let letsPlay = new player(false, false, false, false,0)
@@ -137,25 +140,26 @@ const makePlayer = (id) => {
     // }
   })
   console.log(listOfPlayers)
-  //need a parent UL 
-  const dbPlayers = document.getElementById('players')
-    console.log('find the player section of HTML', dbPlayers)
-    
-    let playerCLi = cLi
+  let playerCLi;
+  //~~it's update the single li, but not creating new ones per individual in the listOfPlayers, the array is growing though 
+  listOfPlayers.forEach((person, index) => {
+  console.log('find the player section of HTML', dbPlayers)
+  playerCLi = cLi
     cClass(cLi, 'playerLi') //create Li for person
-
-  //~~ need to work on this, coming up as undefined
-      playerCLi.innerText = listOfPlayers.name
-     //create blue button
-    let bBtn = document.createElement('button')
-    cClass(bBtn, 'blueBtn')
-      bBtn.innerText = 'Blue'
-      //create red button 
-    let rBtn = document.createElement('button')
-    cClass(rBtn, 'redBtn')
-      rBtn.innerText = 'Red'
-    let update  = document.createElement('button')
-      update.innerText = 'Update Info'
+  //~~ need to work on this
+    //we meed to go through each item as it is created and assign the name
+  
+    playerCLi.innerText = person.name
+   //create blue button
+  let bBtn = document.createElement('button')
+  cClass(bBtn, 'blueBtn')
+    bBtn.innerText = 'Blue'
+    //create red button 
+  let rBtn = document.createElement('button')
+  cClass(rBtn, 'redBtn')
+    rBtn.innerText = 'Red'
+  let update  = document.createElement('button')
+    update.innerText = 'Update Info'
 
   console.log(update, playerCLi, bBtn, rBtn)
 
@@ -167,6 +171,10 @@ bBtn.addEventListener('click',() => {blue(player.id)})
    appending(playerCLi,bBtn)
    appending(playerCLi,update)
    appending(dbPlayers, playerCLi)
+
+  })
+  appending(dbPlayers, playerCLi)
+
 }
 
 //when people are added to their associated them, this class should be added to those individuals. 
