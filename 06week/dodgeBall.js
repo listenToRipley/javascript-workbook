@@ -116,8 +116,10 @@ const listPeopleChoices = () => {
 const removedLi = (previousDIV,previousUL, newArray) => {
   //find the parentDIV
   let lastDIV = byID(previousDIV)
+  console.log('this is not a node?',lastDIV)
   //find the last UL
   let preUL = byID(previousUL)
+    // console.log('the previous ul list are are trying to update',preUL)
   //create a list of it's children element
   let pULchildren = preUL.children
   console.log('pul',pULchildren)
@@ -128,19 +130,18 @@ const removedLi = (previousDIV,previousUL, newArray) => {
     let matchID = byID(`${element.id}`)
     console.log('find a match?', findMatch)
         //if the id for someone in your new array of players, then delete that li
-    if(findMatch = true) {
-      preUL.removeChild(matchID)
-      console.log('if this matched, get rid of it')
-    } else if (!findMatch) {
-      console.log('what am I missing that is making this null?')
+    if(findMatch) {
+      return preUL.removeChild(matchID)
+      // console.log('if this matched, get rid of it',   preUL.removeChild(matchID))
+      // lastDIV.appendChild(preUL)
+    } 
+    else if (!findMatch) {
+      // console.log('there should not be a match after it was removed')
+      return previousDIV
     }
-    lastDIV.appendChild(preUL)
-    console.log('remove function completed')
+    return appending(previousDIV, previousUL)
   })
-  // console.log( 'HTML?',pULchildren.namedItem(2))
-  // if(pULchildren.includes(newArray.name)) {
-  //   console.log('got you')
-  // }
+  // console.log( 'HTML?',pULchildren.namedItem(2)
   console.log('completed the removal')
 }
 
@@ -172,7 +173,7 @@ const makePlayer = (id) => {
   // console.log('find the player section of HTML', dbPlayers)
   let playerLi = cLi
     setAtt(cLi,'id','dbPlayerLi') //create Li for person
-  
+    setAtt(cLi,'id',`${person.id}`)
   //~~ need to work on this
     //we meed to go through each item as it is created and assign the name
     playerLi.innerText = person.name
@@ -192,14 +193,13 @@ const makePlayer = (id) => {
   console.log(update, playerLi, bBtn, rBtn)
 
 //~~these need to be inside my map in order to function correctly, but cannot be called until after they are created?
-    //~~this is where my button issues steam since the player id is not being passed in
-bBtn.addEventListener('click',() => {blue(player.id)
-  console.log('BLUE button click, id?', player.id)
+bBtn.addEventListener('click',() => {blue(id)
+  console.log('BLUE button click, id?', id)
 })
   appending(playerLi,bBtn)
   appending(playerLi,update)
-rBtn.addEventListener('click', () => {red(player.id)
-  console.log('RED button click, id?', player.id)
+rBtn.addEventListener('click', () => {red(id)
+  console.log('RED button click, id?', id)
 })
    appending(playerLi,rBtn)
    appending(playerLi,update)
@@ -245,7 +245,6 @@ listOfPlayers.map(person => {
     bMember.innerText = person.name + person.canDodgeBall
   return bMember
   }})
-  //~~there's an issue there
   // console.log('BLUE parent node', blueUL, 'and their parent', blueDiv)
   appending(blueUL, bMember)
   appending(blueDiv, blueUL)
@@ -266,9 +265,8 @@ const red = (id) => {
     rMember.innerText = person.name + person.canDodgeBall
     return rMember
   }})
-  //~~issue here
   // console.log('RED parent node', redUL, 'and their parent', redDiv)
   appending(redUL, rMember)
-  append(redDiv, redUL)
+  appending(redDiv, redUL)
 }
  
