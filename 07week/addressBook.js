@@ -34,13 +34,17 @@ let mainBody = document.getElementById('main')
   //if not, create UL 
   if (indexUsed.includes(index) === false) {
   let div = document.createElement('div')
+  div.setAttribute('class', 'card mb-3')
   // console.log('access the div where my uls will live', div)
     //container for each person called from the API '
   let mainUl = document.createElement('ul')
   mainUl.classList.add('person')
+
   // console.log('my main ul where the name and picture will first appear', mainUl )
   div.appendChild(mainUl)
-  // console.log('see the div?',div) 
+  // console.log('see the div?',div)
+  mainUl.setAttribute('class', 'list-group list-group-flush') 
+  mainUl.setAttribute('class', 'card-body')
 
   //create a separate UL for all the extra information 
   let person = document.getElementsByClassName('person')
@@ -48,29 +52,34 @@ let mainBody = document.getElementById('main')
 
   //these are my created elements within the mainUL
   let profilePic = document.createElement('img')
-  let firstNames = document.createElement('li')
-  let lastNames = document.createElement('li')
+  let names = document.createElement('li')
   let infoButton = document.createElement('button')
   // //button element needs to be created here so it will generate per individual 
   // console.log('my button', infoButton)
   infoButton.innerText = 'More Info'
+
+  //set classes for css targeting
   infoButton.setAttribute('class', 'infoBtn')
   infoButton.setAttribute('aria-controls','forToggle')
+  infoButton.setAttribute('class', 'btn-info')
+  names.setAttribute('class', 'name')
+  profilePic.setAttribute('class', 'proPic')
 
  //add this content to its parent element 
   mainUl.appendChild(profilePic)
-  mainUl.appendChild(firstNames)
-  mainUl.appendChild(lastNames)
+  mainUl.appendChild(names)
 
   //add the profile picture the profile picture element
   profilePic.src = people.picture.large
 
+  let firstNames = people.name.first
+  let lastNames = people.name.last
+
   //add name to the name element
-  firstNames.innerText = people.name.first
-  lastNames.innerText = people.name.last
+  names.innerText = firstNames + ' ' + lastNames
+
   //add to the parent element
-  mainUl.appendChild(firstNames)
-  mainUl.appendChild(lastNames)
+  mainUl.appendChild(names)
 //the button must be appended after the name has been added, or else it comes before it 
   mainUl.appendChild(infoButton)
 
@@ -93,11 +102,17 @@ let mainBody = document.getElementById('main')
   let cell = document.createElement('li')
   let email = document.createElement('li')
 
+
   //add the information that will be contained in the extraInfo section
   let bDay = people.dob.date 
   // console.log(bDay)
 
   let formatBday = new Date(bDay).toDateString()
+    //if i have time I would like to remove the day abbreviations from the front of the birthday.
+      ///make birthday into a little of individual items
+        // remove the first time
+        //rewrite the birthday
+    
   dob.innerText = `Birthday : ${formatBday}`
   city.innerText = `City : ${people.location.city}`
   state.innerText = `State : ${people.location.state}`
