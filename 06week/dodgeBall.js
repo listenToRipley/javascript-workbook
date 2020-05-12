@@ -56,14 +56,23 @@ const arrOfPeople = [
 //code the will be repeated a lot
 const cLi = document.createElement("li")
 //remember the name needs to be a 'string'
-const cClass = (element,name) => {element.classList.add(name)}
+const setAtt = (element,id,name) => {element.setAttribute(id,name)}
 const findQSA = (element,name) => { element.querySelectorAll(name)}
 const appending = (parent, child) => {parent.appendChild(child)}
 const dElement = (child) => { child.parentNode.removeChild(child)}
 const byID = (id) => document.getElementById(id)
 
+//get from DOM
+const lopParent = byID('lopParent')
+  const listElement = byID('people')
+const playersDiv = byID('playerParent')
+  const dbUL = byID('players')
+const blueDiv = byID('bParent')
+  const blueUL = byID('blue')
+const redDiv = byID('rParent')
+  const redUL = byID('red')
+
 const listPeopleChoices = () => {
-  const listElement = document.getElementById('people')
   arrOfPeople.map(person => {
     // console.log('this this map the whole object?',person) 
     //yes, the whole object is mapped. 
@@ -74,7 +83,7 @@ const listPeopleChoices = () => {
     button.addEventListener('click', function(){makePlayer(person.id)} )
       li.appendChild(button)
       li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
-      cClass(li, `${person.id}`)
+      setAtt(li,'id',`${person.id}`)
         // console.log(li)
       listElement.append(li)
     })
@@ -91,7 +100,8 @@ const listPeopleChoices = () => {
       this.isHealthy = isHealthy;
       this.yearsExperience = 0;
     }
-    //add a method to update the player information 
+    //add a method to update the player information, 
+      //??can we still call this method if the object has beeb merged? 
     updatePlayer() {
       this.canThrowBall = this.canThrowBall;
       this.canDodgeBall = this.canDodgeBall
@@ -106,8 +116,6 @@ const listPeopleChoices = () => {
 const listOfPlayers = []
 
 const makePlayer = (id) => {
-    //need a parent UL 
-    const dbPlayers = document.getElementById('players')
   // console.log(`li ${id} was clicked!`)
   //this creates a copy of the individual with a matching id to the list of players array. 
   arrOfPeople.map(person => {
@@ -124,9 +132,12 @@ const makePlayer = (id) => {
     listOfPlayers.push(newPlayer)
     }
 
+  
     //~~come back to how to remove a child element 
-    // const listElement = byID('people')
-    // const liChild = document.getElementsByTagName('li')
+    //you have a list of people who could be playing
+    //if they decide to play, then they should be removed from the list of people who could play to a list of people who will be playing
+
+    // const peopleLiIDs = byID(${person.id})
     //   //need to return the class name for each of these li's
     // const childID = (listElement.forEach((child) => {
       
@@ -140,41 +151,46 @@ const makePlayer = (id) => {
     // }
   })
   console.log(listOfPlayers)
-  let playerCLi;
+
   //~~it's update the single li, but not creating new ones per individual in the listOfPlayers, the array is growing though 
   listOfPlayers.forEach((person, index) => {
-  console.log('find the player section of HTML', dbPlayers)
-  playerCLi = cLi
-    cClass(cLi, 'playerLi') //create Li for person
+  // console.log('find the player section of HTML', dbPlayers)
+  let playerLi = cLi
+    setAtt(cLi,'id','dbPlayerLi') //create Li for person
+  
   //~~ need to work on this
     //we meed to go through each item as it is created and assign the name
-  
-    playerCLi.innerText = person.name
+    playerLi.innerText = person.name
    //create blue button
   let bBtn = document.createElement('button')
-  cClass(bBtn, 'blueBtn')
+  setAtt(bBtn, 'id','blueBtn')
     bBtn.innerText = 'Blue'
     //create red button 
   let rBtn = document.createElement('button')
-  cClass(rBtn, 'redBtn')
+  setAtt(rBtn,'id','redBtn')
     rBtn.innerText = 'Red'
   let update  = document.createElement('button')
     update.innerText = 'Update Info'
+  setAtt(update, 'id', 'updateBtn')
 
-  console.log(update, playerCLi, bBtn, rBtn)
+
+  console.log(update, playerLi, bBtn, rBtn)
 
 //~~these need to be inside my map in order to function correctly, but cannot be called until after they are created?
-rBtn.addEventListener('click', () => {red(player.id)})
-bBtn.addEventListener('click',() => {blue(player.id)})
+    //~~this is where my button issues steam since the player id is not being passed in
+bBtn.addEventListener('click',() => {blue(player.id)
+  console.log('BLUE button click, id?', player.id)
+})
+  appending(playerLi,bBtn)
+  appending(playerLi,update)
+rBtn.addEventListener('click', () => {red(player.id)
+  console.log('RED button click, id?', player.id)
+})
+   appending(playerLi,rBtn)
+   appending(playerLi,update)
 
-   appending(playerCLi,rBtn)
-   appending(playerCLi,bBtn)
-   appending(playerCLi,update)
-   appending(dbPlayers, playerCLi)
-
+   appending(dbUL, playerLi)
   })
-  appending(dbPlayers, playerCLi)
-
 }
 
 //when people are added to their associated them, this class should be added to those individuals. 
@@ -194,9 +210,10 @@ const redTeam = []
   //if they have been moved to the redTeam, remove them from the listOfPlayers 
 
 const blue = (id) => { 
-  let bTeam =  byID('blue')
-    console.log(bTeam)
-console.log('blue day blue blaha')
+  let bMember
+  //comes up as UNDEFINED, why?
+  console.log('the id',id)
+// console.log('blue day blue blaha')
 listOfPlayers.map(person => {
    if(person.id === id) {
       console.log('my blue if statement')
@@ -204,17 +221,20 @@ listOfPlayers.map(person => {
   let teamSpirit = Object.assign(person, team)
   blueTeam.push(teamSpirit)
   bMember = cLi
-    cClass(bMember, 'bMember')
+    setAtt(bMember,'id','bMember')
     bMember.innerText = person.name + person.canDodgeBall
+  return bMember
   }})
-  appending(bTeam,bMember)
+  //~~there's an issue there
+  // console.log('BLUE parent node', blueUL, 'and their parent', blueDiv)
+  appending(blueUL, bMember)
+  appending(blueDiv, blueUL)
 }
 
-
 const red = (id) => { 
-  let rTeam =  byID('red')
-    console.log(rTeam)
-  console.log('red rum')
+  let rMember
+  console.log('the id',id)
+  // console.log('red rum')
   listOfPlayers.map(person => {
     if(person.id === id) {
       console.log('my red if statement')
@@ -222,10 +242,13 @@ const red = (id) => {
   let teamSpirit = Object.assign(person, team)
   redTeam.push(teamSpirit)
   rMember = cLi
-    cClass(rMember, 'rMember')
+    setAtt(rMember, 'id','rMember')
     rMember.innerText = person.name + person.canDodgeBall
+    return rMember
   }})
   //~~issue here
-  appending(rTeam, rMember)
+  // console.log('RED parent node', redUL, 'and their parent', redDiv)
+  appending(redUL, rMember)
+  append(redDiv, redUL)
 }
  
