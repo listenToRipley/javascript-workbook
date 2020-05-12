@@ -65,10 +65,8 @@ listPeopleChoices()
     using the ID, create a copy of that person in   listOfPlayers[] 
     add the class of Player to that person 
     REMOVE that li from the the list of people HTML
-      the ul items only include name and skill
-      ! HOW
-      You have the list of players in the HTML 
-      They get added to the DB list. 
+      the ul items only include name and skill, it is not the whole object passed into the HTML. 
+      We need to check to see if the same is includes the name that match we just clicked, then it can be removed 
       
     add a buttons of blue() & red()
       this function should be triggered inside of this element 

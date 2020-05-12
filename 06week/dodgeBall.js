@@ -111,6 +111,38 @@ const listPeopleChoices = () => {
     }
   }
 
+//will allow people to be removed from lists
+//we are compare the people who have been pushed to the new group (array), and the HTML list items 
+const removedLi = (previousDIV,previousUL, newArray) => {
+  //find the parentDIV
+  let lastDIV = byID(previousDIV)
+  //find the last UL
+  let preUL = byID(previousUL)
+  //create a list of it's children element
+  let pULchildren = preUL.children
+  console.log('pul',pULchildren)
+
+  //look at the items moved to your new list
+  newArray.forEach((element) => {
+    let findMatch = pULchildren.namedItem(`${element.id}`)
+    let matchID = byID(`${element.id}`)
+    console.log('find a match?', findMatch)
+        //if the id for someone in your new array of players, then delete that li
+    if(findMatch = true) {
+      preUL.removeChild(matchID)
+      console.log('if this matched, get rid of it')
+    } else if (!findMatch) {
+      console.log('what am I missing that is making this null?')
+    }
+    lastDIV.appendChild(preUL)
+    console.log('remove function completed')
+  })
+  // console.log( 'HTML?',pULchildren.namedItem(2))
+  // if(pULchildren.includes(newArray.name)) {
+  //   console.log('got you')
+  // }
+  console.log('completed the removal')
+}
 
 //take the array of people and put it in this list w/ the player components added. 
 const listOfPlayers = []
@@ -131,28 +163,11 @@ const makePlayer = (id) => {
       // console.log('merge to objects?',newPlayer)
     listOfPlayers.push(newPlayer)
     }
-
-  
-    //~~come back to how to remove a child element 
-    //you have a list of people who could be playing
-    //if they decide to play, then they should be removed from the list of people who could play to a list of people who will be playing
-
-    // const peopleLiIDs = byID(${person.id})
-    //   //need to return the class name for each of these li's
-    // const childID = (listElement.forEach((child) => {
-      
-    // }))
-    // //we need to determine if this person has been moved into the listOfPlays[], if they have, then they should be removed from the List Of People HTML
-    // if(listOfPlayers.forEach((person) => {
-    //   person.id
-    // })) {
-    //   console.log('try and remove, parent :', listElement,'child :', liChild)
-    //   liChild.parentNode.removeChild(liChild)
-    // }
   })
   console.log(listOfPlayers)
 
   //~~it's update the single li, but not creating new ones per individual in the listOfPlayers, the array is growing though 
+
   listOfPlayers.forEach((person, index) => {
   // console.log('find the player section of HTML', dbPlayers)
   let playerLi = cLi
@@ -189,8 +204,13 @@ rBtn.addEventListener('click', () => {red(player.id)
    appending(playerLi,rBtn)
    appending(playerLi,update)
 
+   removedLi('lopParent','people', listOfPlayers) 
    appending(dbUL, playerLi)
+   appending(playersDiv, dbUL)
   })
+
+  removedLi('lopParent','people', listOfPlayers) 
+ 
 }
 
 //when people are added to their associated them, this class should be added to those individuals. 
