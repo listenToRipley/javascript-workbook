@@ -54,7 +54,7 @@ const arrOfPeople = [
 ]
 
 //code the will be repeated a lot
-const cLi = document.createElement("li")
+
 //remember the name needs to be a 'string'
 const setAtt = (element,id,name) => {element.setAttribute(id,name)}
 const appending = (parent, child) => {parent.appendChild(child)}
@@ -169,18 +169,17 @@ const makePlayer = (id) => {
 
       // console.log(letsPlay)
       let newPlayer = Object.assign(nestedObj,person,[new Player(false, false, false, false,0)])
-      
+      console.log(listOfPlayers, 'this the list of players')
       // console.log('merge to objects?',newPlayer)
     listOfPlayers.push(newPlayer)
     }
   })
-  console.log(listOfPlayers)
 
   //~~it's update the single li, but not creating new ones per individual in the listOfPlayers, the array is growing though 
 
   listOfPlayers.forEach((person) => {
   // console.log('find the player section of HTML', dbPlayers)
-  let playerLi = cLi
+  let playerLi = document.createElement('li')
 
     setAtt(playerLi,'id','dbPlayerLi') //create Li for person
     setAtt(playerLi,'id',`${person.id}`)
@@ -217,7 +216,7 @@ const edit = () => {
 }
   edit()
 
-  console.log(updateBtn, playerLi, bBtn, rBtn)
+  // console.log(updateBtn, playerLi, bBtn, rBtn)
 
 //~~these need to be inside my map in order to function correctly, but cannot be called until after they are created?
 bBtn.addEventListener('click',() => {blue(id)
@@ -279,7 +278,7 @@ listOfPlayers.map(person => {
   let teamSpirit = Object.assign(nestedObj,person,[new Teammates('Purple Cobras', 'blue')])
   blueTeam.push(teamSpirit)
   console.log('what does my blue team look like now?',blueTeam)
-  bMember = cLi
+  bMember = document.createElement('li')
     setAtt(bMember,'id','bMember')
     bMember.innerText = person.name + person.canDodgeBall
   //buttons
@@ -303,7 +302,7 @@ const red = (id) => {
       // console.log('my red if statement')
   let teamSpirit = Object.assign(nestedObj,person,[new Teammates('Average Joes', 'red')])
   redTeam.push(teamSpirit)
-  rMember = cLi
+  rMember = document.createElement('li')
     setAtt(rMember, 'id','rMember')
     rMember.innerText = person.name + person.canDodgeBall
   //buttons 
