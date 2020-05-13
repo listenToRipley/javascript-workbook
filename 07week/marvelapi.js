@@ -4,8 +4,8 @@
 
 window.onload = () => {
   getHeroes()
+  // location()
 }
-//fetch my api
 
 let getHeroes = () => {
   let apiList = fetch(
@@ -21,7 +21,7 @@ let getHeroes = () => {
     return result
   })
   .then(function(result) {
-      console.log('result',result)
+      // console.log('result',result)
   //should return each item in the array as individual to loop through 
   result.forEach(needAHero)
 })
@@ -30,7 +30,7 @@ let getHeroes = () => {
 let needAHero = (character) => {
   //create a list of all the comic stories 
   // console.log('my results being pulled in?',character) //yes
-  // console.log(Object.keys(character))
+
   //the characters are already is alphabetical order
   let main = document.getElementsByTagName('main') 
   let div = document.getElementById('character')
@@ -50,7 +50,6 @@ let needAHero = (character) => {
   let heroName = document.createElement('li')
   let storyBtn = document.createElement('button')
     storyBtn.setAttribute('id', 'storyButton')
-    storyBtn.setAttribute('aria-controls','forToggle')
     storyBtn.innerText = 'Their story'
   let hiredBtn = document.createElement('button')
   hiredBtn.setAttribute('id', 'hiredButton')
@@ -67,7 +66,7 @@ let needAHero = (character) => {
 
   let storyUL = document.createElement('ul')
   storyUL.setAttribute('id', 'storyTime')
-  storyUL.setAttribute('class', 'forToggle')
+  storyUL.setAttribute('class', 'hide')
 
   const dis = character.description
   // console.log('how long a story?',dis.length)
@@ -81,26 +80,72 @@ let needAHero = (character) => {
   // console.log('tell me a story:',dis)
   
   storyUL.appendChild(liLis)
-  
+  charUL.appendChild(storyUL)
+
+  //taking two clicks to display hte information, why?
 
   storyBtn.addEventListener('click', () => {
-    console.log('storytime for the hero')
+    // console.log('story time for the hero')
+    storyUL.style.display = 'block'
 
     let aria = storyUL.getAttribute('aria-hidden')
     storyUL.setAttribute('aria-hidden', aria === 'true' ? 'false' : 'true')
 
-    if (aria === 'true') {
-      storyUL.style.visibility = 'visible' 
-      storyBtn.innerText = 'Their story'
+    if (aria === 'true' ) {
+      storyUL.style.display = 'block' 
 
     } else {
-      storyUL.style.visibility = 'hidden' 
-      storyBtn.innerText = 'Story is over'
+      storyUL.style.display = 'none' 
     }
-    charUL.appendChild(storyUL)
   })
-
   div.appendChild(charUL)
 
-} 
-// }
+ hiredBtn.addEventListener('click', () => { alert(`Congratulations! You hired ${name}`) })
+
+  // console.log('after the main content is created')
+
+ let series = Object.entries(character.series.items)
+//  console.log('come on!',series)
+ let keysLength = Object.keys(series).length
+ // console.log('list the keys',keysLength.length)
+
+
+ let singleArray = []
+
+ if (series.length > 1) {
+   series.forEach((bodyArray) => {
+    bodyArray.forEach((insideArray) => {
+      singleArray.push(insideArray)
+    })
+    return singleArray
+   })
+ } else if (series.length === 0) {
+   singleArray.push('no stories')
+ }
+
+//  console.log('Stories lists', singleArray)
+
+ let justStories = []
+ let numbers = []
+
+ singleArray.forEach((element, index) => {
+  //  console.log('element', element, 'index', index)
+  if (index % 2 !== 0) {
+    justStories.push(element)
+  }
+  return justStories
+ })
+
+ console.log('just stories array',justStories)
+
+ 
+ 
+
+//  const removeNames = extractTheStoriesArray.forEach((value) => {
+//    value.filter(Object.keys('name'))
+//  })
+
+//  console.log('please?',removeNames)
+
+  }
+
