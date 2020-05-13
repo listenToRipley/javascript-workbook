@@ -7,24 +7,26 @@
   <link rel="stylesheet" href="./dodgeBall.css">
   <title>Dodge Ball</title>
 </head>
-<body>
-  <div id="lopParent">
-      <h4>List Of People</h4>
-      <ul id="people"></ul>
+<body id="body">
+  <main id="main">
+    <div id="lopParent">
+        <h4>List Of People</h4>
+        <ul id="people"></ul>
+    </div>
+    <button onclick="listPeopleChoices()">List People</button>
+    <div id="playerParent">
+        <h4>Dodge Ball Players</h4>
+        <ul id="players"></ul>
+    </div>
+    <div id="bParent">
+        <h4>Blue Team</h4>
+        <ul id="blue"></ul>
+    </div>
+    <div id="rParent">
+        <h4>Red Team</h4>
+        <ul id="red"></ul>
   </div>
-  <button onclick="listPeopleChoices()">List People</button>
-  <div id="playerParent">
-      <h4>Dodge Ball Players</h4>
-      <ul id="players"></ul>
-  </div>
-  <div id="bParent">
-      <h4>Blue Team</h4>
-      <ul id="blue"></ul>
-  </div>
-  <div id="rParent">
-      <h4>Red Team</h4>
-      <ul id="red"></ul>
-  </div>
+</main>
   <script src='./dodgeBall.js'></script>
 </body>
 </html>
