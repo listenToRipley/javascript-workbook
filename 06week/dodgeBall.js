@@ -1,5 +1,7 @@
 'use strict';
 
+// let assert = require('assert');
+
 //this is my starting list. 
 const arrOfPeople = [
   {
@@ -104,7 +106,7 @@ const listPeopleChoices = () => {
 
 //~~~saying that mascot ahd team color have to be stated in the constructor, but it makes everything undefined once passed into the player. 
 class Teammates extends Player {
-  constructor(mascot, teamColor) {
+  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, mascot, teamColor) {
     super () 
       this.mascot = mascot,
       this.teamColor = teamColor
@@ -119,7 +121,7 @@ const removedLi = (previousDIV,previousUL ,newArray, previousArray) => {
     // console.log('the previous ul list are are trying to update',preUL)
   //create a list of it's children element
   let pULchildren = preUL.children
-  console.log('pul',pULchildren)
+  // console.log('pul',pULchildren)
   let matchingID 
 
   //look at the items moved to your new list
@@ -141,13 +143,11 @@ const removedLi = (previousDIV,previousUL ,newArray, previousArray) => {
     }
     return appending(previousDIV, previousUL)
   })
-
-  let matchIndex 
   // console.log( 'HTML?',pULchildren.namedItem(2))
   // console.log('completed the removal')
     //we need to remove the player from the previous array so that they don't keep appearing on the browser   
     if(!previousArray) {
-      console.log('skip this step, you did not provide a previous array, so we guess you want to keep it where it is')
+      // console.log('skip this step, you did not provide a previous array, so we guess you want to keep it where it is')
     } else if (
       previousArray.forEach((element, index) => {
         // console.log('side my else if to remove the repeat element', element)
@@ -202,17 +202,15 @@ const makePlayer = (id) => {
   let rBtn = document.createElement('button')
   setAtt(rBtn,'id','redBtn')
     rBtn.innerText = 'Red'
-
-
   // console.log( playerLi, bBtn, rBtn)
 
 bBtn.addEventListener('click',() => { blue(id)
-  console.log('BLUE button click, id?', id)
-
+  // console.log('BLUE button click, id?', id)
 })
   appending(playerLi,bBtn)
+
 rBtn.addEventListener('click', () => { red(id)
-    console.log('RED button click, id?', id)
+    // console.log('RED button click, id?', id)
 })
    appending(playerLi,rBtn)
    removedLi('lopParent','people', listOfPlayers) 
@@ -224,17 +222,6 @@ rBtn.addEventListener('click', () => { red(id)
 
 console.log('list of players object',listOfPlayers)
 //when people are added to their associated them, this class should be added to those individuals. 
-
-
-//reused switch teams button
-const switchTeamsBtn  = document.createElement('button')
-switchTeamsBtn.innerText = 'Switch Teams'
-setAtt(switchTeamsBtn, 'id', 'switchBtn')
-
-//create switch click event!
-switchTeamsBtn.addEventListener('click',() => {
-  console.log('you clicked to switch teams! you traitor!')
-})
 
 //add people from your listOfPlayers to either the blueTeam or the RedTeam
 const blueTeam = []
@@ -260,9 +247,9 @@ const teamBtn = (id, cTeam, cMember, cTS, cUL, cDiv) => {
 
     // console.log('what does this team look like now?',cTeam)
     cMember = document.createElement('li')
-      setAtt(cMember,'id',`${cMember}`)
+      setAtt(cMember,'id',`${person.id}`)
       cMember.innerText = person.name
-      
+      console.log('my current memember is :', person)
       removedLi('playerParent','players', cTeam, listOfPlayers)
     //buttons
       return cMember
@@ -283,3 +270,39 @@ let red = (id) => {
 }
 // console.log('blue team :', blueTeam, 'red team', redTeam)
 // console.log('what does my team player list look like now?', listOfPlayers)
+
+//tests
+// if (typeof describe === 'functions') {
+//   describe('list of People', function() {
+//     it('should generate a list of people', function() {
+//       assert.equal(listOfPlayers.length = 7)
+//     })
+//   })
+
+//   describe('Dodge Ball Players', function() {
+//     it('should move players to the players array', function() {
+//       assert.equal(listOfPlayers.length = 7)
+//     })
+//   })
+
+//   describe('Blue Team', function() {
+//     it('should generate a list of people', function() {
+//       it('should move players to the blue team array', function() {
+//         assert.equal(blueTeam.length = 7)
+//       })
+//       it('should remove players to the players array', function() {
+//         assert.equal(listOfPlayers.length = 7)
+//       })
+//     })
+//   })
+
+//   describe('Red Team', function() {
+//     it('should move players to the red team array', function() {
+//       assert.equal(redTeam.length = 7)
+//     })
+//     it('should remove players to the players array', function() {
+//       assert.equal(listOfPlayers.length = 7)
+//     })
+    
+//   })
+// }
