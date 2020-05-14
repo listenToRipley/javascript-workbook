@@ -100,37 +100,40 @@ const listPeopleChoices = () => {
       this.isHealthy = isHealthy;
       this.yearsExperience = 0;
     }
-    //add a method to update the player information, 
-      //??can we still call this method if the object has beeb merged? 
-    updatePlayer() {
-      this.canThrowBall = this.canThrowBall;
-      this.canDodgeBall = this.canDodgeBall
-      this.hasPaid = this.hasPaid
-      this.isHealthy = this.isHealthy
-      this.yearsExperience = this.yearsExperience; 
-    }
   }
+
+//~~~saying that mascot ahd team color have to be stated in the constructor, but it makes everything undefined once passed into the player. 
+class Teammates extends Player {
+  constructor(mascot, teamColor) {
+    super () 
+      this.mascot = mascot,
+      this.teamColor = teamColor
+  }
+}
 
 //will allow people to be removed from lists
 //we are compare the people who have been pushed to the new group (array), and the HTML list items 
-const removedLi = (previousDIV,previousUL, newArray) => {
+const removedLi = (previousDIV,previousUL ,newArray, previousArray) => {
   //find the last UL
   let preUL = byID(previousUL)
     // console.log('the previous ul list are are trying to update',preUL)
   //create a list of it's children element
   let pULchildren = preUL.children
   console.log('pul',pULchildren)
+  let matchingID 
 
   //look at the items moved to your new list
   newArray.forEach((element) => {
-    let findMatch = pULchildren.namedItem(`${element.id}`)
-    let matchID = byID(`${element.id}`)
-    console.log('find a match?', findMatch)
+    matchingID = element.id
+    let findMatch = pULchildren.namedItem(matchingID)
+    // console.log('find a match?', findMatch)
         //if the id for someone in your new array of players, then delete that li
     if(findMatch) {
-      return preUL.removeChild(matchID)
-      // console.log('if this matched, get rid of it',   preUL.removeChild(matchID))
+      // console.log('and the match was ',findMatch, 'previousArray~~', previousArray, `& element id this go is:`, matchingID )
       // lastDIV.appendChild(preUL)
+      // thatIndex = previousArray.indexOf(`${element.id}`)
+      // previousArray.splice(thatIndex, 1)
+      return preUL.removeChild(findMatch)
     } 
     else if (!findMatch) {
       // console.log('there should not be a match after it was removed')
@@ -138,23 +141,30 @@ const removedLi = (previousDIV,previousUL, newArray) => {
     }
     return appending(previousDIV, previousUL)
   })
-  // console.log( 'HTML?',pULchildren.namedItem(2)
-  console.log('completed the removal')
+
+  let matchIndex 
+  // console.log( 'HTML?',pULchildren.namedItem(2))
+  // console.log('completed the removal')
+    //we need to remove the player from the previous array so that they don't keep appearing on the browser   
+    if(!previousArray) {
+      console.log('skip this step, you did not provide a previous array, so we guess you want to keep it where it is')
+    } else if (
+      previousArray.forEach((element, index) => {
+        // console.log('side my else if to remove the repeat element', element)
+        if(element.id === matchingID) {
+          // console.log('you find the item in the array!')
+          return previousArray.splice(index, 1)
+        }
+        return previousArray
+      }) 
+    ) {
+      console.log('found in previous array! Now you have to remove it', previousArray)
+      return previousArray
+    }
 }
 
 //take the array of people and put it in this list w/ the player components added. 
 const listOfPlayers = []
-
-//used to created nested objects 
-let nestedObj = {}
-
-//reused buttons 
-//create click event for update button, which will allow all the internal content to be updated side a person object 
-
-const updateBtn = document.createElement('button')
-updateBtn.innerText = 'More Info'
-setAtt(updateBtn, 'id', 'updateBtn')
-setAtt(updateBtn, 'id', 'toggle')
 
 const makePlayer = (id) => {
   // console.log(`li ${id} was clicked!`)
@@ -166,17 +176,15 @@ const makePlayer = (id) => {
       // console.log('first if, inside makePlayer?')
       //at this point, we want to create a new object which includes the player constructor and the person object from the arrayOfPeople
           //we are assuming all of these when they sign up. 
-
       // console.log(letsPlay)
-      let newPlayer = Object.assign(nestedObj,person,[new Player(false, false, false, false,0)])
-      console.log(listOfPlayers, 'this the list of players')
+      let newPlayer = Object.assign(person,[new Player(false, false, false, false,0)])
+      // console.log(listOfPlayers, 'this the list of players')
       // console.log('merge to objects?',newPlayer)
     listOfPlayers.push(newPlayer)
     }
-  })
-
-  //~~it's update the single li, but not creating new ones per individual in the listOfPlayers, the array is growing though 
-
+  }
+  )
+  dbUL.innerHTML = ' '
   listOfPlayers.forEach((person) => {
   // console.log('find the player section of HTML', dbPlayers)
   let playerLi = document.createElement('li')
@@ -184,7 +192,7 @@ const makePlayer = (id) => {
     setAtt(playerLi,'id','dbPlayerLi') //create Li for person
     setAtt(playerLi,'id',`${person.id}`)
   //~~ need to work on this
-    //we meed to go through each item as it is created and assign the name
+    //we need to go through each item as it is created and assign the name
     playerLi.innerText = person.name
    //create blue button
   let bBtn = document.createElement('button')
@@ -194,61 +202,29 @@ const makePlayer = (id) => {
   let rBtn = document.createElement('button')
   setAtt(rBtn,'id','redBtn')
     rBtn.innerText = 'Red'
-  
-  updateBtn
 
- //the event needs to be located within the specific li so it can retain the specific details of that object?
-const edit = () => { 
-  updateBtn.addEventListener('click',() => {
-  console.log('you clicked to update!')
-  const subDiv = document.createElement('div')
-  setAtt(subDiv, 'id', 'subDiv')
-  let sub = byID('subDiv')
-  let db = byID('dbPlayerLi')
-  //we want to update the content of the object associated with the specific link item 
-  console.log('my sub?', sub)
-  console.log('db', db)
-  console.log(updateBtn.parentNode())
 
-  // appending(db, sub)
-}
-)
-}
-  edit()
+  // console.log( playerLi, bBtn, rBtn)
 
-  // console.log(updateBtn, playerLi, bBtn, rBtn)
-
-//~~these need to be inside my map in order to function correctly, but cannot be called until after they are created?
-bBtn.addEventListener('click',() => {blue(id)
+bBtn.addEventListener('click',() => { blue(id)
   console.log('BLUE button click, id?', id)
+
 })
   appending(playerLi,bBtn)
-rBtn.addEventListener('click', () => {red(id)
-  console.log('RED button click, id?', id)
+rBtn.addEventListener('click', () => { red(id)
+    console.log('RED button click, id?', id)
 })
    appending(playerLi,rBtn)
-
-   appending(playerLi,updateBtn)
-
    removedLi('lopParent','people', listOfPlayers) 
    appending(dbUL, playerLi)
    appending(playersDiv, dbUL)
   })
-
   removedLi('lopParent','people', listOfPlayers) 
- 
 }
 
 console.log('list of players object',listOfPlayers)
 //when people are added to their associated them, this class should be added to those individuals. 
-//~~~saying that mascot ahd team color have to be stated in the constructor, but it makes everything undefined once passed into the player. 
- class Teammates extends Player {
-  constructor(mascot, teamColor) {
-    super () 
-      this.mascot = mascot,
-      this.teamColor = teamColor
-  }
-}
+
 
 //reused switch teams button
 const switchTeamsBtn  = document.createElement('button')
@@ -263,61 +239,47 @@ switchTeamsBtn.addEventListener('click',() => {
 //add people from your listOfPlayers to either the blueTeam or the RedTeam
 const blueTeam = []
   //if they have been moved to the blueTeam, remove them from the listOfPlayers 
+  const bTeamSpirit = new Teammates('Purple Cobras', 'blue')
+  let bMember
 
 const redTeam = []
   //if they have been moved to the redTeam, remove them from the listOfPlayers 
-
-const blue = (id) => { 
-  let bMember
-  //comes up as UNDEFINED, why?
-  console.log('the id',id)
-// console.log('blue day blue blaha')
-listOfPlayers.map(person => {
-   if(person.id === id) {
-      // console.log('my blue if statement')
-  let teamSpirit = Object.assign(nestedObj,person,[new Teammates('Purple Cobras', 'blue')])
-  blueTeam.push(teamSpirit)
-  console.log('what does my blue team look like now?',blueTeam)
-  bMember = document.createElement('li')
-    setAtt(bMember,'id','bMember')
-    bMember.innerText = person.name + person.canDodgeBall
-  //buttons
-  updateBtn
-  switchTeamsBtn
-  appending(bMember,updateBtn)
-  appending(bMember, switchTeamsBtn)
-  return bMember
-  }})
-  // console.log('BLUE parent node', blueUL, 'and their parent', blueDiv)
-  appending(blueUL, bMember)
-  appending(blueDiv, blueUL)
-}
-
-const red = (id) => { 
+  const rTeamSpirit = new Teammates('Average Joes', 'red')
   let rMember
-  console.log('the id',id)
-  // console.log('red rum')
+  redUL.innerHTML = ''
+
+const teamBtn = (id, cTeam, cMember, cTS, cUL, cDiv) => {
+    //comes up as UNDEFINED, why?
+    console.log('the id',id)
+  // console.log('clicked')
   listOfPlayers.map(person => {
-    if(person.id === id) {
-      // console.log('my red if statement')
-  let teamSpirit = Object.assign(nestedObj,person,[new Teammates('Average Joes', 'red')])
-  redTeam.push(teamSpirit)
-  rMember = document.createElement('li')
-    setAtt(rMember, 'id','rMember')
-    rMember.innerText = person.name + person.canDodgeBall
-  //buttons 
-  updateBtn
-  switchTeamsBtn
-  appending(rMember,updateBtn)
-  appending(rMember, switchTeamsBtn)
-    return rMember
-  }})
-  // console.log('RED parent node', redUL, 'and their parent', redDiv)
-  appending(redUL, rMember)
-  appending(redDiv, redUL)
+     if(person.id === id) {
+        // console.log('if statement')
+    let teamSpirit = Object.assign(person,cTS)
+    cTeam.push(teamSpirit)
+
+    // console.log('what does this team look like now?',cTeam)
+    cMember = document.createElement('li')
+      setAtt(cMember,'id',`${cMember}`)
+      cMember.innerText = person.name
+      
+      removedLi('playerParent','players', cTeam, listOfPlayers)
+    //buttons
+      return cMember
+  
+    }})
+    // console.log('parent node', cUL, 'and their parent', cDiv)
+    appending(cUL, cMember)
+    appending(cDiv, cUL)
 }
 
-// appending(body, main)
- 
-console.log('blue team :', blueTeam, 'red team', redTeam)
-console.log('what does my team player list look like now?', listOfPlayers)
+let blue = (id) => {
+  teamBtn(id, blueTeam, bMember, bTeamSpirit, blueUL, blueDiv)
+}
+
+let red = (id) => {
+  teamBtn(id, redTeam, rMember, rTeamSpirit, redUL, redDiv)
+
+}
+// console.log('blue team :', blueTeam, 'red team', redTeam)
+// console.log('what does my team player list look like now?', listOfPlayers)
