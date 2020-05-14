@@ -81,7 +81,7 @@ const listPeopleChoices = () => {
     const li = document.createElement("li")
     const button = document.createElement("button")
       // console.log('button', button)
-    button.innerHTML = "Make Player"
+    button.innerText = "Make Player"
     button.addEventListener('click', function(){makePlayer(person.id)} )
       li.appendChild(button)
       li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
@@ -104,10 +104,9 @@ const listPeopleChoices = () => {
     }
   }
 
-//~~~saying that mascot ahd team color have to be stated in the constructor, but it makes everything undefined once passed into the player. 
-class Teammates extends Player {
-  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, mascot, teamColor) {
-    super () 
+//feel like this should be an extended class, but had too many issues 
+class Teammates {
+  constructor(mascot, teamColor) {
       this.mascot = mascot,
       this.teamColor = teamColor
   }
@@ -177,14 +176,15 @@ const makePlayer = (id) => {
       //at this point, we want to create a new object which includes the player constructor and the person object from the arrayOfPeople
           //we are assuming all of these when they sign up. 
       // console.log(letsPlay)
-      let newPlayer = Object.assign(person,[new Player(false, false, false, false,0)])
+      let newPlayer = [new Player(false, false, false, false,0)]
+      let assignPlayer = Object.assign(person,{newPlayer})
       // console.log(listOfPlayers, 'this the list of players')
       // console.log('merge to objects?',newPlayer)
-    listOfPlayers.push(newPlayer)
+    listOfPlayers.push(assignPlayer)
     }
   }
   )
-  dbUL.innerHTML = ' '
+  // dbUL.innerHTML = ' '
   listOfPlayers.forEach((person) => {
   // console.log('find the player section of HTML', dbPlayers)
   let playerLi = document.createElement('li')
@@ -197,22 +197,64 @@ const makePlayer = (id) => {
    //create blue button
   let bBtn = document.createElement('button')
   setAtt(bBtn, 'id','blueBtn')
-    bBtn.innerText = 'Blue'
+    bBtn.innerText = 'Blue Team'
+
+    bBtn.addEventListener('click',() => { blue(id)
+      // console.log('BLUE button click, id?', id)
+    })
+
     //create red button 
   let rBtn = document.createElement('button')
   setAtt(rBtn,'id','redBtn')
-    rBtn.innerText = 'Red'
+    rBtn.innerText = 'Red Team'
   // console.log( playerLi, bBtn, rBtn)
-
-bBtn.addEventListener('click',() => { blue(id)
-  // console.log('BLUE button click, id?', id)
-})
-  appending(playerLi,bBtn)
 
 rBtn.addEventListener('click', () => { red(id)
     // console.log('RED button click, id?', id)
 })
-   appending(playerLi,rBtn)
+
+
+let viewBtn = document.createElement('button')
+setAtt(viewBtn, 'id', 'upDateBtn')
+  viewBtn.innerText = 'View Player Info'
+
+  viewBtn.addEventListener('click', () => { view(id)
+    // console.log('VIEW button click, id?', id)
+})
+
+    appending(playerLi,bBtn)
+    appending(playerLi,rBtn)
+    appending(playerLi,viewBtn)
+//we need a hidden UL for all the player's information can be created 
+  let header = document.createElement('ul')
+  let dodge = document.createElement('li')
+  let throwing = document.createElement('li')
+  let paid = document.createElement('li')
+  let health = document.createElement('li')
+  let xp = document.createElement('li')
+
+      setAtt(header, 'id', 'viewHide')
+      let viewHide = byID('viewHide')
+      setAtt(dodge,'class','dodge')
+      setAtt(throwing,'class','throw')
+      setAtt(paid,'class','pay')
+      setAtt(health,'class','health')
+      setAtt(xp,'class','xp')
+
+    header.innerText = 'Player details'
+    dodge.innerText = `Can Dodge: ${person.newPlayer[0].canDodgeBall}`
+    throwing.innerText = `Can Throw: ${person.newPlayer[0].canThrowBall}`
+    paid.innerText = `Has Paid: ${person.newPlayer[0].hasPaid}`
+    health.innerText = `Is Healthy: ${person.newPlayer[0].isHealthy}`
+    xp.innerText = `Years of Experience: ${person.newPlayer[0].yearsExperience}`
+
+    appending(header, xp)
+    appending(header, health)
+    appending(header, paid)
+    appending(header, throwing)
+    appending(header, dodge)
+    appending(playerLi, header)
+
    removedLi('lopParent','people', listOfPlayers) 
    appending(dbUL, playerLi)
    appending(playersDiv, dbUL)
@@ -233,16 +275,17 @@ const redTeam = []
   //if they have been moved to the redTeam, remove them from the listOfPlayers 
   const rTeamSpirit = new Teammates('Average Joes', 'red')
   let rMember
-  redUL.innerHTML = ''
+  // redUL.innerHTML = ''
 
-const teamBtn = (id, cTeam, cMember, cTS, cUL, cDiv) => {
+const teamBtn = (id, cTeam, cMember, pTS, cUL, cDiv) => {
     //comes up as UNDEFINED, why?
     console.log('the id',id)
   // console.log('clicked')
   listOfPlayers.map(person => {
      if(person.id === id) {
         // console.log('if statement')
-    let teamSpirit = Object.assign(person,cTS)
+        //still having issues with getting the teams information to live inside this element. 
+    let teamSpirit = Object.assign(person, {pTS})
     cTeam.push(teamSpirit)
 
     // console.log('what does this team look like now?',cTeam)
@@ -270,6 +313,21 @@ let red = (id) => {
 }
 // console.log('blue team :', blueTeam, 'red team', redTeam)
 // console.log('what does my team player list look like now?', listOfPlayers)
+
+  // view the player information 
+let view = (id) => {
+  let onlyChild = byID('viewHide')
+  console.log(onlyChild)
+  if (onlyChild.style.display == 'block') {
+    onlyChild.style.display = 'none'
+  } else {
+    onlyChild.style.display = 'block'
+  }
+// we want to show the hidden player content
+}
+
+//update the play information 
+
 
 //tests
 // if (typeof describe === 'functions') {
