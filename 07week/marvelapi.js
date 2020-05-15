@@ -43,11 +43,13 @@ let needAHero = (character) => {
     charUL.setAttribute('id', 'charUL')
 
   let pic = character.thumbnail.path + "/portrait_xlarge." +character.thumbnail.extension
+
   // console.log('picture path',pic)
   let name = character.name
   // console.log('name', name)
   let profilePic  = document.createElement('img')
   let heroName = document.createElement('li')
+    heroName.setAttribute('id', 'heroName')
   let storyBtn = document.createElement('button')
     storyBtn.setAttribute('id', 'storyButton')
     storyBtn.innerText = 'Their story'
@@ -56,6 +58,10 @@ let needAHero = (character) => {
     hiredBtn.innerText = 'HIRE'
 
   profilePic.src = pic
+
+  if (profilePic.src === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available/portrait_xlarge.jpg') {
+    profilePic.src = 'https://i.redd.it/gcgmhj78goe41.jpg'
+  }
   heroName.innerText = name
 
   //the links are broken, it doesn't return an image, just an image error 
@@ -104,42 +110,54 @@ let needAHero = (character) => {
 
   // console.log('after the main content is created')
 
- let series = Object.entries(character.series.items)
-//  console.log('come on!',series)
- let keysLength = Object.keys(series).length
- // console.log('list the keys',keysLength.length)
+  //I sent a lot of time trying to get into the specific array I wanted access to, but this felt like I was going WAY too deep.
 
+//  let series = Object.entries(character.series.items)
+// //  console.log('come on!',series)
+//  let keysLength = Object.keys(series).length
+//  // console.log('list the keys',keysLength.length)
+//  let singleArray = []
 
- let singleArray = []
+//  if (series.length > 1) {
+//    series.forEach((bodyArray) => {
+//     bodyArray.forEach((insideArray) => {
+//       singleArray.push(insideArray)
+//     })
+//     return singleArray
+//    })
+//  } else if (series.length === 0) {
+//    singleArray.push('no stories')
+//  }
 
- if (series.length > 1) {
-   series.forEach((bodyArray) => {
-    bodyArray.forEach((insideArray) => {
-      singleArray.push(insideArray)
-    })
-    return singleArray
-   })
- } else if (series.length === 0) {
-   singleArray.push('no stories')
- }
+// //  console.log('Stories lists', singleArray)
 
-//  console.log('Stories lists', singleArray)
+//  let lastObject = []
+//  let numbers = []
 
- let justStories = []
- let numbers = []
+//  singleArray.forEach((element, index) => {
+//   //  console.log('element', element, 'index', index)
+//   if (index % 2 !== 0) {
+//     lastObject.push(element)
+//   }
+//   return lastObject
+//  })
 
- singleArray.forEach((element, index) => {
-  //  console.log('element', element, 'index', index)
-  if (index % 2 !== 0) {
-    justStories.push(element)
-  }
-  return justStories
- })
+//  console.log('last Object to get into the array',lastObject.length)
+// //  console.log('keys', Object.keys(lastObject))
 
- console.log('just stories array',justStories)
-
+//  let justStories = []
  
- 
+// lastObject.forEach((array) => {
+//    console.log('array',array)
+//    console.log(array.name)
+//   if (lastObject.length = 0) {
+//     return justStories.push('no story')
+//   } else {
+//     return justStories.push(array.name)
+//   }
+//  })
+
+//  console.log('get the items out',justStories)
 
 //  const removeNames = extractTheStoriesArray.forEach((value) => {
 //    value.filter(Object.keys('name'))
