@@ -215,7 +215,7 @@ rBtn.addEventListener('click', () => { red(id)
 
 
 let viewBtn = document.createElement('button')
-setAtt(viewBtn, 'id', 'upDateBtn')
+setAtt(viewBtn, 'id', 'viewBtn')
   viewBtn.innerText = 'View Player Info'
 
   viewBtn.addEventListener('click', () => { view(id)
@@ -316,12 +316,15 @@ let red = (id) => {
 
   // view the player information 
 let view = (id) => {
+  let viewButton = byID('viewBtn')
   let onlyChild = byID('viewHide')
   console.log(onlyChild)
   if (onlyChild.style.display == 'block') {
     onlyChild.style.display = 'none'
+    viewButton.innerText = 'View Player Info'
   } else {
     onlyChild.style.display = 'block'
+    viewButton.innerText = 'Hide Info'
   }
 // we want to show the hidden player content
 }
@@ -336,31 +339,35 @@ let view = (id) => {
 //       assert.equal(listOfPlayers.length = 7)
 //     })
 //   })
+//   describe('Remove player', function() {
+//     it('should remove the player from the previous div list and associated array', function() {
+//    when each of these buttons are clicked, then it should remove that person from the previous array and move it to the new array.
+//       assert.equal(listOfPlayers.length = reduce the length by 1)
+//     })
+//   })
 
 //   describe('Dodge Ball Players', function() {
 //     it('should move players to the players array', function() {
-//       assert.equal(listOfPlayers.length = 7)
+//  once you click the 'Make Player' button they should be moved into this array and display as an LI with an id over the id of that player
+//       assert.equal(listOfPlayers.length = of item push into the array)
 //     })
 //   })
 
 //   describe('Blue Team', function() {
-//     it('should generate a list of people', function() {
+//     it('should generate a list of people who have been moved into ', function() {
 //       it('should move players to the blue team array', function() {
-//         assert.equal(blueTeam.length = 7)
+//      when the button team button is clicked, it should move a copy of that individual
+//         assert.equal(blueTeam.length = of items in the blue team array)
 //       })
 //       it('should remove players to the players array', function() {
-//         assert.equal(listOfPlayers.length = 7)
+//         assert.equal(listOfPlayers.length = increase  by 1)
 //       })
 //     })
 //   })
 
 //   describe('Red Team', function() {
 //     it('should move players to the red team array', function() {
-//       assert.equal(redTeam.length = 7)
+//      when the button team button is clicked, it should move a copy of that individual
+//       assert.equal(redTeam.length = increase by 1)
 //     })
-//     it('should remove players to the players array', function() {
-//       assert.equal(listOfPlayers.length = 7)
-//     })
-    
-//   })
 // }
