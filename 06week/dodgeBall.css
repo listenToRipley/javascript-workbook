@@ -1,0 +1,107 @@
+
+* html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  list-style: none;
+}
+
+body{
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  background-image: url('https://images.unsplash.com/photo-1557291483-8677a3281655?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80');
+  background-position: center;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 24px;
+}
+
+nav { 
+  background-color: black;
+  color: red;
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Kanit', sans-serif;
+  font-size: 65px;
+}
+
+h2 {
+  font-family: 'Faster One', cursive;
+  -webkit-text-stroke: 1px white;
+  font-size: 50px;
+  padding-bottom: 23px;
+
+}
+h3 {
+  font-family: 'Kanit', sans-serif;
+  font-size: 40px;
+  text-align: center;
+}
+
+main {
+  margin-top: 15px;
+  margin-left: 25px;
+}
+
+button {
+  font-family: 'Open Sans', sans-serif;
+  background-color: black;
+  color: white;
+  border: none;
+  font-size: 20px;
+  border-radius: 5px;
+  padding: 6px 10px;
+  margin: 15px;
+}
+#viewHide {
+  display: none;
+  margin-left: 15%
+}
+
+#viewHide :active {
+  transition: max-height 0.2s ease-out;
+}
+
+h4 {
+  display: inline-block;
+  margin: 15px;
+  padding: 10px;
+  width: 300px;
+  height: 1.5em;
+  text-align: center;
+}
+
+.hdisplay {
+  background: linear-gradient(27deg, rgba(255,224,119,0.7554479418886199) 0%, rgba(249,6,6,0.774818401937046) 49%, rgba(186,255,65,0.7990314769975787) 100%);
+}
+
+#cobras{
+  background: linear-gradient(27deg, rgba(43,1,163,0.7554479418886199) 0%, rgba(14,35,246,0.8135593220338984) 49%, rgba(152,65,255,0.801452784503632) 100%);
+}
+
+#joes {
+  background: linear-gradient(27deg, rgba(161,1,1,0.7554479418886199) 0%, rgba(201,76,76,0.7990314769975787) 49%, rgba(255,7,7,0.7990314769975787) 100%);
+}
+
+.team {
+
+}
