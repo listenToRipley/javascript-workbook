@@ -1,0 +1,91 @@
+* html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  list-style: none;
+
+}
+body {
+  width: 100vw;
+}
+
+#main {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5%;
+  font-family: 'Jost', sans-serif;
+  background-image: url(https://images.unsplash.com/photo-1497250681960-ef046c08a56e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #242c33dc;
+}
+
+header {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 27px;
+  justify-content: center;
+  padding: 15px;
+  background-color: goldenrod;
+}
+
+.card-body {
+  background-color: #dbbfa3dc;
+  padding: 15px;
+  margin-right: 5%;
+  margin-bottom: 5%;
+  width: 250px;
+  box-shadow: 2px 3px 4px 2px #0000003d;
+  border-radius: 8px;
+}
+
+.name {
+  padding: 8px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 24px;
+  justify-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.forToggle {
+  margin: 5px auto;
+  padding: 5px auto;
+}
+
+.btn-info {
+  border-radius: 3px;
+  box-shadow: 2px 1px 4px 2px #0000003d;
+  color: 
+  #242c33dc;
+  background-color: 
+  #89a8c1;
+  margin-left: 150px;
+  font-size: 15px;
+  border: none;
+}
+
+.proPic {
+  width: 200px;
+  height: 200px;
+  border-radius: 50px;
+  box-shadow: 2px 3px 4px 2px #0000003d;
+  margin-left: 10%;
+  margin-top: 5%;
+}
